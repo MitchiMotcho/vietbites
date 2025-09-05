@@ -1,26 +1,119 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    --clean: #fafafa; /* Clean sections / page bg */
+    --cream: #fff8dd; /* Soft contrast blocks */
+    --orange: #f48948; /* Primary accent */
+    --clay: #e6b17e; /* Secondary accent / hover */
+    --green: #7bae7f; /* Fresh accent / dividers */
+    --charcoal: #3c3c3c; /* Primary text */
+
+    /* Dynamic hover/active shades from orange */
+    --orange-hover: color-mix(in oklab, var(--orange) 88%, black 12%);
+    --orange-active: color-mix(in oklab, var(--orange) 80%, black 20%);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+    --color-clean: var(--clean);
+    --color-cream: var(--cream);
+    --color-orange: var(--orange);
+    --color-clay: var(--clay);
+    --color-green: var(--green);
+    --color-charcoal: var(--charcoal);
+
+    --font-heading: var(--font-be-vietnam);
+    --font-body: var(--font-source-sans);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Page base now on clean */
+html {
+    background-color: var(--clean);
+    color: var(--charcoal);
+    font-family: var(--font-body, sans-serif);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    padding: 0;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+main {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Headings: keep charcoal, let color come from accents in components */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-heading, sans-serif);
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 0 0 10px 0;
+    color: var(--charcoal);
+}
+
+/* Buttons (global default) */
+button {
+    cursor: pointer;
+    font-family: var(--font-heading, sans-serif);
+    font-weight: 600;
+    padding: 0.6rem 1.2rem;
+    color: var(--clean);
+    background-color: var(--orange);
+    border-radius: 8px;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease,
+        transform 0.06s ease;
+}
+button:hover {
+    background-color: var(--orange-hover);
+    box-shadow: 0 2px 10px color-mix(in oklab, var(--orange) 20%, transparent);
+}
+button:active {
+    background-color: var(--orange-active);
+    transform: translateY(1px);
+}
+button:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--orange) 35%, transparent);
+}
+
+/* Links */
+a:not(nav a):not(footer a) {
+    color: var(--orange);
+    text-decoration: none;
+    transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+a:hover:not(nav a):not(footer a) {
+    color: var(--clay);
+    text-decoration: underline;
+}
+
+/* Divider: subtle green fade instead of black */
+hr {
+    border: none;
+    height: 1px;
+    background: linear-gradient(
+        to right,
+        color-mix(in oklab, var(--green) 0%, transparent),
+        color-mix(in oklab, var(--green) 60%, transparent),
+        color-mix(in oklab, var(--green) 0%, transparent)
+    );
+    opacity: 0.6;
+}
+
+.section-cream {
+    background-color: var(--cream);
+}
+
+.card {
+    background-color: var(--cream);
+    border: 1px solid color-mix(in oklab, var(--charcoal) 10%, transparent);
+    border-radius: 14px;
+    padding: 1rem;
+    box-shadow: 0 1px 0 color-mix(in oklab, var(--charcoal) 6%, transparent);
 }
