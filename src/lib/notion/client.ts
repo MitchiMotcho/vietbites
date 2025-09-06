@@ -1,14 +1,19 @@
-// lib/notionClient.ts
 import { Client } from "@notionhq/client";
 
 export const notion = new Client({
     auth: process.env.NOTION_TOKEN,
 });
 
-// Centralize your DB ids (32-char IDs from Notion URLs)
+// Centralize DB ids (32-char IDs from Notion URLs)
 export const DB = {
     MENU: process.env.NOTION_DB_MENU!,
+    OPENING: process.env.NOTION_DB_OPENING!,
+    ANNOUNCEMENTS: process.env.NOTION_DB_ANNOUNCEMENTS!,
 };
+
+for (const [k, v] of Object.entries(DB)) {
+  if (!v) throw new Error(`Missing env for ${k} database id`);
+}
 
 /**
  * Resolve and memoize the Data Source ID for a given Database ID.

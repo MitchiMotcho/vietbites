@@ -38,6 +38,8 @@ export async function revalidateByTag(tag: string) {
 export const tags = {
     menu: (category?: string) =>
         category ? [`menu`, `menu:category:${category}`] : [`menu`],
+    hours: () => ["hours"],
+    announcements: () => ["announcements"],
 };
 
 /** Reasonable default TTLs (seconds). Adjust to your needs. */

@@ -87,8 +87,6 @@ button:focus-visible {
 
 /* Outline style button */
 .button-outline {
-    display: inline-flex;
-    align-items: center;
     border: 1px solid color-mix(in oklab, var(--charcoal) 15%, transparent);
     background: var(--clean);
     color: var(--charcoal);

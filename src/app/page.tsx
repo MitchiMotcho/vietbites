@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { getMenu } from "@/lib/repositories/menuRepo";
+import { getMenu } from "@/lib/notion/menu";
 
 export default async function Home() {
     const menu = await getMenu();

@@ -4,13 +4,13 @@ import { FaInstagram, FaMapMarkerAlt } from "react-icons/fa";
 
 export default function Footer() {
     return (
-        <footer className="mt-16 bg-clean border-t border-charcoal/10">
+        <footer className="mt-16 mb-2 bg-clean border-t border-charcoal/10">
             {/* Slim brand accent */}
             <div className="h-1 bg-orange/80" />
 
-            <div className="mx-auto max-w-6xl px-5 py-10 grid gap-8 md:grid-cols-2">
+            <div className="mx-auto max-w-6xl items-center justify-center px-5 md:px-20 py-10 grid gap-8 grid-cols-1 md:grid-cols-2">
                 {/* Brand / tagline */}
-                <div className="flex flex-col items-center gap-3">
+                <div className="flex flex-col items-center md:items-start gap-3">
                     <Image
                         src="/images/Banners/BannerNoBg.png"
                         alt="VietBites"
@@ -18,16 +18,16 @@ export default function Footer() {
                         height={200}
                         className="rounded-md h-16 w-auto"
                     />
-                    <div className="mt-3 flex gap-2">
+                    <div className="mt-3 flex flex-col gap-3 w-1/2 sm:w-1/3 md:flex-row md:w-full md:gap-4">
                         <Link
                             href="/contact"
-                            className="inline-flex items-center rounded-lg bg-orange text-clean px-3 py-2 text-sm font-semibold shadow transition ease-in-out duration-300 hover:bg-[var(--orange-hover)] active:bg-[var(--orange-active)] active:scale-[.98]"
+                            className="inline-flex items-center justify-center rounded-lg bg-orange text-clean px-3 py-2 text-sm font-semibold shadow transition ease-in-out duration-300 hover:bg-orange-hover active:bg-orange-active active:scale-[.98] w-full sm:w-auto"
                         >
                             Get in touch
                         </Link>
                         <Link
                             href="/menu"
-                            className="button-outline py-2 px-3 text-sm font-heading font-medium rounded-lg"
+                            className="inline-flex items-center justify-center button-outline py-2 px-3 text-sm font-heading font-medium rounded-lg w-full sm:w-auto"
                         >
                             View menu
                         </Link>
@@ -35,19 +35,18 @@ export default function Footer() {
                 </div>
 
                 {/* Visit us */}
-                <div className="text-sm">
+                <div className="text-sm flex flex-col justify-center items-center md:items-start">
                     <p
-                        className="mb-2 font-semibold text-charcoal"
-                        style={{ fontFamily: "var(--font-heading)" }}
+                        className="mb-2 font-semibold text-charcoal font-heading"
                     >
                         Visit us
                     </p>
-                    <address className="not-italic text-charcoal/90">
+                    <address className="not-italic text-charcoal/90 text-center md:text-left">
                         246 Gerrard St E
                         <br />
                         Toronto, ON, M5A 2G2
                     </address>
-                    <p className="mt-2 text-charcoal/80">
+                    <p className="mt-2 text-charcoal/80 text-center md:text-left">
                         Open Sat to Thurs •{" "}
                         <Link
                             href="/location"
@@ -57,10 +56,10 @@ export default function Footer() {
                         </Link>
                     </p>
 
-                    <div className="mt-3 flex gap-3">
+                    <div className="mt-3 flex gap-3 justify-center md:justify-start">
                         <Link
                             href="/location"
-                            className="flex items-center justify-center w-10 h-10 rounded-full bg-orange text-clean shadow transition ease-in-out duration-300 hover:bg-[var(--orange-hover)] active:bg-[var(--orange-active)] active:scale-[.95]"
+                            className="flex items-center justify-center w-10 h-10 rounded-full bg-orange text-clean shadow transition ease-in-out duration-300 hover:bg-orange-hover active:bg-orange-active active:scale-[.95]"
                         >
                             <FaMapMarkerAlt size={18} />
                         </Link>
