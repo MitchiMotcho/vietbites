@@ -30,7 +30,14 @@ if (!TOKEN) {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ tag: TAG, token: TOKEN }),
         });
-        const data = await res.json();
+        const contentType = res.headers.get("content-type");
+        let data;
+        if (contentType && contentType.includes("application/json")) {
+            data = await res.json();
+        } else {
+            data = await res.text();
+            console.warn("⚠️ Response is not JSON. Raw response:", data);
+        }
         console.log("✅ Response:", data);
     } catch (err) {
         console.error("❌ Error:", err);

@@ -104,12 +104,12 @@ button:focus-visible {
 }
 
 /* Links */
-a:not(nav a):not(footer a) {
+a:not(nav a):not(footer a):not(.section-cream a) {
     color: var(--orange);
     text-decoration: none;
     transition: color 0.3s ease, text-decoration-color 0.3s ease;
 }
-a:hover:not(nav a):not(footer a) {
+a:hover:not(nav a):not(footer a):not(.section-cream a) {
     color: var(--clay);
     text-decoration: underline;
 }
@@ -124,7 +124,8 @@ hr {
         color-mix(in oklab, var(--green) 60%, transparent),
         color-mix(in oklab, var(--green) 0%, transparent)
     );
-    opacity: 0.6;
+    opacity: 0.9;
+    margin: 2rem 0;
 }
 
 .section-cream {

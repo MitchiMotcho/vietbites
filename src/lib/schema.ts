@@ -73,9 +73,9 @@ export const MenuListSchema = z.array(MenuItemSchema);
 
 export const OpeningHourSchema = z.object({
     id: z.string(),
-    day: DayEnum.or(z.string()), // allow custom labels if you ever localize
-    open: TimeString,
-    close: TimeString,
+    day: DayEnum.or(z.string()),
+    open: z.string(),
+    close: z.string(),
     closed: z.boolean(),
     notes: z.string().optional(),
     sort: z.number().optional(), // 1–7 Mon–Sun

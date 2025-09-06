@@ -6,21 +6,40 @@ import { assertHours } from "@/lib/schema";
 
 export type OpeningHour = {
     id: string;
-    day: string; // "Monday"
-    open?: string; // "11:00"
-    close?: string; // "20:00"
+    day: string;
+    open: string;
+    close: string;
     closed: boolean;
     notes?: string;
     sort?: number;
 };
+
+function readTime(prop: any): string | undefined {
+    // Date type (if used) takes precedence
+    const date = prop?.date?.start as string | undefined;
+    if (date) {
+        // e.g., "2025-09-06T11:00:00.000-04:00" -> "11:00"
+        const m = date.match(/T(\d{2}:\d{2})/);
+        if (m) return m[1];
+    }
+
+    const sel = prop?.select?.name as string | undefined;
+    if (sel) return sel.trim();
+
+    // Rich text fallback
+    const rt = text(prop?.rich_text);
+    if (rt) return rt.trim();
+
+    return undefined;
+}
 
 const rawToHour = (p: any): OpeningHour => {
     const props = p.properties;
     return {
         id: p.id,
         day: text(props.Day?.title) || "",
-        open: text(props.Open?.rich_text) || undefined,
-        close: text(props.Close?.rich_text) || undefined,
+        open: readTime(props.Open) ?? "",
+        close: readTime(props.Close) ?? "",
         closed: !!props.Closed?.checkbox,
         notes: text(props.Notes?.rich_text) || undefined,
         sort: props.Sort?.number ?? undefined,
