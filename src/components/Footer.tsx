@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { FaInstagram, FaMapMarkerAlt } from "react-icons/fa";
 
 export default function Footer() {
     return (
@@ -17,21 +18,19 @@ export default function Footer() {
                         height={200}
                         className="rounded-md h-16 w-auto"
                     />
-                    <div>
-                        <div className="mt-3 flex gap-2">
-                            <Link
-                                href="/contact"
-                                className="inline-flex items-center rounded-lg bg-orange text-clean px-3 py-2 text-sm font-semibold shadow transition ease-in-out duration-300 hover:bg-[var(--orange-hover)] active:bg-[var(--orange-active)] active:scale-[.98]"
-                            >
-                                Get in touch
-                            </Link>
-                            <Link
-                                href="/menu"
-                                className="inline-flex items-center rounded-lg border border-charcoal/15 px-3 py-2 text-sm text-charcoal hover:bg-gray-200 ease-in-out duration-300 transition-colors"
-                            >
-                                View menu
-                            </Link>
-                        </div>
+                    <div className="mt-3 flex gap-2">
+                        <Link
+                            href="/contact"
+                            className="inline-flex items-center rounded-lg bg-orange text-clean px-3 py-2 text-sm font-semibold shadow transition ease-in-out duration-300 hover:bg-[var(--orange-hover)] active:bg-[var(--orange-active)] active:scale-[.98]"
+                        >
+                            Get in touch
+                        </Link>
+                        <Link
+                            href="/menu"
+                            className="button-outline py-2 px-3 text-sm font-heading font-medium rounded-lg"
+                        >
+                            View menu
+                        </Link>
                     </div>
                 </div>
 
@@ -49,7 +48,7 @@ export default function Footer() {
                         Toronto, ON, M5A 2G2
                     </address>
                     <p className="mt-2 text-charcoal/80">
-                        Open daily •{" "}
+                        Open Sat to Thurs •{" "}
                         <Link
                             href="/location"
                             className="underline hover:text-orange ease-in-out duration-300 transition-colors"
@@ -58,19 +57,20 @@ export default function Footer() {
                         </Link>
                     </p>
 
-                    <div className="mt-3 flex flex-wrap gap-2">
+                    <div className="mt-3 flex gap-3">
                         <Link
                             href="/location"
-                            className="inline-flex items-center rounded-lg bg-orange text-clean px-3 py-2 text-sm font-semibold shadow transition ease-in-out duration-300 hover:bg-[var(--orange-hover)] active:bg-[var(--orange-active)] active:scale-[.98]"
+                            className="flex items-center justify-center w-10 h-10 rounded-full bg-orange text-clean shadow transition ease-in-out duration-300 hover:bg-[var(--orange-hover)] active:bg-[var(--orange-active)] active:scale-[.95]"
                         >
-                            Directions
+                            <FaMapMarkerAlt size={18} />
                         </Link>
                         <a
                             href="https://www.instagram.com/vietbites.to"
-                            className="inline-flex items-center rounded-lg border border-charcoal/15 px-3 py-2 text-sm hover:bg-gray-200 ease-in-out duration-300 transition-colors"
                             target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-center w-10 h-10 rounded-full border border-charcoal/15 text-charcoal shadow-sm button-outline"
                         >
-                            Instagram
+                            <FaInstagram size={18} />
                         </a>
                     </div>
                 </div>
@@ -79,14 +79,14 @@ export default function Footer() {
             {/* Bottom bar */}
             <div className="border-t border-charcoal/10 py-4 text-center text-xs text-charcoal/70">
                 © {new Date().getFullYear()} VietBites. Created by{" "}
-                <a 
+                <a
                     href="https://motchi.ca"
                     className="underline hover:text-orange ease-in-out duration-300 transition-colors"
                     target="_blank"
                 >
                     Mitchi Motcho Websites
-                </a>. All
-                rights reserved.
+                </a>
+                . All rights reserved.
             </div>
         </footer>
     );

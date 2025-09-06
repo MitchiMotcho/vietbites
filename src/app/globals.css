@@ -9,8 +9,8 @@
     --charcoal: #3c3c3c; /* Primary text */
 
     /* Dynamic hover/active shades from orange */
-    --orange-hover: color-mix(in oklab, var(--orange) 88%, black 12%);
-    --orange-active: color-mix(in oklab, var(--orange) 80%, black 20%);
+    --orange-hover: color-mix(in oklab, var(--orange) 94%, black 6%);
+    --orange-active: color-mix(in oklab, var(--orange) 90%, black 10%);
 }
 
 @theme inline {
@@ -20,6 +20,9 @@
     --color-clay: var(--clay);
     --color-green: var(--green);
     --color-charcoal: var(--charcoal);
+
+    --color-orange-hover: var(--orange-hover);
+    --color-orange-active: var(--orange-active);
 
     --font-heading: var(--font-be-vietnam);
     --font-body: var(--font-source-sans);
@@ -66,7 +69,7 @@ button {
     color: var(--clean);
     background-color: var(--orange);
     border-radius: 8px;
-    transition: background-color 0.2s ease, box-shadow 0.2s ease,
+    transition: background-color 0.3s ease, box-shadow 0.3s ease,
         transform 0.06s ease;
 }
 button:hover {
@@ -82,11 +85,31 @@ button:focus-visible {
     box-shadow: 0 0 0 3px color-mix(in oklab, var(--orange) 35%, transparent);
 }
 
+/* Outline style button */
+.button-outline {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid color-mix(in oklab, var(--charcoal) 15%, transparent);
+    background: var(--clean);
+    color: var(--charcoal);
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+.button-outline:hover {
+    background: #e5e7eb; /* Tailwind's gray-200 */
+}
+.button-outline:active {
+    background: #d1d5db; /* Tailwind's gray-300 */
+}
+.button-outline:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--charcoal) 20%, transparent);
+}
+
 /* Links */
 a:not(nav a):not(footer a) {
     color: var(--orange);
     text-decoration: none;
-    transition: color 0.2s ease, text-decoration-color 0.2s ease;
+    transition: color 0.3s ease, text-decoration-color 0.3s ease;
 }
 a:hover:not(nav a):not(footer a) {
     color: var(--clay);
