@@ -7,6 +7,7 @@ import { assertMenu } from "@/lib/schema";
 export type MenuItem = {
     id: string;
     name: string;
+    vietName: string;
     description?: string;
     price: number;
     category:
@@ -32,6 +33,7 @@ const rawToItem = (p: any): MenuItem => {
     return {
         id: p.id,
         name: text(props.Name?.title) || "Untitled",
+        vietName: text(props["Vietnamese Name"]?.rich_text) || "Untitled",
         description: text(props.Description?.rich_text) || undefined,
         price:
             props.Price?.number ??

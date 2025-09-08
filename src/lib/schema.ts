@@ -55,8 +55,9 @@ export const TimeString = z
 export const MenuItemSchema = z.object({
     id: z.string(),
     name: z.string().min(1, "Name is required"),
+    vietName: z.string().min(1, "Vietnamese name is required"),
     description: z.string().optional(),
-    price: asNumber, // you already coerce in mapping, this double-safes it
+    price: asNumber,
     // Allow strict known categories OR gracefully accept unknown future ones
     category: CategoryEnum.or(z.string()),
     photo: asUrl,

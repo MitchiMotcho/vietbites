@@ -11,7 +11,6 @@ const navLinks = [
     { href: "/story", label: "Our Story" },
     { href: "/menu", label: "Menu" },
     { href: "/location", label: "Location" },
-    { href: "/contact", label: "Contact" },
 ];
 
 export default function Navbar() {
