@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
+import "./Hero.css";
 import OpenToday from "./OpenToday";
+import QRCode from "./QRCode/QRCode";
 import { getHours } from "@/lib/notion/hours";
 
 export default async function Hero({
@@ -9,57 +11,143 @@ export default async function Hero({
     hours: Awaited<ReturnType<typeof getHours>>;
 }) {
     return (
-        <section className="relative overflow-hidden rounded-2xl section-cream px-6 py-10 md:px-10 md:py-14">
-            <div className="grid gap-10 md:grid-cols-2 items-center">
-                {/* Text side */}
+        <section
+            id="hero"
+            className="relative overflow-hidden rounded-2xl bg-cream px-6 py-16 md:px-14 md:py-24 lg:py-32 min-h-[600px] md:min-h-[700px] lg:min-h-[800px]"
+        >
+            {/* subtle border frame like the card poster */}
+            <div className="pointer-events-none absolute inset-0 rounded-2xl ring-2 ring-orange" />
+
+            {/* Floating product images */}
+            <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 z-0"
+            >
+                <div className="hidden lg:block absolute floatLeft opacity-95 floatAnim1">
+                    <Image
+                        src="/images/food/icon1.png"
+                        alt="Food Icons - Rice Paper Salad"
+                        width={220}
+                        height={150}
+                        style={{ height: 'auto', width: '200px' }}
+                        className="h-auto aspect-auto w-[200px] lg:w-[220px] object-cover -rotate-20"
+                        priority
+                    />
+                </div>
+                <div className="hidden lg:block absolute floatCenter opacity-95 floatAnim2">
+                    <Image
+                        src="/images/food/icon3.png"
+                        alt="Food Icons - Banh Mi"
+                        width={200}
+                        height={260}
+                        style={{ height: 'auto', width: '180px' }}
+                        className="h-auto w-[180px] xl:w-[200px] object-cover"
+                        priority
+                    />
+                </div>
+                <div className="hidden md:block absolute floatRight opacity-95 floatAnim3">
+                    <Image
+                        src="/images/food/icon2.png"
+                        alt="Food Icons - Snack"
+                        width={210}
+                        height={210}
+                        style={{ height: 'auto' }}
+                        className="h-auto w-[190px] xl:w-[210px] object-cover"
+                        priority
+                    />
+                </div>
+            </div>
+
+            <div className="relative z-10 grid items-center gap-10 md:gap-14 md:grid-cols-[1.2fr_.8fr]">
                 <div>
-                    <h1 className="text-3xl md:text-4xl font-bold font-heading">
-                        Welcome to{" "}
-                        <span className="text-orange">VietBites</span> – A Taste
-                        of Vietnam in Toronto
-                    </h1>
-                    <p className="mt-3 text-base md:text-lg text-charcoal/80">
-                        Discover the vibrant flavors and rich culinary
-                        traditions of Vietnam. At VietBites, we bring you the
-                        essence of Hải Phòng's bustling streets with our
-                        authentic <em>bánh mì</em> and delightful Vietnamese
-                        desserts. Every dish is crafted with care and meant to
-                        be savored and celebrated.
+                    <p className="mb-2 inline-block rounded-full bg-orange/10 px-3 py-1 text-xs font-semibold text-orange">
+                        VietBites • Toronto
                     </p>
 
-                    <div className="mt-6 flex gap-3">
+                    <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold font-heading leading-tight">
+                        Welcome to{" "}
+                        <span className="text-orange">VIETBITES</span> — A Taste
+                        of Vietnam in Toronto
+                    </h1>
+
+                    <p className="mt-4 text-base md:text-lg text-charcoal/80 max-w-prose">
+                        Discover the vibrant flavors and rich culinary
+                        traditions of Vietnam. At VietBites, we bring you the
+                        essence of Hải Phòng&apos;s bustling streets with our
+                        authentic <em>bánh mì</em> and Vietnamese desserts.
+                        Crafted with care, meant to be savored.
+                    </p>
+
+                    <div className="mt-8 w-3/4 mx-auto sm:w-full flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
                         <Link
                             href="/menu"
-                            className="inline-flex items-center rounded-lg bg-orange text-clean px-5 py-3 font-semibold shadow transition duration-200 hover:bg-[var(--orange-hover)] active:bg-[var(--orange-active)] active:scale-[.98]"
+                            className="text-center rounded-lg bg-orange text-clean px-5 py-3 font-semibold shadow transition duration-200 hover:bg-[var(--orange-hover)] active:bg-[var(--orange-active)] active:scale-[.98]"
                         >
                             View Menu
                         </Link>
                         <Link
+                            href="/story"
+                            className="text-center button-outline px-5 py-3 text-sm md:text-base font-heading font-medium rounded-lg"
+                        >
+                            Our Story
+                        </Link>
+                        <Link
                             href="/location"
-                            className="button-outline py-3 px-5 text-sm md:text-base font-heading font-medium rounded-lg"
+                            className="text-center button-outline px-5 py-3 text-sm md:text-base font-heading font-medium rounded-lg"
                         >
                             Visit Us
                         </Link>
                     </div>
 
-                    {/* Hours quick glance */}
+                    {/* Today’s hours */}
                     <div className="mt-6 text-sm text-charcoal/80">
                         <OpenToday hours={hours} />
                     </div>
                 </div>
 
-                {/* Image side */}
-                <div className="flex justify-center md:justify-end">
-                    <Image
-                        src="/images/Banners/VerticalArt.jpg"
-                        alt="VietBites dishes"
-                        width={560}
-                        height={360}
-                        className="rounded-xl shadow-sm object-cover w-full max-w-[560px] h-auto"
-                        priority
-                    />
+                <div className="relative mx-auto w-full max-w-sm">
+                    <div className="rounded-xl bg-clean p-6 shadow-sm ring-1 ring-charcoal/10">
+                        <div className="flex items-center gap-3">
+                            <Image
+                                src="/images/Logos/logoCircle.png"
+                                alt="VietBites mark"
+                                width={40}
+                                height={40}
+                                className="h-10 w-10 rounded-full"
+                            />
+                            <div>
+                                <p className="font-heading font-bold text-lg tracking-wide text-orange">
+                                    VIETBITES
+                                </p>
+                                <p className="text-xs text-charcoal/70">
+                                    Desserts &amp; Bánh mì
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-[1fr_auto] sm:items-center">
+                            <p className="text-sm text-charcoal/80">
+                                Follow us on Instagram for new specials and
+                                behind-the-scenes.
+                            </p>
+                            <a
+                                href="https://www.instagram.com/vietbites.to"
+                                className="inline-flex items-center justify-center rounded-md bg-orange px-4 py-2 text-sm font-semibold text-clean shadow hover:bg-[var(--orange-hover)] active:bg-[var(--orange-active)]"
+                                target="_blank"
+                                rel="noreferrer noopener"
+                            >
+                                @vietbites.to
+                            </a>
+                        </div>
+
+                        {/* Instagram QR code */}
+                        <QRCode />
+                    </div>
                 </div>
             </div>
+
+            {/* Layout safety layer to prevent overlaps on small screens */}
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 top-0 z-0 md:hidden bg-gradient-to-b from-transparent via-transparent to-cream/10" />
         </section>
     );
 }

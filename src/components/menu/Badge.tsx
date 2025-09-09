@@ -38,7 +38,7 @@ export default function Badge({ note }: BadgeProps) {
                 >
                     <path d="M12 2a1 1 0 0 1 1 1v5.05l4.24-2.45a1 1 0 1 1 1 1.73L14 9.78l4.24 2.45a1 1 0 1 1-1 1.73L13 11.95V17a1 1 0 1 1-2 0v-5.05l-4.24 2.45a1 1 0 1 1-1-1.73L10 9.78 5.76 7.33a1 1 0 1 1 1-1.73L11 8.05V3a1 1 0 0 1 1-1z" />
                 </svg>
-                NEW
+                New Arrival
             </span>
         );
     }

@@ -64,20 +64,28 @@ export default function MenuCard({
                     </span>
                 </div>
 
-                {description ? (
-                    <p className="mt-1 text-sm text-charcoal/60 line-clamp-4 overflow-hidden flex-1">
-                        {description}
-                    </p>
-                ) : (
-                    // keep space when no description so cards stay same height
-                    <div className="mt-1 flex-1" />
-                )}
+                <div className="flex-1">
+                    {description ? (
+                        <p className="mt-1 text-sm text-charcoal/60 line-clamp-4 overflow-hidden">
+                            {description}
+                            {description.length > 100 && '...'}
+                        </p>
+                    ) : (
+                        // keep space when no description so cards stay same height
+                        <div className="mt-1" />
+                    )}
+                </div>
 
                 {tags && tags.length > 0 ? (
                     <div className="mt-2 flex flex-wrap gap-1.5">
-                        {tags.map((t) => (
+                        {tags.slice(0, 2).map((t) => (
                             <Tag key={t} label={t} />
                         ))}
+                        {tags.length > 2 && (
+                            <span className="text-sm text-charcoal/60">
+                                + {tags.length - 2} more
+                            </span>
+                        )}
                     </div>
                 ) : null}
             </div>

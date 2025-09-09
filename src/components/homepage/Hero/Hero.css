@@ -1,0 +1,136 @@
+/* ----- Curved layout positions for the 3 floating images ----- */
+
+/* Left: bottom-left corner, slightly rotated */
+.floatLeft {
+    left: 10%;
+    bottom: clamp(0.5rem, 2.5vw, 1rem);
+}
+
+/* Center: centered horizontally, a touch higher to form the arc */
+.floatCenter {
+    left: 43%;
+    transform: translateX(-50%) rotate(-3deg);
+    bottom: clamp(2rem, 5vw, 1rem);
+}
+
+/* Right: bottom-right corner mirroring the left */
+.floatRight {
+    right: 10%;
+    bottom: clamp(0.5rem, 2.5vw, 1rem);
+    transform: rotate(-4deg);
+}
+
+/* Slight inward offset on very wide screens so they don't hug the edges */
+@media (min-width: 1536px) {
+    .floatLeft {
+        left: 8%;
+    }
+    .floatRight {
+        right: 8%;
+    }
+}
+
+/* Responsive: bring images closer and scale down on large/medium */
+@media (max-width: 1280px) {
+    .floatLeft {
+        left: 8%;
+        bottom: clamp(0.5rem, 2vw, 1rem);
+    }
+    .floatCenter {
+        left: 45%;
+        bottom: clamp(1.75rem, 4.5vw, 1rem);
+    }
+    .floatRight {
+        right: 8%;
+        bottom: clamp(0.5rem, 2vw, 1rem);
+    }
+}
+@media (max-width: 1024px) {
+    .floatLeft {
+        left: 6%;
+        bottom: clamp(0.5rem, 3vw, 0.75rem);
+    }
+    .floatCenter {
+        left: 46%;
+        bottom: clamp(1.5rem, 4vw, 0.75rem);
+    }
+    .floatRight {
+        right: 6%;
+        bottom: clamp(0.5rem, 3vw, 0.75rem);
+    }
+}
+
+/* ----- Gentle float animations (very subtle for a professional feel) ----- */
+@keyframes float1 {
+    0% {
+        transform: translateY(0) rotate(6deg);
+    }
+    50% {
+        transform: translateY(-10px) rotate(6deg);
+    }
+    100% {
+        transform: translateY(0) rotate(6deg);
+    }
+}
+@keyframes float2 {
+    0% {
+        transform: translateY(0) rotate(-3deg);
+    }
+    50% {
+        transform: translateY(8px) rotate(-3deg);
+    }
+    100% {
+        transform: translateY(0) rotate(-3deg);
+    }
+}
+@keyframes float3 {
+    0% {
+        transform: translateY(0) rotate(-4deg);
+    }
+    50% {
+        transform: translateY(-8px) rotate(-4deg);
+    }
+    100% {
+        transform: translateY(0) rotate(-4deg);
+    }
+}
+
+.floatAnim1 {
+    animation: float1 8s ease-in-out infinite;
+}
+.floatAnim2 {
+    animation: float2 9s ease-in-out infinite;
+}
+.floatAnim3 {
+    animation: float3 8.5s ease-in-out infinite;
+}
+
+/* Reduce intensity on hover-capable devices (keeps it classy) */
+@media (hover: hover) {
+    .floatAnim1:hover,
+    .floatAnim2:hover,
+    .floatAnim3:hover {
+        animation-duration: 7s;
+    }
+}
+
+/* Accessibility: respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .floatAnim1,
+    .floatAnim2,
+    .floatAnim3 {
+        animation: none !important;
+    }
+}
+
+/* ----- Safety: never overlap main content on small screens ----- */
+/* We already hide some images with `hidden md/lg:block` in TSX.
+   This adds a bit of guard on tablet sizes by nudging them inward. */
+@media (max-width: 900px) {
+    .floatLeft {
+        left: 5%;
+    }
+    .floatRight {
+        right: 5%;
+    }
+}

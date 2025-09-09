@@ -6,10 +6,14 @@ function pickFeatured(
     items: Awaited<ReturnType<typeof getMenu>>,
     count: number
 ) {
-    const highlight = items.filter((i) => i.notes === "HIGHLIGHT");
-    const fresh = items.filter((i) => i.notes === "NEW");
+    const highlight = items.filter(
+        (i) => i.notes?.toUpperCase() === "HIGHLIGHT"
+    );
+    const fresh = items.filter((i) => i.notes?.toUpperCase() === "NEW");
     const rest = items.filter(
-        (i) => i.notes !== "HIGHLIGHT" && i.notes !== "NEW"
+        (i) =>
+            i.notes?.toUpperCase() !== "HIGHLIGHT" &&
+            i.notes?.toUpperCase() !== "NEW"
     );
     return [...highlight, ...fresh, ...rest].slice(0, count);
 }
@@ -24,9 +28,16 @@ export default function FeaturedMenu({
     return (
         <section id="menu" className="mt-10">
             <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
-                <h2 className="text-2xl font-bold font-heading">
-                    Customer Favourites
-                </h2>
+                <div className="flex flex-col items-center sm:items-start text-center sm:text-left gap-1">
+                    <h2 className="text-2xl font-bold font-heading">
+                        Customer Favourites
+                    </h2>
+                    <p className="text-sm text-charcoal/70 w-5/6 md:max-w-3/4 lg:w-full lg:max-w-full">
+                        A selection of our most popular dishes. To view more
+                        details about these items, check out the full menu.
+                    </p>
+                </div>
+
                 <Link
                     href="/menu"
                     className="inline-block rounded-lg bg-orange text-white px-4 py-2 text-sm font-semibold shadow hover:bg-orange-hover transition-colors focus:outline-none focus:ring-2 focus:ring-orange focus:ring-offset-2"
@@ -36,7 +47,7 @@ export default function FeaturedMenu({
             </div>
 
             {featured.length ? (
-                <ul className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                <ul className="mt-4 grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                     {featured.map((item) => (
                         <li key={item.id}>
                             <MenuCard
