@@ -29,7 +29,7 @@ export default function Navbar() {
                     onClick={() => setOpen(false)}
                 >
                     <Image
-                        src="/images/banners/BannerNoBg.png"
+                        src="/images/banners/bannerNoBg.png"
                         alt="VietBites"
                         width={500}
                         height={200}

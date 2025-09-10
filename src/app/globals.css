@@ -103,12 +103,16 @@ button:focus-visible {
 }
 
 /* Links */
-a:not(nav a):not(footer a):not(.section-cream a):not(#menu a):not(#hero a) {
+a:not(nav a):not(footer a):not(.section-cream a):not(#menu a):not(#hero a):not(
+        #story-link a
+    ) {
     color: var(--orange);
     text-decoration: none;
     transition: color 0.3s ease, text-decoration-color 0.3s ease;
 }
-a:hover:not(nav a):not(footer a):not(.section-cream a):not(#menu a):not(#hero a) {
+a:hover:not(nav a):not(footer a):not(.section-cream a):not(#menu a):not(
+        #hero a
+    ):not(#story-link a) {
     color: var(--clay);
     text-decoration: underline;
 }
@@ -134,7 +138,47 @@ hr {
 .card {
     background-color: var(--cream);
     border: 1px solid color-mix(in oklab, var(--charcoal) 10%, transparent);
-    border-radius: 14px;
-    padding: 1rem;
+    border-radius: 10px;
     box-shadow: 0 1px 0 color-mix(in oklab, var(--charcoal) 6%, transparent);
+    position: relative;
+    overflow: hidden; /* hide inner overflow behind the clipped border */
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 2px solid var(--orange);
+    /* Clip out the top-left and bottom-right corners */
+    clip-path: polygon(
+        20px 0,
+        100% 0,
+        100% calc(100% - 20px),
+        calc(100% - 20px) 100%,
+        0 100%,
+        0 20px
+    );
+    pointer-events: none;
+    border-radius: 0; /* ensure clean clipped corners */
+}
+
+.frame-clipped {
+    position: relative;
+}
+
+.frame-clipped::before {
+    content: "";
+    position: absolute;
+    inset: 20px; /* same as inset-5 */
+    border: 2px solid var(--orange);
+    clip-path: polygon(
+        30px 0,
+        100% 0,
+        100% calc(100% - 30px),
+        calc(100% - 30px) 100%,
+        0 100%,
+        0 30px
+    );
+    border-radius: 0;
+    pointer-events: none;
 }

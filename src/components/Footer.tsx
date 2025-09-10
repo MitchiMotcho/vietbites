@@ -12,7 +12,7 @@ export default function Footer() {
                 {/* Brand / tagline */}
                 <div className="flex flex-col items-center md:items-start gap-3">
                     <Image
-                        src="/images/Banners/BannerNoBg.png"
+                        src="/images/banners/bannerNoBg.png"
                         alt="VietBites"
                         width={500}
                         height={200}
@@ -36,9 +36,7 @@ export default function Footer() {
 
                 {/* Visit us */}
                 <div className="text-sm flex flex-col justify-center items-center md:items-start">
-                    <p
-                        className="mb-2 font-semibold text-charcoal font-heading"
-                    >
+                    <p className="mb-2 font-semibold text-charcoal font-heading">
                         Visit us
                     </p>
                     <address className="not-italic text-charcoal/90 text-center md:text-left">

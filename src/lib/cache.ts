@@ -40,6 +40,7 @@ export const tags = {
         category ? [`menu`, `menu:category:${category}`] : [`menu`],
     hours: () => ["hours"],
     announcements: () => ["announcements"],
+    pillars: () => ["pillars"],
 };
 
 /** Reasonable default TTLs (seconds). Adjust to your needs. */

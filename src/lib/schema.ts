@@ -99,6 +99,17 @@ export type TAnnouncement = z.infer<typeof AnnouncementSchema>;
 
 export const AnnouncementListSchema = z.array(AnnouncementSchema);
 
+/* -------------------------------- Pillars -------------------------------- */
+export const PillarSchema = z.object({
+    id: z.string(),
+    title: z.string().min(1, "Title is required"),
+    description: z.string().optional(),
+    priority: z.number().optional(),
+});
+export type TPillar = z.infer<typeof PillarSchema>;
+
+export const PillarListSchema = z.array(PillarSchema);
+
 /* ----------------------------- Batch validators ----------------------------- */
 
 export function assertMenu(items: unknown): TMenuItem[] {
@@ -128,6 +139,15 @@ export function assertAnnouncements(items: unknown): TAnnouncement[] {
             parsed.error.flatten()
         );
         throw new Error("Announcements data failed validation");
+    }
+    return parsed.data;
+}
+
+export function assertPillars(items: unknown): TPillar[] {
+    const parsed = PillarListSchema.safeParse(items);
+    if (!parsed.success) {
+        console.error("Pillars validation errors:", parsed.error.flatten());
+        throw new Error("Pillars data failed validation");
     }
     return parsed.data;
 }

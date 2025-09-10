@@ -13,11 +13,9 @@ export default async function Hero({
     return (
         <section
             id="hero"
-            className="relative overflow-hidden rounded-2xl bg-cream px-6 py-16 md:px-14 md:py-24 lg:py-32 min-h-[600px] md:min-h-[700px] lg:min-h-[800px]"
+            className="frame-clipped overflow-hidden rounded-2xl bg-cream px-8 py-16 
+             md:px-16 md:py-24 lg:py-32 min-h-[600px] md:min-h-[700px] lg:min-h-[800px]"
         >
-            {/* subtle border frame like the card poster */}
-            <div className="pointer-events-none absolute inset-0 rounded-2xl ring-2 ring-orange" />
-
             {/* Floating product images */}
             <div
                 aria-hidden
@@ -29,7 +27,7 @@ export default async function Hero({
                         alt="Food Icons - Rice Paper Salad"
                         width={220}
                         height={150}
-                        style={{ height: 'auto', width: '200px' }}
+                        style={{ height: "auto", width: "200px" }}
                         className="h-auto aspect-auto w-[200px] lg:w-[220px] object-cover -rotate-20"
                         priority
                     />
@@ -40,7 +38,7 @@ export default async function Hero({
                         alt="Food Icons - Banh Mi"
                         width={200}
                         height={260}
-                        style={{ height: 'auto', width: '180px' }}
+                        style={{ height: "auto", width: "180px" }}
                         className="h-auto w-[180px] xl:w-[200px] object-cover"
                         priority
                     />
@@ -51,14 +49,14 @@ export default async function Hero({
                         alt="Food Icons - Snack"
                         width={210}
                         height={210}
-                        style={{ height: 'auto' }}
+                        style={{ height: "auto" }}
                         className="h-auto w-[190px] xl:w-[210px] object-cover"
                         priority
                     />
                 </div>
             </div>
 
-            <div className="relative z-10 grid items-center gap-10 md:gap-14 md:grid-cols-[1.2fr_.8fr]">
+            <div className="relative z-10 grid items-center gap-10 md:gap-14 lg:grid-cols-[1.2fr_.8fr]">
                 <div>
                     <p className="mb-2 inline-block rounded-full bg-orange/10 px-3 py-1 text-xs font-semibold text-orange">
                         VietBites • Toronto
@@ -66,9 +64,11 @@ export default async function Hero({
 
                     <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold font-heading leading-tight">
                         Welcome to{" "}
-                        <span className="text-orange">VIETBITES</span> — A Taste
-                        of Vietnam in Toronto
+                        <span className="text-orange">VIETBITES</span>
                     </h1>
+                    <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold font-heading leading-snug text-charcoal/80">
+                        A Taste of Vietnam in Toronto
+                    </h2>
 
                     <p className="mt-4 text-base md:text-lg text-charcoal/80 max-w-prose">
                         Discover the vibrant flavors and rich culinary
@@ -109,7 +109,7 @@ export default async function Hero({
                     <div className="rounded-xl bg-clean p-6 shadow-sm ring-1 ring-charcoal/10">
                         <div className="flex items-center gap-3">
                             <Image
-                                src="/images/Logos/logoCircle.png"
+                                src="/images/logos/logoCircle.png"
                                 alt="VietBites mark"
                                 width={40}
                                 height={40}
