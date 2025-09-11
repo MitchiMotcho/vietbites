@@ -1,0 +1,35 @@
+/* Poster frame utility */
+.section-poster {
+    position: relative;
+}
+.section-poster::before {
+    content: "";
+    position: absolute;
+    inset: 0.75rem; /* ~inset-3 */
+    border: 1px solid color-mix(in oklab, var(--charcoal) 12%, transparent);
+    border-radius: 12px;
+    pointer-events: none;
+}
+
+/* Numbered list styling for Chè */
+.che-ol {
+    counter-reset: che;
+}
+.che-ol > li {
+    counter-increment: che;
+    display: grid;
+    grid-template-columns: 1fr auto; /* name/desc on left, price on right */
+    gap: 0.25rem 0.75rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px dashed
+        color-mix(in oklab, var(--charcoal) 15%, transparent);
+}
+.che-ol > li:last-child {
+    border-bottom: 0;
+}
+.che-ol > li .no {
+    font-family: var(--font-heading, inherit);
+    color: var(--orange);
+    font-weight: 800;
+    margin-right: 0.5rem;
+}
