@@ -21,10 +21,10 @@ export default async function Pillars() {
                         key={pillar.title}
                         className="rounded-lg border border-charcoal/10 bg-cream p-6 shadow-sm transition hover:shadow-md"
                     >
-                        <h3 className="font-heading text-lg font-bold text-orange">
+                        <h3 className="pillar-heading font-heading text-lg font-bold text-orange">
                             {pillar.title}
                         </h3>
-                        <p className="mt-3 text-sm text-charcoal/80">
+                        <p className="mt-3 text-sm text-charcoal">
                             {pillar.description}
                         </p>
                     </div>

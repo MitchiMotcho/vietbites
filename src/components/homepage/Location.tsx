@@ -6,14 +6,17 @@ export default function Location() {
         <section className="mt-12 rounded-2xl section-cream px-6 py-10 md:px-10 md:py-14">
             <div className="grid gap-8 md:grid-cols-2 md:items-center lg:grid-cols-[60%_40%] lg:pr-26 lg:pl-10">
                 <div className="space-y-4">
-                    <h2
-                        className="text-2xl md:text-3xl font-bold font-heading"
-                    >
+                    <h2 className="text-2xl md:text-3xl font-bold font-heading">
                         Come Visit VietBites on Gerrard St E
                     </h2>
                     <p className="text-charcoal/80 text-sm md:text-base leading-relaxed">
-                        VietBites is located at 246 Gerrard St E, Toronto, steps from downtown. Come by
-                        for bánh mì, desserts, and a little taste of Vietnam!
+                        <span className="text-orange font-semibold">VietBites</span> is
+                        located at{" "}
+                        <span className="font-semibold">
+                            246 Gerrard St E, Toronto
+                        </span>
+                        , steps from downtown. Come by for bánh mì, desserts,
+                        and a little taste of Vietnam!
                     </p>
 
                     <div className="flex flex-col gap-6 pt-6 md:gap-8 text-xs sm:text-sm lg:text-base">
@@ -30,7 +33,6 @@ export default function Location() {
                             >
                                 Get in Touch
                             </Link>
-                            
                         </div>
                         <div className="text-center md:text-left relative">
                             <Link

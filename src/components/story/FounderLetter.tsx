@@ -19,7 +19,7 @@ export default function FounderLetter() {
                     bigger. With all the savings we had, we opened{" "}
                     <strong>VietBites</strong>.
                 </p>
-                <div className="my-6 rounded-xl bg-cream p-5 ring-1 ring-charcoal/10">
+                <div className="my-6 border-orange/80 border-t-3 border-b-3 p-5">
                     <p className="text-base md:text-lg text-charcoal/90">
                         Our mission is to introduce nostalgic, authentic flavors
                         to locals and passersby, and to give people a little

@@ -56,6 +56,14 @@ h6 {
     font-family: var(--font-heading, sans-serif);
     font-weight: 700;
     line-height: 1.25;
+}
+
+h1:not(.pillar-heading):not(.announcement-title),
+h2:not(.pillar-heading):not(.announcement-title),
+h3:not(.pillar-heading):not(.announcement-title),
+h4:not(.pillar-heading):not(.announcement-title),
+h5:not(.pillar-heading):not(.announcement-title),
+h6:not(.pillar-heading):not(.announcement-title) {
     color: var(--charcoal);
 }
 
