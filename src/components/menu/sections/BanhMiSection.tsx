@@ -3,11 +3,12 @@ import type { TMenuItem } from "@/lib/schema";
 import NoteBadge from "@/components/menu/NoteBadge";
 import DietaryTags from "@/components/menu/DietaryTags";
 import Price from "@/components/menu/MenuPrice";
+import "@/app/menu/menu.css";
 
 export function BanhMiSection({ items }: { items: TMenuItem[] }) {
     return (
-        <div className="section-poster rounded-2xl bg-cream p-4 md:p-6">
-            <h2 className="menu-heading mb-3 text-center font-heading text-2xl md:text-3xl font-extrabold text-orange">
+        <div className="frame-menu bg-cream px-4 py-6 md:px-6 md:py-7">
+            <h2 className="menu-heading mb-3 text-center font-heading text-3xl font-extrabold text-orange">
                 BÁNH MÌ
             </h2>
             <div className="grid grid-cols-1 gap-5">
@@ -62,14 +63,13 @@ export function BanhMiSection({ items }: { items: TMenuItem[] }) {
 export function BanhMiToppings({ items }: { items: TMenuItem[] }) {
     if (!items.length) return null;
     return (
-        <div className="mt-4 rounded-xl bg-cream p-4">
-            <div className="flex flex-row items-center justify-between gap-1">
-                <p className="font-heading text-orange font-extrabold ml-3">
-                    TOPPING
+        <div className="rounded-xl bg-cream frame-toppings">
+            <div className="flex flex-col items-start gap-1">
+                <p className="font-heading text-orange font-extrabold text-xl">
+                    TOPPINGS
                 </p>
-                <p className="text-xs font-italic text-orange mt-6">
-                    Do you dislike any ingredient below? <br />
-                    Let us know... we won&apos;t put it in.
+                <p className="text-xs xl:text-sm italic text-charcoal/70">
+                    Do you dislike any ingredient below? Let us know, we won&apos;t put it in!
                 </p>
             </div>
 
@@ -95,7 +95,9 @@ export function BanhMiToppings({ items }: { items: TMenuItem[] }) {
                                 </span>
                             </div>
                         )}
-                        <span className="text-sm text-center text-orange font-medium">{it.name}</span>
+                        <span className="text-sm text-center text-orange font-semibold">
+                            {it.name}
+                        </span>
                     </div>
                 ))}
             </div>

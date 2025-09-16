@@ -7,7 +7,7 @@ export default function DietaryTags({ item }: { item: TMenuItem }) {
     )
         return null;
     return (
-        <div className="mt-1 text-xs text-charcoal/60">
+        <div className="mt-1 text-xs text-charcoal/70">
             {item.description && <p>{item.description}</p>}
             {!!item.tags?.length && (
                 <p className="mt-1">

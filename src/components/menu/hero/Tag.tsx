@@ -12,7 +12,7 @@ const tagIcons: Record<string, JSX.Element> = {
 export default function Tag({ label }: { label: string }) {
     return (
         <span
-            className={`inline-flex items-center font-medium rounded-full border border-orange/80 bg-neutral-50 px-3 py-1 text-xs shadow-sm text-orange/80 cursor-default`}
+            className={`inline-flex items-center font-medium rounded-full border border-orange/80 bg-neutral-50 px-3 py-1 text-[10px] shadow-sm text-orange/80 cursor-default`}
         >
             {tagIcons[label.toLowerCase()]}
             {label}

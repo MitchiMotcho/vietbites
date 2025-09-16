@@ -33,3 +33,126 @@
     font-weight: 800;
     margin-right: 0.5rem;
 }
+
+/*** Banh Mi Section Frame ***/
+/* Sharp rectangular frame with top break for headings */
+.frame-menu {
+    position: relative;
+    padding: 2rem; /* Add space inside the frame */
+}
+
+.frame-menu::before {
+    content: "";
+    position: absolute;
+    top: 5%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2.5px solid var(--orange);
+    border-top: none; /* leave the top border for manual drawing */
+    pointer-events: none;
+    box-sizing: border-box; /* Ensure padding doesn't affect the border */
+}
+
+/* Create two halves of the top border, leaving a gap for the heading */
+.frame-menu::after {
+    content: "";
+    position: absolute;
+    top: 5%;
+    left: 0;
+    right: 0;
+    height: 0;
+    border-top: 2.5px solid var(--orange);
+    pointer-events: none;
+
+    /* Create a larger gap in the middle for the heading */
+    mask-image: linear-gradient(
+        to right,
+        black calc(50% - 8ch),
+        transparent calc(50% - 8ch),
+        transparent calc(50% + 8ch),
+        black calc(50% + 8ch)
+    );
+    mask-repeat: no-repeat;
+    -webkit-mask-image: linear-gradient(
+        to right,
+        black calc(50% - 8ch),
+        transparent calc(50% - 8ch),
+        transparent calc(50% + 8ch),
+        black calc(50% + 8ch)
+    );
+    -webkit-mask-repeat: no-repeat;
+}
+
+/* Adjust top border for small screens */
+@media (max-width: 640px) {
+    .frame-menu::before {
+        top: 2.5%; /* Adjust top position for better alignment */
+    }
+
+    .frame-menu::after {
+        top: 2.5%; /* Match the adjusted top position */
+    }
+}
+
+/*** Topping Frame ***/
+.frame-toppings {
+    position: relative;
+    padding: 0.5rem 2rem; /* Add space inside the frame */
+}
+
+.frame-toppings::before {
+    content: "";
+    position: absolute;
+    top: 10%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2.5px solid var(--orange);
+    border-top: none; /* leave the top border for manual drawing */
+    pointer-events: none;
+    box-sizing: border-box; /* Ensure padding doesn't affect the border */
+}
+
+/* Create two halves of the top border, leaving a gap for the heading */
+.frame-toppings::after {
+    content: "";
+    position: absolute;
+    top: 10%;
+    left: 0;
+    right: 0;
+    height: 0;
+    border-top: 2.5px solid var(--orange);
+    pointer-events: none;
+
+    /* Create a gap further away from the corner and make it larger */
+    mask-image: linear-gradient(
+        to right,
+        black 0,
+        black 3ch,
+        transparent 3ch,
+        transparent 16ch,
+        black 16ch
+    );
+    mask-repeat: no-repeat;
+    -webkit-mask-image: linear-gradient(
+        to right,
+        black 0,
+        black 3ch,
+        transparent 3ch,
+        transparent 16ch,
+        black 16ch
+    );
+    -webkit-mask-repeat: no-repeat;
+}
+
+/* Adjust top border for small screens */
+@media (max-width: 1024px) {
+    .frame-toppings::before {
+        top: 7%; /* Adjust top position for better alignment */
+    }
+
+    .frame-toppings::after {
+        top: 7%; /* Match the adjusted top position */
+    }
+}
