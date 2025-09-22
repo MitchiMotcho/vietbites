@@ -52,23 +52,25 @@ export default function MenuCard({
 
             {/* Body */}
             <div className="p-4 flex flex-col gap-1 flex-1 min-h-0">
-                <div className="flex flex-row items-center justify-between gap-3 text-orange">
-                    <div>
+                <div className="flex flex-row items-start justify-between gap-3 text-orange">
+                    <div className="flex flex-col max-w-3/4">
                         <p className="font-semibold text-lg leading-snug">
                             {name}
                         </p>
                         <div className="text-sm italic">{vietName}</div>
                     </div>
-                    <span className="text-base text-charcoal/90 font-mono font-semibold">
-                        ${price.toFixed(2)}
-                    </span>
+                    <div className="flex items-center">
+                        <p className="text-orange font-extrabold text-lg">
+                            ${price.toFixed(2)}
+                        </p>
+                    </div>
                 </div>
 
                 <div className="flex-1">
                     {description ? (
                         <p className="mt-1 text-sm text-charcoal/60 line-clamp-4 overflow-hidden">
                             {description}
-                            {description.length > 100 && '...'}
+                            {description.length > 100 && "..."}
                         </p>
                     ) : (
                         // keep space when no description so cards stay same height

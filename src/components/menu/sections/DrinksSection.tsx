@@ -4,7 +4,7 @@ import NoteBadge from "@/components/menu/NoteBadge";
 import DietaryTags from "@/components/menu/DietaryTags";
 import Price from "@/components/menu/MenuPrice";
 
-export default function DrinksSection({ items }: { items: TMenuItem[] }) {
+export function DrinksSection({ items }: { items: TMenuItem[] }) {
     return (
         <div className="section-poster rounded-2xl bg-cream p-4 md:p-6 h-full">
             <h2 className="mb-3 text-center font-heading text-2xl md:text-3xl font-extrabold text-orange">
@@ -37,6 +37,41 @@ export default function DrinksSection({ items }: { items: TMenuItem[] }) {
                             <Price value={it.price} />
                         </p>
                         <DietaryTags item={it} />
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+}
+
+export function DrinksToppings({ items }: { items: TMenuItem[] }) {
+    if (!items.length) return null;
+    return (
+        <div className="mt-4 flex items-center gap-4 rounded-xl bg-cream p-4 ring-1 ring-charcoal/10">
+            <span className="rounded-full bg-orange px-3 py-1 text-xs font-heading font-bold text-clean">
+                TOPPING
+            </span>
+            <div className="flex flex-wrap gap-4">
+                {items.map((it) => (
+                    <div key={it.id} className="flex items-center gap-2">
+                        {it.photo ? (
+                            <Image
+                                src={it.photo}
+                                alt={it.name}
+                                width={36}
+                                height={36}
+                                className="h-9 w-9 rounded-full object-cover ring-1 ring-charcoal/10"
+                                style={{ height: "auto" }}
+                            />
+                        ) : (
+                            <div className="h-9 w-9 rounded-full bg-clean ring-1 ring-charcoal/10" />
+                        )}
+                        <span className="text-sm">{it.name}</span>
+                        {typeof it.price === "number" && (
+                            <span className="text-xs text-charcoal/60">
+                                · <Price value={it.price} />
+                            </span>
+                        )}
                     </div>
                 ))}
             </div>

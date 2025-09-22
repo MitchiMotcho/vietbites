@@ -21,8 +21,6 @@
     grid-template-columns: 1fr auto; /* name/desc on left, price on right */
     gap: 0.25rem 0.75rem;
     padding: 0.5rem 0;
-    border-bottom: 1px dashed
-        color-mix(in oklab, var(--charcoal) 15%, transparent);
 }
 .che-ol > li:last-child {
     border-bottom: 0;
@@ -36,12 +34,12 @@
 
 /*** Banh Mi Section Frame ***/
 /* Sharp rectangular frame with top break for headings */
-.frame-menu {
+.frame-banhmi {
     position: relative;
     padding: 2rem; /* Add space inside the frame */
 }
 
-.frame-menu::before {
+.frame-banhmi::before {
     content: "";
     position: absolute;
     top: 5%;
@@ -55,7 +53,7 @@
 }
 
 /* Create two halves of the top border, leaving a gap for the heading */
-.frame-menu::after {
+.frame-banhmi::after {
     content: "";
     position: absolute;
     top: 5%;
@@ -86,11 +84,11 @@
 
 /* Adjust top border for small screens */
 @media (max-width: 640px) {
-    .frame-menu::before {
+    .frame-banhmi::before {
         top: 2.5%; /* Adjust top position for better alignment */
     }
 
-    .frame-menu::after {
+    .frame-banhmi::after {
         top: 2.5%; /* Match the adjusted top position */
     }
 }
@@ -154,5 +152,77 @@
 
     .frame-toppings::after {
         top: 7%; /* Match the adjusted top position */
+    }
+}
+
+/*** Che Section Frame ***/
+/* Sharp rectangular frame with top break for headings */
+.frame-che {
+    position: relative;
+    padding: 2rem; /* Add space inside the frame */
+}
+
+.frame-che::before {
+    content: "";
+    position: absolute;
+    top: 4.1%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2.5px solid var(--orange);
+    border-top: none; /* leave the top border for manual drawing */
+    pointer-events: none;
+    box-sizing: border-box; /* Ensure padding doesn't affect the border */
+}
+
+/* Create two halves of the top border, leaving a gap for the heading */
+.frame-che::after {
+    content: "";
+    position: absolute;
+    top: 4.1%;
+    left: 0;
+    right: 0;
+    height: 0;
+    border-top: 2.5px solid var(--orange);
+    pointer-events: none;
+
+    /* Create a larger gap in the middle for the heading */
+    mask-image: linear-gradient(
+        to right,
+        black calc(50% - 17ch),
+        transparent calc(50% - 17ch),
+        transparent calc(50% + 17ch),
+        black calc(50% + 17ch)
+    );
+    mask-repeat: no-repeat;
+    -webkit-mask-image: linear-gradient(
+        to right,
+        black calc(50% - 17ch),
+        transparent calc(50% - 17ch),
+        transparent calc(50% + 17ch),
+        black calc(50% + 17ch)
+    );
+    -webkit-mask-repeat: no-repeat;
+}
+
+/* Adjust top border for smaller screens */
+@media (max-width: 1024px) {
+    .frame-che::before {
+        top: 5.7%; /* Adjust top position for better alignment */
+    }
+
+    .frame-che::after {
+        top: 5.7%; /* Match the adjusted top position */
+    }
+}
+
+/* Adjust top border for smallest screens */
+@media (max-width: 640px) {
+    .frame-che::before {
+        top: 4%; /* Adjust top position for better alignment */
+    }
+
+    .frame-che::after {
+        top: 4%; /* Match the adjusted top position */
     }
 }

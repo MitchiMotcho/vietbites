@@ -75,15 +75,17 @@ export default function Footer() {
 
             {/* Bottom bar */}
             <div className="border-t border-charcoal/10 py-4 text-center text-xs text-charcoal/70">
-                © {new Date().getFullYear()} VietBites. Created by{" "}
-                <a
-                    href="https://motchi.ca"
-                    className="underline hover:text-orange ease-in-out duration-300 transition-colors"
-                    target="_blank"
-                >
-                    Mitchi Motcho Websites
-                </a>
-                . All rights reserved.
+                <p className="max-w-3/4 mx-auto">
+                    © {new Date().getFullYear()} VietBites. Created by{" "}
+                    <a
+                        href="https://motchi.ca"
+                        className="underline hover:text-orange ease-in-out duration-300 transition-colors"
+                        target="_blank"
+                    >
+                        Mitchi Motcho Websites
+                    </a>
+                    . All rights reserved.
+                </p>
             </div>
         </footer>
     );

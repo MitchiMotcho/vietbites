@@ -40,20 +40,20 @@ export function groupByCategory(items: TMenuItem[]): MenuGroups {
  */
 export function splitToppings(items: TMenuItem[]) {
     const bm: TMenuItem[] = [];
-    const che: TMenuItem[] = [];
+    const drinks: TMenuItem[] = [];
     for (const it of items) {
         const tagset = new Set((it.tags ?? []).map((t) => t.toLowerCase()));
         if (it.category === "Toppings") {
             if (tagset.has("banh mi".toLowerCase())) {
                 bm.push(it);
-            } else if (tagset.has("sweet soup".toLowerCase())) {
-                che.push(it);
+            } else if (tagset.has("drinks".toLowerCase())) {
+                drinks.push(it);
             }
         }
     }
 
     return {
         banhMiToppings: bm,
-        cheToppings: che,
+        drinksToppings: drinks,
     };
 }

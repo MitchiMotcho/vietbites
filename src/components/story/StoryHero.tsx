@@ -1,9 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 
 export function StoryHero() {
     return (
-        <section className="relative overflow-hidden rounded-2xl section-cream px-6 py-16 md:px-10 md:py-20 lg:py-24">
+        <section className="relative overflow-hidden rounded-2xl section-cream sm:mx-6 px-6 py-16 md:px-10 md:py-20 lg:py-24">
             <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-charcoal/10" />
             <div className="mx-auto max-w-6xl grid gap-10 md:grid-cols-[1.1fr_.9fr] items-center">
                 <div>

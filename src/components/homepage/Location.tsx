@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Location() {
     return (
-        <section className="mt-12 rounded-2xl section-cream px-6 py-10 md:px-10 md:py-14">
+        <section className="mt-12 mx-4 sm:mx-0 rounded-2xl section-cream px-6 py-10 md:px-10 md:py-14">
             <div className="grid gap-8 md:grid-cols-2 md:items-center lg:grid-cols-[60%_40%] lg:pr-26 lg:pl-10">
                 <div className="space-y-4">
                     <h2 className="text-2xl md:text-3xl font-bold font-heading">
