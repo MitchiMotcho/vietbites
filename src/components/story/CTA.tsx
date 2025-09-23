@@ -35,7 +35,7 @@ export default function CTA() {
                 <div className="relative h-56 overflow-hidden rounded-xl ring-1 ring-orange/20 md:h-64">
                     <Image
                         src="/images/StoreFront.webp"
-                        alt="VietBites storefront"
+                        alt="VietBites Storefront"
                         fill
                         className="object-cover"
                     />

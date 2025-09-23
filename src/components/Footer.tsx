@@ -12,7 +12,7 @@ export default function Footer() {
                 {/* Brand / tagline */}
                 <div className="flex flex-col items-center md:items-start gap-3">
                     <Image
-                        src="/images/banners/bannerNoBg.png"
+                        src="/images/banners/BannerNoBg.png"
                         alt="VietBites"
                         width={500}
                         height={200}

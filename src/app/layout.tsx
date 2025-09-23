@@ -18,7 +18,12 @@ const sourceSans = Source_Sans_3({
     display: "swap",
 });
 
+const defaultUrl = process.env.NEXT_PUBLIC_BASE_URL
+    ? `https://${process.env.NEXT_PUBLIC_BASE_URL}`
+    : "http://localhost:3000";
+
 export const metadata: Metadata = {
+    metadataBase: new URL(defaultUrl),
     title: "Viet Bites - Canada",
     description: "Authentic Vietnamese cuisine in Canada",
 };

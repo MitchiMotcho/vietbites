@@ -49,8 +49,8 @@ export default function Location() {
                 {/* Image */}
                 <div className="flex justify-center md:justify-end">
                     <Image
-                        src="/images/Storefront.webp"
-                        alt="VietBites storefront"
+                        src="/images/StoreFront.webp"
+                        alt="VietBites Storefront"
                         width={500}
                         height={800}
                         className="rounded-xl shadow-sm object-cover max-w-[500px] lg:max-w-[300px] w-full h-auto"

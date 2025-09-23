@@ -109,7 +109,7 @@ export default async function Hero({
                     <div className="rounded-xl bg-clean p-6 shadow-sm ring-1 ring-charcoal/10">
                         <div className="flex items-center gap-3">
                             <Image
-                                src="/images/logos/logoCircle.png"
+                                src="/images/logos/LogoCircle.png"
                                 alt="VietBites mark"
                                 width={40}
                                 height={40}
