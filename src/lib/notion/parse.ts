@@ -1,12 +1,101 @@
-/* Text helpers */
-export const text = (arr?: { plain_text: string }[] | string | null) =>
-  Array.isArray(arr) ? arr.map(t => t.plain_text).join("") : (arr ?? "");
+import type {
+    PageObjectResponse,
+    PartialPageObjectResponse,
+} from "@notionhq/client/build/src/api-endpoints";
 
-/* Files -> first public URL (if uploaded) or external url */
-export const fileUrl = (files?: any[]) => {
-  if (!files?.length) return undefined;
-  const f = files[0];
-  if (f.type === "file") return f.file.url;
-  if (f.type === "external") return f.external.url;
-  return undefined;
+/** A Page from Notion that might be partial */
+export type NotionPage = PageObjectResponse | PartialPageObjectResponse;
+
+export function isFullPage(p: NotionPage): p is PageObjectResponse {
+    return "properties" in p;
+}
+
+/* -------------------- Rich text → string -------------------- */
+export function text(rt?: { plain_text: string }[] | string | null): string {
+    return Array.isArray(rt) ? rt.map((t) => t.plain_text).join("") : rt ?? "";
+}
+
+/* -------------------- Property readers (type-safe) -------------------- */
+export function getTitle(
+    props: PageObjectResponse["properties"],
+    key: string
+): string | undefined {
+    const prop = props[key];
+    if (prop?.type === "title") return text(prop.title);
+    return undefined;
+}
+
+export function getRichText(
+    props: PageObjectResponse["properties"],
+    key: string
+): string | undefined {
+    const prop = props[key];
+    if (prop?.type === "rich_text") return text(prop.rich_text);
+    return undefined;
+}
+
+export function getNumber(
+    props: PageObjectResponse["properties"],
+    key: string
+): number | undefined {
+    const prop = props[key];
+    if (prop?.type === "number") return prop.number ?? undefined;
+    return undefined;
+}
+
+export function getCheckbox(
+    props: PageObjectResponse["properties"],
+    key: string
+): boolean | undefined {
+    const prop = props[key];
+    if (prop?.type === "checkbox") return prop.checkbox ?? undefined;
+    return undefined;
+}
+
+export function getSelectName(
+    props: PageObjectResponse["properties"],
+    key: string
+): string | undefined {
+    const prop = props[key];
+    if (prop?.type === "select") return prop.select?.name ?? undefined;
+    return undefined;
+}
+
+export function getMultiSelectNames(
+    props: PageObjectResponse["properties"],
+    key: string
+): string[] | undefined {
+    const prop = props[key];
+    if (prop?.type === "multi_select")
+        return (prop.multi_select ?? []).map((t) => t.name);
+    return undefined;
+}
+
+/* -------------------- Files → first URL -------------------- */
+// Minimal structural type for Notion files (works across SDK versions)
+type NotionFile =
+    | { type: "file"; file: { url: string } }
+    | { type: "external"; external: { url: string } };
+
+export function firstFileUrl(
+    props: PageObjectResponse["properties"],
+    key: string
+): string | undefined {
+    const prop = props[key];
+    if (prop?.type !== "files") return undefined;
+
+    const f = prop.files?.[0] as NotionFile | undefined;
+    if (!f) return undefined;
+
+    return f.type === "file"
+        ? f.file.url
+        : f.type === "external"
+        ? f.external.url
+        : undefined;
+}
+
+/* -------------------- Paginated results shape -------------------- */
+export type NotionList<T = NotionPage> = {
+    results: T[];
+    next_cursor: string | null;
 };

@@ -1,7 +1,6 @@
 import type { TMenuItem } from "@/lib/schema";
 import Price from "@/components/menu/MenuPrice";
 import DietaryTags from "@/components/menu/DietaryTags";
-import Image from "next/image";
 
 export function CheSection({ items }: { items: TMenuItem[] }) {
     return (
@@ -35,7 +34,7 @@ export function CheSection({ items }: { items: TMenuItem[] }) {
             <p className="my-4 text-center text-orange italic font-semibold w-3/4 mx-auto">
                 A traditional Vietnamese sweet dessert soup made with
                 ingredients like beans, coconut milk, tapioca, jellies and
-                seasonal fruits. Served chilled or warm, it's a refreshing and
+                seasonal fruits. Served chilled or warm, it&apos;s a refreshing and
                 colorful treat enjoyed year-round.
             </p>
         </div>

@@ -1,8 +1,18 @@
 import "server-only";
 import { notion, DB, getDataSourceId } from "./client";
-import { text, fileUrl } from "./parse";
 import { cached, tags, ttl } from "../cache";
 import { assertAnnouncements } from "@/lib/schema";
+import type { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import {
+    NotionList,
+    NotionPage,
+    isFullPage,
+    getTitle,
+    getRichText,
+    getNumber,
+    firstFileUrl,
+    getCheckbox,
+} from "./parse";
 
 export type Announcement = {
     id: string;
@@ -13,42 +23,39 @@ export type Announcement = {
     active?: boolean;
 };
 
-const rawToAnn = (p: any): Announcement => {
+const rawToAnn = (p: NotionPage): Announcement => {
+    if (!isFullPage(p)) return { id: p.id, title: "Untitled", active: true };
     const props = p.properties;
     return {
         id: p.id,
-        title: text(props.Title?.title) || "Untitled",
-        details: text(props.Details?.rich_text) || undefined,
-        media: fileUrl(props.Media?.files),
-        sort: props.Sort?.number ?? undefined,
-        active: props.Active?.checkbox ?? true,
+        title: getTitle(props, "Title") || "Untitled",
+        details: getRichText(props, "Details") || undefined,
+        media: firstFileUrl(props, "Media"),
+        sort: getNumber(props, "Sort"),
+        active: getCheckbox(props, "Active") ?? true,
     };
 };
 
 async function _getAnnouncements(): Promise<Announcement[]> {
     const data_source_id = await getDataSourceId(DB.ANNOUNCEMENTS);
-    const all: any[] = [];
+    const all: PageObjectResponse[] = [];
     let start_cursor: string | undefined;
 
     do {
-        const res = await notion.dataSources.query({
+        const res = (await notion.dataSources.query({
             data_source_id,
             sorts: [{ property: "Sort", direction: "ascending" }],
-            filter: { property: "Active", checkbox: { equals: true } }, // valid
+            filter: { property: "Active", checkbox: { equals: true } },
             page_size: 100,
             start_cursor,
-        });
+        })) as NotionList<PageObjectResponse>;
+
         all.push(...res.results);
-        start_cursor = (res as any).next_cursor ?? undefined;
+        start_cursor = res.next_cursor ?? undefined;
     } while (start_cursor);
 
     const items = all.map(rawToAnn);
-    try {
-        assertAnnouncements(items);
-    } catch (error) {
-        console.error("Announcements validation failed:", error);
-        throw error;
-    }
+    assertAnnouncements(items);
     return items;
 }
 

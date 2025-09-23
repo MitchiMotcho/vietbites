@@ -1,8 +1,20 @@
 import "server-only";
 import { notion, DB, getDataSourceId } from "./client";
-import { text, fileUrl } from "./parse";
 import { cached, tags, ttl } from "../cache";
 import { assertMenu } from "@/lib/schema";
+import type { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import {
+    NotionList,
+    NotionPage,
+    isFullPage,
+    getTitle,
+    getRichText,
+    getNumber,
+    getSelectName,
+    firstFileUrl,
+    getCheckbox,
+    getMultiSelectNames,
+} from "./parse";
 
 export type MenuItem = {
     id: string;
@@ -28,32 +40,55 @@ export type MenuItem = {
     tags?: string[];
 };
 
-const rawToItem = (p: any): MenuItem => {
+const rawToItem = (p: NotionPage): MenuItem => {
+    if (!isFullPage(p)) {
+        return {
+            id: p.id,
+            name: "Untitled",
+            vietName: "Untitled",
+            price: 0,
+            category: "Uncategorized",
+            available: true,
+        };
+    }
     const props = p.properties;
+
+    const name = getTitle(props, "Name") || "Untitled";
+    const vietName = getRichText(props, "Vietnamese Name") || "Untitled";
+    const description = getRichText(props, "Description") || undefined;
+
+    const price =
+        getNumber(props, "Price") ?? (Number(getTitle(props, "Price")) || 0); // safety fallback if schema is temporarily off
+
+    const category = getSelectName(props, "Category") ?? "Uncategorized";
+    const photo = firstFileUrl(props, "Photo");
+    const notes = getSelectName(props, "Notes") ?? undefined;
+    const sortOrder = getNumber(props, "Sort Order");
+    const available = getCheckbox(props, "Available") ?? true;
+    const tags = getMultiSelectNames(props, "Tags") ?? [];
+
     return {
         id: p.id,
-        name: text(props.Name?.title) || "Untitled",
-        vietName: text(props["Vietnamese Name"]?.rich_text) || "Untitled",
-        description: text(props.Description?.rich_text) || undefined,
-        price:
-            props.Price?.number ??
-            (text(props.Price) ? Number(text(props.Price)) : 0),
-        category: props.Category?.select?.name ?? "Uncategorized",
-        photo: fileUrl(props.Photo?.files),
-        notes: props.Notes?.select?.name ?? undefined,
-        sortOrder: props["Sort Order"]?.number ?? undefined,
-        available: !!props.Available?.checkbox,
-        tags: (props.Tags?.multi_select ?? []).map((t: any) => t.name),
+        name,
+        vietName,
+        description,
+        price,
+        category,
+        photo,
+        notes,
+        sortOrder,
+        available,
+        tags,
     };
 };
 
 async function _getMenu(): Promise<MenuItem[]> {
     const data_source_id = await getDataSourceId(DB.MENU);
-    const all: any[] = [];
+    const all: PageObjectResponse[] = [];
     let start_cursor: string | undefined;
 
     do {
-        const pages = await notion.dataSources.query({
+        const pages = (await notion.dataSources.query({
             data_source_id,
             sorts: [
                 { property: "Sort Order", direction: "ascending" },
@@ -62,28 +97,24 @@ async function _getMenu(): Promise<MenuItem[]> {
             filter: { property: "Available", checkbox: { equals: true } },
             page_size: 100,
             start_cursor,
-        });
+        })) as NotionList<PageObjectResponse>;
+
         all.push(...pages.results);
-        start_cursor = (pages as any).next_cursor ?? undefined;
+        start_cursor = pages.next_cursor ?? undefined;
     } while (start_cursor);
 
     const items = all.map(rawToItem);
-    try {
-        assertMenu(items); // validate and throw if mismatch
-    } catch (error) {
-        console.error("Menu validation failed:", error);
-        throw error;
-    }
+    assertMenu(items);
     return items;
 }
 
 async function _getMenuByCategory(category: string): Promise<MenuItem[]> {
     const data_source_id = await getDataSourceId(DB.MENU);
-    const all: any[] = [];
+    const all: PageObjectResponse[] = [];
     let start_cursor: string | undefined;
 
     do {
-        const pages = await notion.dataSources.query({
+        const pages = (await notion.dataSources.query({
             data_source_id,
             sorts: [
                 { property: "Sort Order", direction: "ascending" },
@@ -92,19 +123,14 @@ async function _getMenuByCategory(category: string): Promise<MenuItem[]> {
             filter: { property: "Category", select: { equals: category } },
             page_size: 100,
             start_cursor,
-        });
+        })) as NotionList<PageObjectResponse>;
+
         all.push(...pages.results);
-        start_cursor = (pages as any).next_cursor ?? undefined;
+        start_cursor = pages.next_cursor ?? undefined;
     } while (start_cursor);
 
     const items = all.map(rawToItem);
-    try {
-        assertMenu(items); // validate and throw if mismatch
-    } catch (error) {
-        console.error("Menu validation failed:", error);
-        throw error;
-    }
-
+    assertMenu(items);
     return items;
 }
 

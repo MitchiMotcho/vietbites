@@ -23,9 +23,10 @@ export async function POST(req: Request) {
 
         await revalidateByTag(tag);
         return NextResponse.json({ ok: true, revalidated: tag });
-    } catch (e: any) {
+    } catch (e: unknown) {
+        const errorMessage = e instanceof Error ? e.message : "Unknown error";
         return NextResponse.json(
-            { ok: false, error: e?.message ?? "Unknown error" },
+            { ok: false, error: errorMessage },
             { status: 500 }
         );
     }

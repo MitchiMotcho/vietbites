@@ -38,7 +38,7 @@ export default function OpenToday({ hours }: { hours: Awaited<ReturnType<typeof 
 
     return (
         <p>
-            Today's Hours:{" "}
+            Today&apos;s Hours:{" "}
             {isClosed ? (
                 <span className="font-semibold">Closed</span>
             ) : (

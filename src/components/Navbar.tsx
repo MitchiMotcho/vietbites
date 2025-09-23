@@ -99,7 +99,7 @@ export default function Navbar() {
                         className="px-2 py-2"
                         style={{ fontFamily: "var(--font-heading)" }}
                     >
-                        {navLinks.map((l, i) => {
+                        {navLinks.map((l) => {
                             const active = pathname === l.href;
                             return (
                                 <li key={l.href}>

@@ -1,6 +1,4 @@
-import Image from "next/image";
 import type { Metadata } from "next";
-import Link from "next/link";
 import { StoryHero } from "@/components/story/StoryHero";
 import FounderLetter from "@/components/story/FounderLetter";
 import { PhotoStrip } from "@/components/story/PhotoStrip";

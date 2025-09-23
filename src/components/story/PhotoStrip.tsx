@@ -11,7 +11,7 @@ export function PhotoStrip({
 }: {
     images?: { src: string; alt: string }[];
 }) {
-    const Img = (props: ComponentProps<typeof Image>) => <Image {...props} />;
+    const Img = ({ alt, ...props }: ComponentProps<typeof Image>) => <Image alt={alt} {...props} />;
     return (
         <section className="mx-auto mt-12 max-w-6xl md:px-10">
             <div className="grid grid-cols-2 gap-3 md:grid-cols-4">

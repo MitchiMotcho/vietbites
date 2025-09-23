@@ -46,6 +46,12 @@ main {
     padding: 20px 7px;
 }
 
+@media screen and (min-width: 1024px) {
+    main {
+        padding: 20px 20px;
+    }
+}
+
 /* Headings: keep charcoal, let color come from accents in components */
 h1,
 h2,
