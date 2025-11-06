@@ -6,9 +6,9 @@ import DietaryTags from "@/components/menu/DietaryTags";
 
 export function CheSection({ items }: { items: TMenuItem[] }) {
     return (
-        <div className="bg-cream frame-che">
-            <div className="px-4 py-6 md:px-6 md:py-7 ">
-                <h2 className="menu-heading mb-3 text-center font-heading text-3xl font-extrabold text-orange">
+        <div className="bg-cream frame-che frame-sharp frame-center-gap">
+            <div className="px-4 py-6 md:px-6 md:py-2 ">
+                <h2 className="menu-heading mb-3 text-center font-heading text-3xl font-extrabold text-orange mt-2 md:mt-6">
                     CHÈ / SWEET SOUP
                 </h2>
                 <p className="mb-2 mt-8 text-center text-orange italic font-semibold w-3/4 mx-auto">

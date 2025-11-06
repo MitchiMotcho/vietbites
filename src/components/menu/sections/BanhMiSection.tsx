@@ -7,7 +7,7 @@ import "@/app/menu/menu.css";
 
 export function BanhMiSection({ items }: { items: TMenuItem[] }) {
     return (
-        <div className="frame-banhmi bg-cream px-4 py-6 md:px-6 md:py-7">
+        <div className="frame-banhmi frame-sharp frame-center-gap bg-cream px-4 py-6 md:px-6 md:py-7">
             <h2 className="menu-heading mb-3 text-center font-heading text-3xl font-extrabold text-orange">
                 BÁNH MÌ
             </h2>
@@ -63,7 +63,7 @@ export function BanhMiSection({ items }: { items: TMenuItem[] }) {
 export function BanhMiToppings({ items }: { items: TMenuItem[] }) {
     if (!items.length) return null;
     return (
-        <div className="rounded-xl bg-cream frame-toppings">
+        <div className="rounded-xl bg-cream frame-toppings frame-sharp frame-left-gap mt-2">
             <div className="flex flex-col items-start gap-1">
                 <p className="font-heading text-orange font-extrabold text-xl">
                     TOPPINGS
@@ -95,7 +95,7 @@ export function BanhMiToppings({ items }: { items: TMenuItem[] }) {
                                 </span>
                             </div>
                         )}
-                        <span className="text-sm text-center text-orange font-semibold">
+                        <span className="text-sm text-center text-orange font-semibold mb-3">
                             {it.name}
                         </span>
                     </div>

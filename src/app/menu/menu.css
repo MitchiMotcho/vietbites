@@ -5,7 +5,7 @@
 .section-poster::before {
     content: "";
     position: absolute;
-    inset: 0.75rem; /* ~inset-3 */
+    inset: 0.75rem;
     border: 1px solid color-mix(in oklab, var(--charcoal) 12%, transparent);
     border-radius: 12px;
     pointer-events: none;
@@ -18,7 +18,7 @@
 .che-ol > li {
     counter-increment: che;
     display: grid;
-    grid-template-columns: 1fr auto; /* name/desc on left, price on right */
+    grid-template-columns: 1fr auto;
     gap: 0.25rem 0.75rem;
     padding: 0.5rem 0;
 }
@@ -32,196 +32,114 @@
     margin-right: 0.5rem;
 }
 
-/*** Banh Mi Section Frame ***/
-/* Sharp rectangular frame with top break for headings */
+/*** Reusable sharp-frame system ***/
+/* Base reusable frame. Use together with a gap-mode and an optional section helper. */
+.frame-sharp {
+    position: relative;
+    padding: var(--frame-padding, 1.5rem);
+    /* customizable tokens */
+    --frame-top: 5%;           /* default top offset for border */
+    --frame-border: 2.5px;     /* border thickness */
+    --frame-color: var(--orange);
+    box-sizing: border-box;
+}
+
+.frame-sharp::before {
+    content: "";
+    position: absolute;
+    top: var(--frame-top);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: var(--frame-border) solid var(--frame-color);
+    border-top: none;
+    pointer-events: none;
+    box-sizing: border-box;
+}
+
+.frame-sharp::after {
+    content: "";
+    position: absolute;
+    top: var(--frame-top);
+    left: 0;
+    right: 0;
+    height: 0;
+    border-top: var(--frame-border) solid var(--frame-color);
+    pointer-events: none;
+    /* Default mask: no gap (full top border). */
+    mask-image: linear-gradient(to right, black 0, black 100%);
+    -webkit-mask-image: linear-gradient(to right, black 0, black 100%);
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+}
+
+/* Modes for how the top border gap is shaped */
+
+/* Centered gap (useful for headings centered over the frame). 
+   --frame-gap controls half the gap size (e.g. 8ch -> total 16ch). */
+.frame-center-gap::after {
+    mask-image: linear-gradient(
+        to right,
+        black calc(50% - var(--frame-gap, 8ch)),
+        transparent calc(50% - var(--frame-gap, 8ch)),
+        transparent calc(50% + var(--frame-gap, 8ch)),
+        black calc(50% + var(--frame-gap, 8ch))
+    );
+    -webkit-mask-image: linear-gradient(
+        to right,
+        black calc(50% - var(--frame-gap, 8ch)),
+        transparent calc(50% - var(--frame-gap, 8ch)),
+        transparent calc(50% + var(--frame-gap, 8ch)),
+        black calc(50% + var(--frame-gap, 8ch))
+    );
+}
+
+/* Left-side gap (gap starts from left offset to some size).
+   Use --frame-gap-start and --frame-gap-end (both accept length units like 3ch, 16ch). */
+.frame-left-gap::after {
+    mask-image: linear-gradient(
+        to right,
+        black 0,
+        black var(--frame-gap-start, 3ch),
+        transparent var(--frame-gap-start, 3ch),
+        transparent var(--frame-gap-end, 16ch),
+        black var(--frame-gap-end, 16ch)
+    );
+    -webkit-mask-image: linear-gradient(
+        to right,
+        black 0,
+        black var(--frame-gap-start, 3ch),
+        transparent var(--frame-gap-start, 3ch),
+        transparent var(--frame-gap-end, 16ch),
+        black var(--frame-gap-end, 16ch)
+    );
+}
+
+/* Optional convenience section classes (compose with .frame-sharp + gap/top classes)
+   These only set sensible defaults for padding/gap; they do not duplicate pseudo rules. */
 .frame-banhmi {
-    position: relative;
-    padding: 2rem; /* Add space inside the frame */
+    --frame-padding: 2rem;
+    --frame-gap: 8ch;
 }
-
-.frame-banhmi::before {
-    content: "";
-    position: absolute;
-    top: 5%;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border: 2.5px solid var(--orange);
-    border-top: none; /* leave the top border for manual drawing */
-    pointer-events: none;
-    box-sizing: border-box; /* Ensure padding doesn't affect the border */
-}
-
-/* Create two halves of the top border, leaving a gap for the heading */
-.frame-banhmi::after {
-    content: "";
-    position: absolute;
-    top: 5%;
-    left: 0;
-    right: 0;
-    height: 0;
-    border-top: 2.5px solid var(--orange);
-    pointer-events: none;
-
-    /* Create a larger gap in the middle for the heading */
-    mask-image: linear-gradient(
-        to right,
-        black calc(50% - 8ch),
-        transparent calc(50% - 8ch),
-        transparent calc(50% + 8ch),
-        black calc(50% + 8ch)
-    );
-    mask-repeat: no-repeat;
-    -webkit-mask-image: linear-gradient(
-        to right,
-        black calc(50% - 8ch),
-        transparent calc(50% - 8ch),
-        transparent calc(50% + 8ch),
-        black calc(50% + 8ch)
-    );
-    -webkit-mask-repeat: no-repeat;
-}
-
-/* Adjust top border for small screens */
-@media (max-width: 640px) {
-    .frame-banhmi::before {
-        top: 2.5%; /* Adjust top position for better alignment */
-    }
-
-    .frame-banhmi::after {
-        top: 2.5%; /* Match the adjusted top position */
-    }
-}
-
-/*** Topping Frame ***/
 .frame-toppings {
-    position: relative;
-    padding: 1.1rem 2rem; /* Add space inside the frame */
+    --frame-padding: 0 2rem;
+    --frame-gap-start: 3ch;
+    --frame-gap-end: 16ch;
 }
-
-.frame-toppings::before {
-    content: "";
-    position: absolute;
-    top: 10%;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border: 2.5px solid var(--orange);
-    border-top: none; /* leave the top border for manual drawing */
-    pointer-events: none;
-    box-sizing: border-box; /* Ensure padding doesn't affect the border */
-}
-
-/* Create two halves of the top border, leaving a gap for the heading */
-.frame-toppings::after {
-    content: "";
-    position: absolute;
-    top: 10%;
-    left: 0;
-    right: 0;
-    height: 0;
-    border-top: 2.5px solid var(--orange);
-    pointer-events: none;
-
-    /* Create a gap further away from the corner and make it larger */
-    mask-image: linear-gradient(
-        to right,
-        black 0,
-        black 3ch,
-        transparent 3ch,
-        transparent 16ch,
-        black 16ch
-    );
-    mask-repeat: no-repeat;
-    -webkit-mask-image: linear-gradient(
-        to right,
-        black 0,
-        black 3ch,
-        transparent 3ch,
-        transparent 16ch,
-        black 16ch
-    );
-    -webkit-mask-repeat: no-repeat;
-}
-
-/* Adjust top border for small screens */
-@media (max-width: 1024px) {
-    .frame-toppings::before {
-        top: 7%; /* Adjust top position for better alignment */
-    }
-
-    .frame-toppings::after {
-        top: 7%; /* Match the adjusted top position */
-    }
-}
-
-/*** Che Section Frame ***/
-/* Sharp rectangular frame with top break for headings */
 .frame-che {
-    position: relative;
+    --frame-padding: 0;
+    --frame-gap: 17ch;
+    --frame-top: 4%;
 }
 
-.frame-che::before {
-    content: "";
-    position: absolute;
-    top: 4%;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border: 2.5px solid var(--orange);
-    border-top: none; /* leave the top border for manual drawing */
-    pointer-events: none;
-    box-sizing: border-box; /* Ensure padding doesn't affect the border */
-}
-
-/* Create two halves of the top border, leaving a gap for the heading */
-.frame-che::after {
-    content: "";
-    position: absolute;
-    top: 4%;
-    left: 0;
-    right: 0;
-    height: 0;
-    border-top: 2.5px solid var(--orange);
-    pointer-events: none;
-
-    /* Create a larger gap in the middle for the heading */
-    mask-image: linear-gradient(
-        to right,
-        black calc(50% - 17ch),
-        transparent calc(50% - 17ch),
-        transparent calc(50% + 17ch),
-        black calc(50% + 17ch)
-    );
-    mask-repeat: no-repeat;
-    -webkit-mask-image: linear-gradient(
-        to right,
-        black calc(50% - 17ch),
-        transparent calc(50% - 17ch),
-        transparent calc(50% + 17ch),
-        black calc(50% + 17ch)
-    );
-    -webkit-mask-repeat: no-repeat;
-}
-
-/* Adjust top border for smaller screens */
+/* Responsive adjustments can remain as small helpers */
 @media (max-width: 1024px) {
-    .frame-che::before {
-        top: 5.7%; /* Adjust top position for better alignment */
-    }
-
-    .frame-che::after {
-        top: 5.7%; /* Match the adjusted top position */
+    .frame-toppings {
+        --frame-padding: 0.2rem 2rem;
     }
 }
-
-/* Adjust top border for smallest screens */
 @media (max-width: 640px) {
-    .frame-che::before {
-        top: 4%; /* Adjust top position for better alignment */
-    }
-
-    .frame-che::after {
-        top: 4%; /* Match the adjusted top position */
+    .frame-banhmi {
+        --frame-top: 2.5%;
     }
 }

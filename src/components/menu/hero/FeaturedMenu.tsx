@@ -26,7 +26,7 @@ export default function FeaturedMenu({
     const featured = pickFeatured(menu, 4);
 
     return (
-        <section id="menu" className="mt-10">
+        <section id="menu" className="mt-10 mx-4 lg:mx-0">
             <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
                 <div className="flex flex-col items-center sm:items-start text-center sm:text-left gap-1">
                     <h2 className="text-2xl font-bold font-heading">

@@ -1,44 +1,51 @@
 import Image from "next/image";
 import type { TMenuItem } from "@/lib/schema";
-import NoteBadge from "@/components/menu/NoteBadge";
-import DietaryTags from "@/components/menu/DietaryTags";
 import Price from "@/components/menu/MenuPrice";
+import NoteBadge from "@/components/menu/NoteBadge";
 
 export function DrinksSection({ items }: { items: TMenuItem[] }) {
     return (
-        <div className="section-poster rounded-2xl bg-cream p-4 md:p-6 h-full">
-            <h2 className="mb-3 text-center font-heading text-2xl md:text-3xl font-extrabold text-orange">
-                DRINK
-            </h2>
-            <div className="flex flex-wrap items-end gap-6">
-                {items.map((it) => (
-                    <div key={it.id} className="w-[120px]">
-                        <div className="relative mx-auto mb-2 h-24 w-24 overflow-hidden rounded-lg ring-1 ring-charcoal/10">
-                            <NoteBadge note={it.notes} />
-                            {it.photo ? (
-                                <Image
-                                    src={it.photo}
-                                    alt={it.name}
-                                    width={120}
-                                    height={120}
-                                    className="h-full w-full object-cover"
-                                />
-                            ) : (
-                                <div className="h-full w-full bg-clean" />
-                            )}
+        <div className="bg-cream frame-drink frame-sharp frame-center-gap">
+            <div className="px-4 py-6 md:px-6 md:py-7 ">
+                <h2 className="menu-heading mb-3 text-center font-heading text-3xl font-extrabold text-orange">
+                    DRINK
+                </h2>
+                <div
+                    className="grid gap-6 items-start mt-8"
+                    style={{ gridTemplateColumns: "repeat(auto-fit, minmax(40%, 1fr))" }}
+                >
+                    {items.map((it) => (
+                        <div key={it.id} className="w-full flex justify-center">
+                            <div className="w-full max-w-[520px] flex flex-col items-center gap-3 text-orange">
+                                <NoteBadge note={it.notes} />
+                                {it.photo ? (
+                                    <Image
+                                        src={it.photo}
+                                        alt={it.name}
+                                        width={800}
+                                        height={600}
+                                        sizes="(max-width: 640px) 90vw, 45vw"
+                                        className="w-full rounded-md object-cover"
+                                        style={{ height: "auto" }}
+                                    />
+                                ) : (
+                                    <div className="w-full h-48 rounded-md bg-clean flex items-center justify-center p-2 text-xs">
+                                        <span className="text-center text-charcoal/60">
+                                            Image coming soon...
+                                        </span>
+                                    </div>
+                                )}
+                                <p className="font-heading font-semibold text-orange text-center">
+                                    {it.name}
+                                </p>
+                                <p className="text-xs text-orange italic text-center">
+                                    {it.vietName}
+                                </p>
+                                <Price value={it.price} />
+                            </div>
                         </div>
-                        <p className="text-center text-sm font-heading">
-                            {it.name}
-                        </p>
-                        <p className="text-center text-xs text-charcoal/70">
-                            {it.vietName}
-                        </p>
-                        <p className="mt-1 text-center font-semibold text-orange">
-                            <Price value={it.price} />
-                        </p>
-                        <DietaryTags item={it} />
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </div>
     );
