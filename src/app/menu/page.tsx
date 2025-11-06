@@ -5,6 +5,7 @@ import { BanhMiSection, BanhMiToppings } from "@/components/menu/sections/BanhMi
 import { CheSection } from "@/components/menu/sections/CheSection";
 import { DrinksSection, DrinksToppings } from "@/components/menu/sections/DrinksSection";
 import SimpleTileSection from "@/components/menu/sections/SimpleTileSection";
+
 export default async function MenuPage() {
     const items = await getMenu();
     const groups = groupByCategory(items);
@@ -16,8 +17,8 @@ export default async function MenuPage() {
     const { banhMiToppings, drinksToppings } = splitToppings(toppings);
 
     return (
-        <main className="mx-auto max-w-[1280px] px-4 py-8 md:px-6 md:py-10 space-y-8 bg-cream">
-            {/* Row 1: 2 columns */}
+        <main className="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-10 space-y-8 bg-cream">
+            {/* Row 1: 2 columns on large screens; 1 on smaller screens */}
             <section className="grid gap-6 lg:grid-cols-2 h-full items-start">
                 <div className="h-full flex flex-col">
                     <BanhMiSection items={banhMi} />
@@ -26,9 +27,9 @@ export default async function MenuPage() {
                 <div className="h-full flex">
                     <CheSection items={sweetSoup} />
                 </div>
-            </section>   
+            </section>
 
-            {/* Row 2: 2 columns */}
+            {/* Row 2: 2 columns on large screens; 1 on smaller screens */}
             <section className="grid gap-6 lg:grid-cols-2">
                 <div>
                     <DrinksSection items={drinks} />
@@ -42,23 +43,7 @@ export default async function MenuPage() {
                 </div>
             </section>
 
-            {/* Row 3: 2 columns */}
-            <section className="grid gap-6 md:grid-cols-2">
-                <div>
-                    <SimpleTileSection
-                        title="Cake Box"
-                        items={groups["Cake Box"] ?? []}
-                    />
-                </div>
-                <div>
-                    <SimpleTileSection
-                        title="Sweets"
-                        items={groups["Sweets"] ?? []}
-                    />
-                </div>
-            </section>
-
-            {/* Row 4: 2 columns */}
+            {/* Row 3: 2 columns on large screens; 1 on smaller screens */}
             <section className="grid gap-6 md:grid-cols-2">
                 <div>
                     <SimpleTileSection
@@ -70,6 +55,22 @@ export default async function MenuPage() {
                     <SimpleTileSection
                         title="Sticky Rice"
                         items={groups["Sticky Rice"] ?? []}
+                    />
+                </div>
+            </section>
+
+            {/* Row 4: 2 columns on large screens; 1 on smaller screens */}
+            <section className="grid gap-6 md:grid-cols-2">
+                <div>
+                    <SimpleTileSection
+                        title="Cake Box"
+                        items={groups["Cake Box"] ?? []}
+                    />
+                </div>
+                <div>
+                    <SimpleTileSection
+                        title="Sweets"
+                        items={groups["Sweets"] ?? []}
                     />
                 </div>
             </section>

@@ -96,7 +96,7 @@
 /*** Topping Frame ***/
 .frame-toppings {
     position: relative;
-    padding: 0.5rem 2rem; /* Add space inside the frame */
+    padding: 1.1rem 2rem; /* Add space inside the frame */
 }
 
 .frame-toppings::before {
@@ -159,13 +159,12 @@
 /* Sharp rectangular frame with top break for headings */
 .frame-che {
     position: relative;
-    padding: 2rem; /* Add space inside the frame */
 }
 
 .frame-che::before {
     content: "";
     position: absolute;
-    top: 4.1%;
+    top: 4%;
     left: 0;
     right: 0;
     bottom: 0;
@@ -179,7 +178,7 @@
 .frame-che::after {
     content: "";
     position: absolute;
-    top: 4.1%;
+    top: 4%;
     left: 0;
     right: 0;
     height: 0;
