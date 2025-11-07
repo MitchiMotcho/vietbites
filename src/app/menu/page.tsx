@@ -3,7 +3,7 @@ import { getMenu } from "@/lib/notion/menu";
 import { groupByCategory, splitToppings } from "@/lib/menu/helpers";
 import { BanhMiSection, BanhMiToppings } from "@/components/menu/sections/BanhMiSection";
 import { CheSection } from "@/components/menu/sections/CheSection";
-import { DrinksSection, DrinksToppings } from "@/components/menu/sections/DrinksSection";
+import { DrinksSection, DrinksToppings } from "@/components/menu/sections/DrinkSection";
 import SimpleTileSection from "@/components/menu/sections/SimpleTileSection";
 
 export default async function MenuPage() {

@@ -63,17 +63,17 @@ export function BanhMiSection({ items }: { items: TMenuItem[] }) {
 export function BanhMiToppings({ items }: { items: TMenuItem[] }) {
     if (!items.length) return null;
     return (
-        <div className="rounded-xl bg-cream frame-toppings frame-sharp frame-left-gap mt-2">
+        <div className="rounded-xl bg-cream frame-banhmi-toppings frame-sharp frame-left-gap mt-2">
             <div className="flex flex-col items-start gap-1">
                 <p className="font-heading text-orange font-extrabold text-xl">
-                    TOPPINGS
+                    BÁNH MÌ TOPPINGS
                 </p>
                 <p className="text-xs xl:text-sm italic text-charcoal/70">
                     Do you dislike any ingredient below? Let us know, we won&apos;t put it in!
                 </p>
             </div>
 
-            <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+            <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 py-2">
                 {items.map((it) => (
                     <div
                         key={it.id}

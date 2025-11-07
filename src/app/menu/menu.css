@@ -121,14 +121,25 @@
     --frame-padding: 2rem;
     --frame-gap: 8ch;
 }
-.frame-toppings {
+.frame-banhmi-toppings {
     --frame-padding: 0 2rem;
     --frame-gap-start: 3ch;
-    --frame-gap-end: 16ch;
+    --frame-gap-end: 26.5ch;
 }
 .frame-che {
     --frame-padding: 0;
     --frame-gap: 17ch;
+    --frame-top: 4%;
+}
+.frame-drink {
+    --frame-padding: 1rem 3rem;
+    --frame-gap: 5ch;
+    --frame-top: 2%;
+}
+.frame-drink-toppings {
+    --frame-padding: 0 2rem;
+    --frame-gap-start: 3ch;
+    --frame-gap-end: 24ch;
     --frame-top: 4%;
 }
 
@@ -141,5 +152,11 @@
 @media (max-width: 640px) {
     .frame-banhmi {
         --frame-top: 2.5%;
+    }
+    .frame-banhmi-toppings {
+        --frame-top: 3.5%;
+    }
+    .frame-drink-toppings {
+        --frame-top: 5%;
     }
 }
