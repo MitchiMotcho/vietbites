@@ -6,7 +6,7 @@ import { getHours } from "@/lib/notion/hours";
 
 import Hero from "@/components/homepage/Hero/Hero";
 import Announcements from "@/components/homepage/Announcements";
-import FeaturedMenu from "@/components/menu/hero/FeaturedMenu";
+import FeaturedMenu from "@/components/homepage/FeaturedMenu/FeaturedMenu";
 import Location from "@/components/homepage/Location";
 
 export default async function HomePage() {

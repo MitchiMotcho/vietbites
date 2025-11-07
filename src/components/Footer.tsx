@@ -39,11 +39,18 @@ export default function Footer() {
                     <p className="mb-2 font-semibold text-charcoal font-heading">
                         Visit us
                     </p>
-                    <address className="not-italic text-charcoal/90 text-center md:text-left">
-                        246 Gerrard St E
-                        <br />
-                        Toronto, ON, M5A 2G2
-                    </address>
+                    <a
+                        href="https://maps.app.goo.gl/Fq7RaTVgy5xjsM9C6"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline text-charcoal/90 hover:text-orange transition-colors ease-in-out duration-300"
+                    >
+                        <address className="not-italic text-center md:text-left">
+                            246 Gerrard St E
+                            <br />
+                            Toronto, ON, M5A 2G2
+                        </address>
+                    </a>
                     <p className="mt-2 text-charcoal/80 text-center md:text-left">
                         Open Sat to Thurs •{" "}
                         <Link

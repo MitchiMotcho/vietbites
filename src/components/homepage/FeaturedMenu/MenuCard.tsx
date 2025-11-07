@@ -40,7 +40,7 @@ export default function MenuCard({
                     </div>
                 ) : (
                     <div className="h-44 w-full grid place-items-center bg-clean text-sm text-charcoal/60 border-b border-charcoal/10">
-                        Photo coming soon
+                        Photo coming soon...
                     </div>
                 )}
 

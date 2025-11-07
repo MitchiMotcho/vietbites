@@ -1,10 +1,22 @@
 import "server-only";
+
+import {
+    BanhMiSection,
+    BanhMiToppings,
+} from "@/components/menu/sections/BanhMiSection";
+import {
+    DrinksSection,
+    DrinksToppings,
+} from "@/components/menu/sections/DrinkSection";
+import { CheSection } from "@/components/menu/sections/CheSection";
+import SimpleTileSection from "@/components/menu/sections/SimpleTileSection";
+import HouseSpecialSection from "@/components/menu/sections/HouseSpecialSection";
+
 import { getMenu } from "@/lib/notion/menu";
 import { groupByCategory, splitToppings } from "@/lib/menu/helpers";
-import { BanhMiSection, BanhMiToppings } from "@/components/menu/sections/BanhMiSection";
-import { CheSection } from "@/components/menu/sections/CheSection";
-import { DrinksSection, DrinksToppings } from "@/components/menu/sections/DrinkSection";
-import SimpleTileSection from "@/components/menu/sections/SimpleTileSection";
+
+import Link from "next/link";
+import { BiMessageError } from "react-icons/bi";
 
 export default async function MenuPage() {
     const items = await getMenu();
@@ -15,6 +27,26 @@ export default async function MenuPage() {
     const drinks = groups["Drinks"] ?? [];
     const toppings = groups["Toppings"] ?? [];
     const { banhMiToppings, drinksToppings } = splitToppings(toppings);
+    const houseSpecial = groups["House Special"] ?? [];
+
+    if (
+        !banhMi.length ||
+        !sweetSoup.length ||
+        !drinks.length //||
+        //!houseSpecial.length
+    ) {
+        return (
+            <main className="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-10 text-center h-[60vh] flex flex-col items-center justify-center gap-4">
+                <BiMessageError className="text-9xl text-orange mx-auto" />
+                <p className="text-charcoal/70 lg:text-lg">
+                    Our menu is currently under maintenance. Please check back
+                    later!
+                    <br /> If issue persists, please contact us at{" "}
+                    <Link href="/contact">our contact page</Link>.
+                </p>
+            </main>
+        );
+    }
 
     return (
         <main className="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-10 space-y-8 bg-cream">
@@ -36,10 +68,7 @@ export default async function MenuPage() {
                     <DrinksToppings items={drinksToppings} />
                 </div>
                 <div>
-                    <SimpleTileSection
-                        title="House Special"
-                        items={groups["House Special"] ?? []}
-                    />
+                    <HouseSpecialSection items={houseSpecial} />
                 </div>
             </section>
 
