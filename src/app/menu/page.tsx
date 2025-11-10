@@ -10,7 +10,7 @@ import {
 } from "@/components/menu/sections/DrinkSection";
 import { CheSection } from "@/components/menu/sections/CheSection";
 import SimpleTileSection from "@/components/menu/sections/SimpleTileSection";
-import HouseSpecialSection from "@/components/menu/sections/HouseSpecialSection";
+import HouseSpecialSection from "@/components/menu/sections/HouseSpecial/HouseSpecialSection";
 
 import { getMenu } from "@/lib/notion/menu";
 import { groupByCategory, splitToppings } from "@/lib/menu/helpers";
@@ -32,8 +32,8 @@ export default async function MenuPage() {
     if (
         !banhMi.length ||
         !sweetSoup.length ||
-        !drinks.length //||
-        //!houseSpecial.length
+        !drinks.length ||
+        !houseSpecial.length
     ) {
         return (
             <main className="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-10 text-center h-[60vh] flex flex-col items-center justify-center gap-4">

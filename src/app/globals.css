@@ -1,12 +1,18 @@
 @import "tailwindcss";
 
 :root {
-    --clean: #fafafa; /* Clean sections / page bg */
-    --cream: #fff8dd; /* Soft contrast blocks */
-    --orange: #f48948; /* Primary accent */
-    --clay: #e6b17e; /* Secondary accent / hover */
-    --green: #7bae7f; /* Fresh accent / dividers */
-    --charcoal: #3c3c3c; /* Primary text */
+    --clean: #fafafa;
+    /* Clean sections / page bg */
+    --cream: #fff8dd;
+    /* Soft contrast blocks */
+    --orange: #f48948;
+    /* Primary accent */
+    --clay: #e6b17e;
+    /* Secondary accent / hover */
+    --green: #7bae7f;
+    /* Fresh accent / dividers */
+    --charcoal: #3c3c3c;
+    /* Primary text */
 
     /* Dynamic hover/active shades from orange */
     --orange-hover: color-mix(in oklab, var(--orange) 94%, black 6%);
@@ -64,7 +70,7 @@ h6 {
     line-height: 1.25;
 }
 
-h1:not(.pillar-heading):not(.announcement-title):not(.menu-heading),
+h1:not(.pillar-heading):not(.announcement-title):not(.menu-heading):not(.contact-heading),
 h2:not(.pillar-heading):not(.announcement-title):not(.menu-heading),
 h3:not(.pillar-heading):not(.announcement-title):not(.menu-heading),
 h4:not(.pillar-heading):not(.announcement-title):not(.menu-heading),
@@ -74,7 +80,7 @@ h6:not(.pillar-heading):not(.announcement-title):not(.menu-heading) {
 }
 
 /* Buttons (global default) */
-button {
+button:not(.select-box button) {
     cursor: pointer;
     font-family: var(--font-heading, sans-serif);
     font-weight: 600;
@@ -85,48 +91,58 @@ button {
     transition: background-color 0.3s ease, box-shadow 0.3s ease,
         transform 0.06s ease;
 }
-button:hover {
+
+button:hover:not(.select-box button) {
     background-color: var(--orange-hover);
     box-shadow: 0 2px 10px color-mix(in oklab, var(--orange) 20%, transparent);
 }
-button:active {
+
+button:active:not(.select-box button) {
     background-color: var(--orange-active);
     transform: translateY(1px);
 }
-button:focus-visible {
+
+button:disabled:not(.select-box button) {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+button:focus-visible:not(.select-box button) {
     outline: none;
     box-shadow: 0 0 0 3px color-mix(in oklab, var(--orange) 35%, transparent);
 }
 
 /* Outline style button */
-.button-outline {
+.button-outline:not(.select-box button) {
     border: 1px solid color-mix(in oklab, var(--charcoal) 15%, transparent);
     background: var(--clean);
     color: var(--charcoal);
     transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
-.button-outline:hover {
-    background: #e5e7eb; /* Tailwind's gray-200 */
+
+.button-outline:hover:not(.select-box button) {
+    background: #e5e7eb;
 }
-.button-outline:active {
-    background: #d1d5db; /* Tailwind's gray-300 */
+
+.button-outline:active:not(.select-box button) {
+    background: #d1d5db;
 }
-.button-outline:focus-visible {
+
+.button-outline:focus-visible:not(.select-box button) {
     outline: none;
     box-shadow: 0 0 0 3px color-mix(in oklab, var(--charcoal) 20%, transparent);
 }
 
 /* Links */
-a:not(nav a):not(footer a):not(.section-cream a):not(#menu a):not(#hero a):not(
-        #story-link a
-    ) {
+a:not(nav a):not(footer a):not(.section-cream a):not(#menu a):not(#hero a):not(#story-link a) {
     color: var(--orange);
     text-decoration: none;
     transition: color 0.3s ease, text-decoration-color 0.3s ease;
 }
-a:hover:not(nav a):not(footer a):not(.section-cream a):not(#menu a):not(
-        #hero a
-    ):not(#story-link a) {
+
+a:hover:not(nav a):not(footer a):not(.section-cream a):not(#menu a):not(#hero a):not(#hero a):not(#story-link a) {
     color: var(--clay);
     text-decoration: underline;
 }
@@ -135,12 +151,10 @@ a:hover:not(nav a):not(footer a):not(.section-cream a):not(#menu a):not(
 hr {
     border: none;
     height: 1px;
-    background: linear-gradient(
-        to right,
-        color-mix(in oklab, var(--green) 0%, transparent),
-        color-mix(in oklab, var(--green) 60%, transparent),
-        color-mix(in oklab, var(--green) 0%, transparent)
-    );
+    background: linear-gradient(to right,
+            color-mix(in oklab, var(--green) 0%, transparent),
+            color-mix(in oklab, var(--green) 60%, transparent),
+            color-mix(in oklab, var(--green) 0%, transparent));
     opacity: 0.9;
     margin: 2rem 0;
 }
@@ -155,7 +169,7 @@ hr {
     border-radius: 10px;
     box-shadow: 0 1px 0 color-mix(in oklab, var(--charcoal) 6%, transparent);
     position: relative;
-    overflow: hidden; /* hide inner overflow behind the clipped border */
+    overflow: hidden;
 }
 
 .card::before {
@@ -164,16 +178,14 @@ hr {
     inset: 6px;
     border: 2px solid var(--orange);
     /* Clip out the top-left and bottom-right corners */
-    clip-path: polygon(
-        20px 0,
-        100% 0,
-        100% calc(100% - 20px),
-        calc(100% - 20px) 100%,
-        0 100%,
-        0 20px
-    );
+    clip-path: polygon(20px 0,
+            100% 0,
+            100% calc(100% - 20px),
+            calc(100% - 20px) 100%,
+            0 100%,
+            0 20px);
     pointer-events: none;
-    border-radius: 0; /* ensure clean clipped corners */
+    border-radius: 0;
 }
 
 .frame-clipped {
@@ -183,16 +195,15 @@ hr {
 .frame-clipped::before {
     content: "";
     position: absolute;
-    inset: 20px; /* same as inset-5 */
+    inset: 20px;
+    /* same as inset-5 */
     border: 2px solid var(--orange);
-    clip-path: polygon(
-        30px 0,
-        100% 0,
-        100% calc(100% - 30px),
-        calc(100% - 30px) 100%,
-        0 100%,
-        0 30px
-    );
+    clip-path: polygon(30px 0,
+            100% 0,
+            100% calc(100% - 30px),
+            calc(100% - 30px) 100%,
+            0 100%,
+            0 30px);
     border-radius: 0;
     pointer-events: none;
 }
@@ -200,14 +211,13 @@ hr {
 /* Adjust clipped frame for smaller screens */
 @media (max-width: 640px) {
     .frame-clipped::before {
-        inset: 10px; /* reduce inset for smaller screens */
-        clip-path: polygon(
-            15px 0,
-            100% 0,
-            100% calc(100% - 15px),
-            calc(100% - 15px) 100%,
-            0 100%,
-            0 15px
-        );
+        inset: 10px;
+        /* reduce inset for smaller screens */
+        clip-path: polygon(15px 0,
+                100% 0,
+                100% calc(100% - 15px),
+                calc(100% - 15px) 100%,
+                0 100%,
+                0 15px);
     }
 }

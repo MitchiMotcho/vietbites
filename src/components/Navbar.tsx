@@ -10,7 +10,7 @@ const navLinks = [
     { href: "/", label: "Home" },
     { href: "/story", label: "Our Story" },
     { href: "/menu", label: "Menu" },
-    { href: "/location", label: "Location" },
+    { href: "/location", label: "Location/Hours" },
 ];
 
 export default function Navbar() {
@@ -50,7 +50,7 @@ export default function Navbar() {
                                         active
                                             ? "text-orange font-bold"
                                             : "text-charcoal/90 hover:text-orange"
-                                    } before:absolute before:-bottom-1 before:left-0 before:h-[2px] before:w-0 before:bg-orange before:transition-all before:duration-300 hover:before:w-full`}
+                                    } before:absolute before:-bottom-1 before:left-0 before:h-0.5 before:w-0 before:bg-orange before:transition-all before:duration-300 hover:before:w-full`}
                                 >
                                     {l.label}
                                 </Link>
