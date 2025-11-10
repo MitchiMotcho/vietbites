@@ -43,7 +43,7 @@ export default function OpenToday({ hours }: { hours: Awaited<ReturnType<typeof 
                 <span className="font-semibold">Closed</span>
             ) : (
                 <span className="font-semibold">
-                    {to12Hour(today.open)} – {to12Hour(today.close)}
+                    {to12Hour(today.open)} - {to12Hour(today.close)}
                 </span>
             )}{" "}
             <Link

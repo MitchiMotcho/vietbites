@@ -135,7 +135,7 @@ export default function PhoneInput({
         const currNational = getNationalDigits(current);
         const digitsBefore = countNationalBeforeCaret(current, caret);
 
-        let removeIndex =
+        const removeIndex =
             e.key === "Backspace" ? digitsBefore - 1 : digitsBefore;
 
         if (removeIndex < 0 || removeIndex >= currNational.length) {

@@ -12,7 +12,7 @@ export default function UrgentBanner() {
                 <p className="mt-1 text-xs">
                     Start your subject with{" "}
                     <span className="font-semibold tracking-wider font-mono">
-                        "[URGENT] - "
+                        &quot;[URGENT] - &quot;
                     </span>{" "}
                     and include a phone number so we can reach you faster.
                 </p>
