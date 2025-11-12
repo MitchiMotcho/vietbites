@@ -42,7 +42,7 @@ export function HouseSpecialCard({ group }: { group: TMenuItem[] }) {
                         {/* tags (dietary / chips) */}
                         {item.tags?.length ? (
                             <div className="mt-2 flex flex-wrap gap-2">
-                                {item.tags.map((t: any, i: number) => (
+                                {item.tags.map((t: string, i: number) => (
                                     <span
                                         key={i}
                                         className="text-xs px-2 py-0.5 rounded-full bg-gray-100 text-gray-700"

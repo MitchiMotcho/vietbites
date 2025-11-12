@@ -61,7 +61,7 @@ export default function TextArea({
             <textarea
                 id={id}
                 ref={ref}
-                value={value as any}
+                value={value as string}
                 onChange={handleChange}
                 aria-invalid={over || undefined}
                 className={

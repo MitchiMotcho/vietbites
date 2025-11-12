@@ -48,17 +48,15 @@ export default function FormField({
             </div>
 
             {isValidElement(children)
-                ? cloneElement(
-                      children as ReactElement<any>,
-                      {
-                          // keep existing props, inject id if missing, and aria-required
-                          ...(children as ReactElement<any>).props,
-                          id:
-                              (children as ReactElement<any>).props?.id ??
-                              controlId,
+                ? (() => {
+                      const child = children as ReactElement<Record<string, unknown>>;
+                      // keep existing props, inject id if missing, and aria-required
+                      return cloneElement(child, {
+                          ...child.props,
+                          id: child.props?.id ?? controlId,
                           "aria-required": required || undefined,
-                      } as any
-                  )
+                      });
+                  })()
                 : children}
         </div>
     );

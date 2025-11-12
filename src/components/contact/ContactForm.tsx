@@ -60,8 +60,12 @@ export default function ContactForm() {
             setResult(
                 "Thank you! Your message has been sent. (Form submission is currently disabled in demo.)"
             );
-        } catch (err: any) {
-            setResult(err.message || "Something went wrong.");
+        } catch (err: unknown) {
+            let message = "Something went wrong.";
+            if (err instanceof Error && err.message) {
+                message = err.message;
+            }
+            setResult(message);
         } finally {
             setLoading(false);
         }
@@ -132,7 +136,9 @@ export default function ContactForm() {
                         value={phone}
                         onChange={(value) => {
                             setPhone(value);
-                            value === "" && setPhoneValid(true);
+                            if (value === "") {
+                                setPhoneValid(true);
+                            }
                         }}
                         onValidityChange={(ok) => setPhoneValid(ok)}
                     />
