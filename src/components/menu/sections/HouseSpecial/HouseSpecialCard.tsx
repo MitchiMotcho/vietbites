@@ -7,29 +7,31 @@ export function HouseSpecialCard({ group }: { group: TMenuItem[] }) {
     const item = group[0];
 
     return (
-        <div className="grid sm:grid-cols-[30%_70%] grid-cols-1 gap-3">
-            <div className="relative w-3/4 mx-auto sm:w-full h-32 sm:h-32">
+        <div className="grid grid-cols-1 sm:grid-cols-[30%_1fr] gap-3 justify-center items-center">
+            <div className="relative flex items-center justify-center">
                 {item.notes ? <NoteBadge note={item.notes} /> : null}
-                {item.photo ? (
-                    <Image
-                        src={item.photo}
-                        alt={item.name ?? "photo"}
-                        fill
-                        sizes="(max-width: 640px) 75vw, 30vw"
-                        className="rounded-md object-cover"
-                        priority
-                    />
-                ) : (
-                    <div className="h-full w-full text-xs rounded-md bg-clean flex items-center justify-center p-2">
-                        <span className="text-center text-charcoal/60">
-                            Image coming soon...
-                        </span>
-                    </div>
-                )}
+                <div className="relative w-full aspect-4/3 rounded-md overflow-hidden">
+                    {item.photo ? (
+                        <Image
+                            src={item.photo}
+                            alt={item.name ?? "photo"}
+                            fill
+                            sizes="(max-width: 640px) 100vw, 30vw"
+                            className="object-cover object-center rounded-md"
+                            priority
+                        />
+                    ) : (
+                        <div className="absolute inset-0 text-xs bg-clean flex items-center justify-center p-2 rounded-md border border-charcoal/10">
+                            <span className="text-center text-charcoal/60">
+                                Image coming soon...
+                            </span>
+                        </div>
+                    )}
+                </div>
             </div>
 
             <div className="flex flex-col items-start justify-center">
-                <div className="flex justify-between w-full">
+                <div className="flex justify-between w-full gap-3">
                     <div className="min-w-0">
                         <p className="font-heading font-semibold text-orange truncate">
                             {item.name}
@@ -39,7 +41,6 @@ export function HouseSpecialCard({ group }: { group: TMenuItem[] }) {
                                 {item.vietName}
                             </p>
                         ) : null}
-                        {/* tags (dietary / chips) */}
                         {item.tags?.length ? (
                             <div className="mt-2 flex flex-wrap gap-2">
                                 {item.tags.map((t: string, i: number) => (
@@ -54,39 +55,35 @@ export function HouseSpecialCard({ group }: { group: TMenuItem[] }) {
                         ) : null}
                     </div>
 
-                    <div className="text-right ml-2">
+                    <div className="text-right shrink-0">
                         {group.length === 1 ? (
                             <p className="text-orange font-extrabold">
                                 <Price value={item.price} />
                             </p>
                         ) : (
-                            <div className="text-right ml-2">
+                            <div>
                                 <div className="text-xs text-charcoal/70 font-semibold">
                                     Options
                                 </div>
                                 <ul className="list-none mt-1 space-y-1 text-orange">
-                                    {group.map((elem, idx) => (
-                                        <li
-                                            key={idx}
-                                            className="whitespace-nowrap text-sm flex items-center justify-end gap-2"
-                                        >
-                                            {elem.description &&
-                                            elem.description.split(
-                                                "/",
-                                                2
-                                            )[0] ? (
-                                                <span className="text-xs text-charcoal/70 font-semibold mr-1 truncate">
-                                                    {
-                                                        elem.description.split(
-                                                            "/",
-                                                            2
-                                                        )[0]
-                                                    }
-                                                </span>
-                                            ) : null}
-                                            <Price value={elem.price} />
-                                        </li>
-                                    ))}
+                                    {group.map((elem, idx) => {
+                                        const label = elem.description
+                                            ?.split("/", 2)[0]
+                                            ?.trim();
+                                        return (
+                                            <li
+                                                key={idx}
+                                                className="whitespace-nowrap text-sm flex items-center justify-end gap-2"
+                                            >
+                                                {label ? (
+                                                    <span className="text-xs text-charcoal/70 font-semibold mr-1 truncate max-w-[12ch]">
+                                                        {label}
+                                                    </span>
+                                                ) : null}
+                                                <Price value={elem.price} />
+                                            </li>
+                                        );
+                                    })}
                                 </ul>
                             </div>
                         )}
@@ -99,8 +96,6 @@ export function HouseSpecialCard({ group }: { group: TMenuItem[] }) {
                     </p>
                 ) : null}
             </div>
-
-            <hr className="sm:hidden" />
         </div>
     );
 }

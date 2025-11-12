@@ -1,12 +1,11 @@
-
 import type { TMenuItem } from "@/lib/schema";
 import { HouseSpecialCard } from "./HouseSpecialCard";
+import MenuSectionShell from "../MenuSectionShell";
 import "@/app/menu/menu.css";
 
 export default function HouseSpecialSection({ items }: { items: TMenuItem[] }) {
     if (!items?.length) return null;
 
-    // Group items by name (preserve order)
     const groupsMap = new Map<string, TMenuItem[]>();
     items.forEach((it) => {
         const key = it.name ?? "item";
@@ -16,16 +15,18 @@ export default function HouseSpecialSection({ items }: { items: TMenuItem[] }) {
     const groups = Array.from(groupsMap.values());
 
     return (
-        <section className="frame-banhmi frame-sharp frame-center-gap bg-cream px-4 py-6 md:px-6 md:py-7">
-            <h2 className="menu-heading mb-3 text-center font-heading text-3xl font-extrabold text-orange">
-                House Specials
-            </h2>
-
-            <div className="grid grid-cols-1 gap-5">
+        <MenuSectionShell
+            title="HOUSE SPECIALS"
+            frameClass="center-frame"
+        >
+            <div className="grid grid-cols-1 gap-5 py-4">
                 {groups.map((g, i) => (
-                    <HouseSpecialCard key={(g[0].name ?? "item") + "-" + i} group={g} />
+                    <div key={(g[0].name ?? "item") + "-" + i}>
+                        <HouseSpecialCard group={g} />
+                        {i !== groups.length - 1 && <hr className="w-full" />}
+                    </div>
                 ))}
             </div>
-        </section>
+        </MenuSectionShell>
     );
 }

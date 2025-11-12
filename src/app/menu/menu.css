@@ -32,18 +32,17 @@
     margin-right: 0.5rem;
 }
 
-/*** Reusable sharp-frame system ***/
-/* Base reusable frame. Use together with a gap-mode and an optional section helper. */
+/* Base reusable frame (stable, full top border) */
 .frame-sharp {
     position: relative;
     padding: var(--frame-padding, 1.5rem);
-    /* customizable tokens */
-    --frame-top: 5%;           /* default top offset for border */
-    --frame-border: 2.5px;     /* border thickness */
+    --frame-top: 0.8rem;
+    --frame-border: 3px;
     --frame-color: var(--orange);
+    --frame-padding: 0 2rem 2rem;
+    --frame-top: 0.8rem;
     box-sizing: border-box;
 }
-
 .frame-sharp::before {
     content: "";
     position: absolute;
@@ -56,7 +55,6 @@
     pointer-events: none;
     box-sizing: border-box;
 }
-
 .frame-sharp::after {
     content: "";
     position: absolute;
@@ -66,97 +64,21 @@
     height: 0;
     border-top: var(--frame-border) solid var(--frame-color);
     pointer-events: none;
-    /* Default mask: no gap (full top border). */
-    mask-image: linear-gradient(to right, black 0, black 100%);
-    -webkit-mask-image: linear-gradient(to right, black 0, black 100%);
-    mask-repeat: no-repeat;
-    -webkit-mask-repeat: no-repeat;
 }
 
-/* Modes for how the top border gap is shaped */
-
-/* Centered gap (useful for headings centered over the frame). 
-   --frame-gap controls half the gap size (e.g. 8ch -> total 16ch). */
-.frame-center-gap::after {
-    mask-image: linear-gradient(
-        to right,
-        black calc(50% - var(--frame-gap, 8ch)),
-        transparent calc(50% - var(--frame-gap, 8ch)),
-        transparent calc(50% + var(--frame-gap, 8ch)),
-        black calc(50% + var(--frame-gap, 8ch))
-    );
-    -webkit-mask-image: linear-gradient(
-        to right,
-        black calc(50% - var(--frame-gap, 8ch)),
-        transparent calc(50% - var(--frame-gap, 8ch)),
-        transparent calc(50% + var(--frame-gap, 8ch)),
-        black calc(50% + var(--frame-gap, 8ch))
-    );
+/* Heading "erases" the top border underneath */
+.menu-heading {
+    display: inline-block;
+    position: relative;
+    padding: 0 0.75rem;
+    background: var(--cream, #fff7ed); /* match bg-cream */
+    line-height: 1.15;
+    width: fit-content;
+    z-index: 1;
 }
 
-/* Left-side gap (gap starts from left offset to some size).
-   Use --frame-gap-start and --frame-gap-end (both accept length units like 3ch, 16ch). */
-.frame-left-gap::after {
-    mask-image: linear-gradient(
-        to right,
-        black 0,
-        black var(--frame-gap-start, 3ch),
-        transparent var(--frame-gap-start, 3ch),
-        transparent var(--frame-gap-end, 16ch),
-        black var(--frame-gap-end, 16ch)
-    );
-    -webkit-mask-image: linear-gradient(
-        to right,
-        black 0,
-        black var(--frame-gap-start, 3ch),
-        transparent var(--frame-gap-start, 3ch),
-        transparent var(--frame-gap-end, 16ch),
-        black var(--frame-gap-end, 16ch)
-    );
-}
-
-/* Optional convenience section classes (compose with .frame-sharp + gap/top classes)
-   These only set sensible defaults for padding/gap; they do not duplicate pseudo rules. */
-.frame-banhmi {
-    --frame-padding: 2rem;
-    --frame-gap: 8ch;
-}
-.frame-banhmi-toppings {
-    --frame-padding: 0 2rem;
-    --frame-gap-start: 3ch;
-    --frame-gap-end: 26.5ch;
-}
-.frame-che {
-    --frame-padding: 0;
-    --frame-gap: 17ch;
-    --frame-top: 4%;
-}
-.frame-drink {
-    --frame-padding: 1rem 3rem;
-    --frame-gap: 5ch;
-    --frame-top: 2%;
-}
-.frame-drink-toppings {
-    --frame-padding: 0 2rem;
-    --frame-gap-start: 3ch;
-    --frame-gap-end: 24ch;
-    --frame-top: 4%;
-}
-
-/* Responsive adjustments can remain as small helpers */
-@media (max-width: 1024px) {
-    .frame-toppings {
-        --frame-padding: 0.2rem 2rem;
-    }
-}
 @media (max-width: 640px) {
-    .frame-banhmi {
-        --frame-top: 2.5%;
-    }
-    .frame-banhmi-toppings {
-        --frame-top: 3.5%;
-    }
-    .frame-drink-toppings {
-        --frame-top: 5%;
+    .frame-sharp {
+        --frame-border: 2px;
     }
 }

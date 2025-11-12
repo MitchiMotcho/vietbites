@@ -3,10 +3,10 @@ import Image from "next/image";
 
 export function PhotoStrip({
     images = [
-        { src: "/images/story/FoodCollage.png", alt: "Che/Sweet Soup" },
+        { src: "/images/story/MiniBaguette.png", alt: "Che/Sweet Soup" },
         { src: "/images/story/MiniBaguette.png", alt: "Mini Baguette" },
-        { src: "/images/story/Tiramisu.png", alt: "Tiramisu" },
-        { src: "/images/story/Flan.png", alt: "Flan" },
+        { src: "/images/story/MiniBaguette.png", alt: "Tiramisu" },
+        { src: "/images/story/MiniBaguette.png", alt: "Flan" },
     ],
 }: {
     images?: { src: string; alt: string }[];
@@ -15,9 +15,9 @@ export function PhotoStrip({
     return (
         <section className="mx-auto mt-12 max-w-6xl md:px-10">
             <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
-                {images.map((img) => (
+                {images.map((img, index) => (
                     <figure
-                        key={img.src}
+                        key={index}
                         className="group relative overflow-hidden rounded-xl shadow-lg ring-1 ring-charcoal/10 bg-orange/10"
                     >
                         <Img
@@ -27,7 +27,7 @@ export function PhotoStrip({
                             height={300}
                             className="h-40 w-full object-cover transition-transform duration-300 group-hover:scale-110 md:h-48"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-50"></div>
+                        <div className="absolute inset-0 bg-linear-to-t from-black/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-50"></div>
                     </figure>
                 ))}
             </div>

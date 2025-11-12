@@ -2,39 +2,38 @@ import Image from "next/image";
 import type { TMenuItem } from "@/lib/schema";
 import Price from "@/components/menu/MenuPrice";
 import NoteBadge from "@/components/menu/NoteBadge";
+import MenuSectionShell from "./MenuSectionShell";
 
 export function DrinksSection({ items }: { items: TMenuItem[] }) {
+    if (!items?.length) return null;
+
     return (
-        <div className="bg-cream frame-drink frame-sharp frame-center-gap px-4 py-6 md:px-6 md:py-7 relative">
-            <h2 className="menu-heading absolute left-1/2 -translate-x-1/2 -top-1 z-10 bg-cream px-3 font-heading text-3xl font-extrabold text-orange">
-                DRINK
-            </h2>
-            <div
-                className="grid gap-x-2 gap-y-4 items-start mt-6"
-                style={{
-                    gridTemplateColumns: "repeat(auto-fit, minmax(40%, 1fr))",
-                }}
-            >
+        <MenuSectionShell
+            title="DRINKS"
+            frameClass="center-frame"
+        >
+            <div className="grid gap-4 items-start mt-2 grid-cols-1 sm:grid-cols-2">
                 {items.map((it) => (
                     <div key={it.id} className="w-full flex justify-center">
-                        <div className="w-full max-w-[520px] flex flex-col items-center gap-1 text-orange">
+                        <div className="w-full max-w-[520px] flex flex-col items-center gap-2 text-orange">
                             <NoteBadge note={it.notes} />
-                            {it.photo ? (
-                                <Image
-                                    src={it.photo}
-                                    alt={it.name}
-                                    width={800}
-                                    height={600}
-                                    className="w-auto h-42 md:h-58 rounded-md object-cover"
-                                    style={{ width: "auto" }}
-                                />
-                            ) : (
-                                <div className="w-full h-48 rounded-md bg-clean flex items-center justify-center p-2 mb-2 text-xs">
-                                    <span className="text-center text-charcoal/60">
-                                        Image coming soon...
-                                    </span>
-                                </div>
-                            )}
+                            <div className="relative w-full max-w-[520px] rounded-md overflow-hidden flex items-center justify-center">
+                                {it.photo ? (
+                                    <Image
+                                        src={it.photo}
+                                        alt={it.name}
+                                        width={800}
+                                        height={600}
+                                        className="max-h-48 md:max-h-64 w-auto object-contain mx-auto"
+                                    />
+                                ) : (
+                                    <div className="w-full py-6 rounded-md bg-clean flex items-center justify-center p-2 text-xs">
+                                        <span className="text-center text-charcoal/60">
+                                            Image coming soon...
+                                        </span>
+                                    </div>
+                                )}
+                            </div>
                             <p className="font-heading font-semibold text-orange text-sm md:text-base text-center">
                                 {it.name}
                             </p>
@@ -46,31 +45,29 @@ export function DrinksSection({ items }: { items: TMenuItem[] }) {
                     </div>
                 ))}
             </div>
-        </div>
+        </MenuSectionShell>
     );
 }
 
 export function DrinksToppings({ items }: { items: TMenuItem[] }) {
-    if (!items.length) return null;
+    if (!items?.length) return null;
     return (
-        <div className="rounded-xl bg-cream frame-drink-toppings frame-sharp frame-left-gap mt-2">
-            <div className="flex flex-col items-start gap-1">
-                <p className="font-heading text-orange font-extrabold text-xl">
-                    DRINK TOPPINGS
-                </p>
-                <p className="text-xs xl:text-sm italic text-charcoal/70">
-                    Add any of these toppings to your drink!
-                </p>
-            </div>
+        <MenuSectionShell
+            title="DRINK TOPPINGS"
+            frameClass="left-frame"
+        >
+            <p className="text-xs xl:text-sm italic text-charcoal/70">
+                Add any of these toppings to your drink!
+            </p>
 
-            <div className="flex flex-col items-start gap-4 py-4 px-4 md:items-start md:justify-start lg:px-0 lg:flex-row lg:flex-wrap lg:gap-10 xl:justify-evenly">
+            <div className="flex flex-col gap-4 py-4 px-2 lg:px-0 lg:flex-row lg:flex-wrap lg:gap-10 xl:justify-evenly">
                 {items.map((it) => (
                     <div
                         key={it.id}
                         className="w-full lg:w-auto flex flex-row items-center gap-4"
                     >
                         {it.photo ? (
-                            <div className="flex-shrink-0">
+                            <div className="shrink-0">
                                 <Image
                                     src={it.photo}
                                     alt={it.name}
@@ -80,16 +77,15 @@ export function DrinksToppings({ items }: { items: TMenuItem[] }) {
                                 />
                             </div>
                         ) : (
-                            <div className="h-16 w-16 md:h-20 md:w-20 rounded-full bg-clean flex items-center justify-center p-2 text-gray-400 text-xs ring-charcoal/10 ring-1 flex-shrink-0">
+                            <div className="h-16 w-16 md:h-20 md:w-20 rounded-full bg-clean flex items-center justify-center p-2 text-gray-400 text-xs ring-charcoal/10 ring-1 shrink-0">
                                 Soon...
                             </div>
                         )}
 
-                        <div className="grid grid-cols-[80%_20%] w-full lg:min-w-[30vw] items-baseline justify-between gap-x-6 px-4 xl:flex xl:min-w-0 xl:px-0">
+                        <div className="grid grid-cols-[1fr_auto] w-full lg:min-w-[30vw] items-baseline gap-x-6 px-2 xl:flex xl:min-w-0 xl:px-0">
                             <span className="text-sm md:text-base font-medium font-heading text-orange leading-none">
                                 {it.name}
                             </span>
-
                             {typeof it.price === "number" && (
                                 <span className="text-sm text-orange font-semibold leading-none">
                                     <Price value={it.price} />
@@ -98,7 +94,13 @@ export function DrinksToppings({ items }: { items: TMenuItem[] }) {
                         </div>
                     </div>
                 ))}
+                <hr className="w-full lg:hidden" />
+                <div className="w-full lg:w-auto flex items-center justify-center px-2">
+                    <p className="text-xs xl:text-sm italic text-charcoal/70 text-center">
+                        Brighten your drink with our toppings. Mix and match to create your perfect sip, ask your server for recommendations and current availability.
+                    </p>
+                </div>
             </div>
-        </div>
+        </MenuSectionShell>
     );
 }

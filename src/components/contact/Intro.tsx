@@ -8,8 +8,8 @@ export default function Intro({ className = "" }: { className?: string }) {
     return (
         <aside
             className={
-                "rounded-lg bg-white border border-gray-100 shadow-sm p-5 md:p-6 flex flex-col gap-4" +
-                (className ? " " + className : "")
+            "rounded-lg bg-white border border-gray-100 shadow-sm p-5 md:p-6 flex flex-col gap-4 w-full max-w-4xl mx-auto" +
+            (className ? " " + className : "")
             }
         >
             <UrgentBanner />
