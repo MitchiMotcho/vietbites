@@ -55,7 +55,7 @@ export default async function LocationPage() {
                                             VIETBITES
                                         </p>
                                         <p className="text-charcoal/80 font-medium mt-1">
-                                            <span className="inline-flex items-center gap-2">
+                                            <span className="inline-flex items-center gap-2 text-xs md:text-sm lg:text-base">
                                                 <FaLocationDot className="h-4 w-4 text-orange" aria-hidden="true" />
                                                 {ADDRESS}
                                             </span>
@@ -63,7 +63,7 @@ export default async function LocationPage() {
 
                                         {PHONE ? (
                                             <p className="text-charcoal/80 font-medium mt-1">
-                                            <span className="inline-flex items-center gap-2">
+                                            <span className="inline-flex items-center gap-2 text-sm lg:text-base">
                                                 <FaPhone className="h-4 w-4 text-orange" aria-hidden="true" />
                                                 {PHONE}
                                             </span>

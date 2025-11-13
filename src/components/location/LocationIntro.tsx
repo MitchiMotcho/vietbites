@@ -124,7 +124,7 @@ export default function LocationIntro({ hours }: { hours: Hours }) {
                         aria-hidden="true"
                     />
                     <div className="text-center">
-                        <div className="text-lg md:text-xl font-heading font-semibold leading-tight">
+                        <div className="text-base md:text-lg lg:text-xl font-heading font-semibold leading-tight">
                             <OpenToday hours={hours} showLink={false} />
                         </div>
                         <div className="text-xs text-charcoal/70 mt-0.5">

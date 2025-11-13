@@ -10,7 +10,7 @@ export default function ContactPage() {
                     <h1 className="contact-heading text-center text-3xl md:text-4xl font-semibold text-orange tracking-tight">
                         CONTACT US
                     </h1>
-                    <p className="mt-2 text-center text-sm md:text-base text-charcoal/70 max-w-1/2 mx-auto">
+                    <p className="mt-2 text-center text-sm md:text-base text-charcoal/70 lg:max-w-1/2 mx-auto">
                         The Viet Bites team is here to help you with any
                         questions or concerns!
                     </p>

@@ -65,7 +65,7 @@ export default function Intro({ className = "" }: { className?: string }) {
                 ]}
             />
 
-            <div className="rounded-lg bg-gray-50 border border-gray-100 p-4">
+            <div className="rounded-lg bg-gray-50 border border-gray-100 p-4 hidden lg:block">
                 <p className="text-sm font-medium text-gray-800">
                     What to include
                 </p>
