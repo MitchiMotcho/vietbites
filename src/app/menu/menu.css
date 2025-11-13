@@ -35,12 +35,11 @@
 /* Base reusable frame (stable, full top border) */
 .frame-sharp {
     position: relative;
-    padding: var(--frame-padding, 1.5rem);
+    padding: var(--frame-padding, 0 2rem 2rem);
     --frame-top: 0.8rem;
     --frame-border: 3px;
     --frame-color: var(--orange);
     --frame-padding: 0 2rem 2rem;
-    --frame-top: 0.8rem;
     box-sizing: border-box;
 }
 .frame-sharp::before {

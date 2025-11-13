@@ -1,22 +1,17 @@
 import "server-only";
+import Image from "next/image";
+import Link from "next/link";
 
-import {
-    BanhMiSection,
-    BanhMiToppings,
-} from "@/components/menu/sections/BanhMiSection";
-import {
-    DrinksSection,
-    DrinksToppings,
-} from "@/components/menu/sections/DrinkSection";
-import { CheSection } from "@/components/menu/sections/CheSection";
-import SimpleTileSection from "@/components/menu/sections/SimpleTileSection";
-import HouseSpecialSection from "@/components/menu/sections/HouseSpecial/HouseSpecialSection";
+import ToppingsSection from "@/components/menu/ToppingSection";
+import MenuListSection from "@/components/menu/MenuListSection";
+import DrinksGridSection from "@/components/menu/DrinkGridSection";
 
 import { getMenu } from "@/lib/notion/menu";
 import { groupByCategory, splitToppings } from "@/lib/menu/helpers";
 
-import Link from "next/link";
 import { BiMessageError } from "react-icons/bi";
+
+import "@/app/menu/menu.css";
 
 export default async function MenuPage() {
     const items = await getMenu();
@@ -28,6 +23,7 @@ export default async function MenuPage() {
     const toppings = groups["Toppings"] ?? [];
     const { banhMiToppings, drinksToppings } = splitToppings(toppings);
     const houseSpecial = groups["House Special"] ?? [];
+    const combo = groups["Combo"] ?? [];
 
     if (
         !banhMi.length ||
@@ -62,56 +58,116 @@ export default async function MenuPage() {
                     </p>
                 </div>
 
-                {/* Row 1: 2 columns on large screens; 1 on smaller screens */}
-                <section className="grid gap-6 lg:grid-cols-2 h-full items-start">
+                <section className="grid gap-6 xl:grid-cols-2 h-full items-start">
                     <div className="h-full flex flex-col">
-                        <BanhMiSection items={banhMi} />
-                        <BanhMiToppings items={banhMiToppings} />
+                        <MenuListSection
+                            title="BÁNH MÌ"
+                            items={banhMi}
+                            frameClass="center-frame"
+                            groupByName={true}
+                            showOptions={true}
+                        />
+                        <ToppingsSection
+                            title="BÁNH MÌ TOPPINGS"
+                            items={banhMiToppings}
+                            variant="banhmi"
+                            frameClass="left-frame"
+                        />
                     </div>
                     <div className="h-full flex">
-                        <CheSection items={sweetSoup} />
+                        <MenuListSection
+                            title="HOUSE SPECIALS"
+                            items={houseSpecial}
+                            frameClass="center-frame"
+                            groupByName={true}
+                            showOptions={true}
+                            extraTopPlacement="span"
+                            extraTop={
+                                <p className="py-4">
+                                    Signature selections crafted in-house to
+                                    showcase a harmonious blend of traditional
+                                    flavors and simple, familiar ingredients.
+                                </p>
+                            }
+                            extraBottom={
+                                <>
+                                    <hr className="w-full" />
+                                    <figure className="w-full mt-8">
+                                        <div className="relative w-full aspect-video overflow-hidden rounded-none">
+                                            <Image
+                                                src="/images/menu/banh-mi-que.jpeg"
+                                                alt="House Specials — Bánh Mì Quê"
+                                                fill
+                                                sizes="100vw"
+                                                className="object-cover"
+                                                priority
+                                            />
+                                        </div>
+                                        <figcaption className="my-4 text-[11px] text-center text-charcoal/70 italic">
+                                            *Bánh Mì Que: Mini baguette with
+                                            Pate filling, crafted in-house.
+                                        </figcaption>
+                                    </figure>
+                                </>
+                            }
+                        />
                     </div>
                 </section>
 
-                {/* Row 2: 2 columns on large screens; 1 on smaller screens */}
-                <section className="grid gap-6 lg:grid-cols-2 h-full items-start">
+                <section className="w-full">
+                    <div className="h-full flex">
+                        <MenuListSection
+                            title="CHÈ / SWEET SOUP"
+                            items={sweetSoup}
+                            frameClass="center-frame"
+                            groupByName={true}
+                            showOptions={true}
+                            splitThreshold={6}
+                            extraTopPlacement="span"
+                            extraTop={
+                                <>
+                                    <p className="py-4">
+                                        A traditional Vietnamese sweet dessert
+                                        soup made with ingredients like beans,
+                                        coconut milk, tapioca, jellies and
+                                        seasonal fruits. Served chilled or warm,
+                                        it&apos;s a refreshing and colorful
+                                        treat enjoyed year-round.
+                                    </p>
+                                </>
+                            }
+                        />
+                    </div>
+                </section>
+
+                <section className="grid gap-6 xl:grid-cols-2 h-full items-start">
                     <div className="h-full flex flex-col">
-                        <DrinksSection items={drinks} />
-                        <DrinksToppings items={drinksToppings} />
+                        <DrinksGridSection
+                            items={drinks}
+                            frameClass="center-frame"
+                        />
+                        <ToppingsSection
+                            title="DRINK TOPPINGS"
+                            items={drinksToppings}
+                            variant="drinks"
+                            frameClass="left-frame"
+                        />
                     </div>
                     <div className="h-full flex">
-                        <HouseSpecialSection items={houseSpecial} />
-                    </div>
-                </section>
-
-                {/* Row 3: 2 columns on large screens; 1 on smaller screens */}
-                <section className="grid gap-6 md:grid-cols-2">
-                    <div>
-                        <SimpleTileSection
-                            title="Combo"
-                            items={groups["Combo"] ?? []}
-                        />
-                    </div>
-                    <div>
-                        <SimpleTileSection
-                            title="Sticky Rice"
-                            items={groups["Sticky Rice"] ?? []}
-                        />
-                    </div>
-                </section>
-
-                {/* Row 4: 2 columns on large screens; 1 on smaller screens */}
-                <section className="grid gap-6 md:grid-cols-2">
-                    <div>
-                        <SimpleTileSection
-                            title="Cake Box"
-                            items={groups["Cake Box"] ?? []}
-                        />
-                    </div>
-                    <div>
-                        <SimpleTileSection
-                            title="Sweets"
-                            items={groups["Sweets"] ?? []}
+                        <MenuListSection
+                            title="COMBO MEALS"
+                            items={combo}
+                            frameClass="center-frame"
+                            groupByName={true}
+                            showOptions={true}
+                            extraTopPlacement="span"
+                            extraTop={
+                                <p className="py-4">
+                                    Bundle your favorites and save! Choose any
+                                    of the options below for a perfect meal
+                                    combination.
+                                </p>
+                            }
                         />
                     </div>
                 </section>

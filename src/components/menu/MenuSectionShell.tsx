@@ -18,7 +18,6 @@ export default function MenuSectionShell({
             className={clsx(
                 "bg-cream frame-sharp",
                 frameClass,
-                "px-4 pb-6 pt-0 md:px-6 md:pb-7 md:pt-0",
                 "h-full flex flex-col",
                 frameClass === "left-frame" && "mt-2",
                 className
