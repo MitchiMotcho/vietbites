@@ -11,8 +11,6 @@ import { groupByCategory, splitToppings } from "@/lib/menu/helpers";
 
 import { BiMessageError } from "react-icons/bi";
 
-import "@/app/menu/menu.css";
-
 export default async function MenuPage() {
     const items = await getMenu();
     const groups = groupByCategory(items);

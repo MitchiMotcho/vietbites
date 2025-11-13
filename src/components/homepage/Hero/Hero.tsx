@@ -81,7 +81,7 @@ export default async function Hero({
                     <div className="mt-8 w-3/4 mx-auto sm:w-full flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
                         <Link
                             href="/menu"
-                            className="text-center rounded-lg bg-orange text-clean px-5 py-3 font-semibold shadow transition duration-200 hover:bg-[var(--orange-hover)] active:bg-[var(--orange-active)] active:scale-[.98]"
+                            className="text-center rounded-lg bg-orange text-clean px-5 py-3 font-semibold shadow transition duration-200 hover:bg-orange-hover active:bg-orange-active active:scale-[.98]"
                         >
                             View Menu
                         </Link>
@@ -132,7 +132,7 @@ export default async function Hero({
                             </p>
                             <a
                                 href="https://www.instagram.com/vietbites.to"
-                                className="inline-flex items-center justify-center rounded-md bg-orange px-4 py-2 text-sm font-semibold text-clean shadow hover:bg-[var(--orange-hover)] active:bg-[var(--orange-active)]"
+                                className="inline-flex items-center justify-center rounded-md bg-orange px-4 py-2 text-sm font-semibold text-clean shadow hover:bg-orange-hover active:bg-orange-active"
                                 target="_blank"
                                 rel="noreferrer noopener"
                             >
@@ -147,7 +147,7 @@ export default async function Hero({
             </div>
 
             {/* Layout safety layer to prevent overlaps on small screens */}
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 top-0 z-0 md:hidden bg-gradient-to-b from-transparent via-transparent to-cream/10" />
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 top-0 z-0 md:hidden bg-linear-to-b from-transparent via-transparent to-cream/10" />
         </section>
     );
 }

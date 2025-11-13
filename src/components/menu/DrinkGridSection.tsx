@@ -3,7 +3,7 @@ import Image from "next/image";
 import type { TMenuItem } from "@/lib/schema";
 import Price from "@/components/menu/MenuPrice";
 import NoteBadge from "@/components/menu/NoteBadge";
-import MenuSectionShell from "@/components/menu/MenuSectionShell";
+import FrameSection from "@/components/common/FrameSection";
 
 export default function DrinksGridSection({
     title = "DRINKS",
@@ -17,7 +17,7 @@ export default function DrinksGridSection({
     if (!items?.length) return null;
 
     return (
-        <MenuSectionShell title={title} frameClass={frameClass}>
+        <FrameSection title={title} frameClass={frameClass}>
             <div className="grid gap-4 items-start mt-2 grid-cols-1 sm:grid-cols-2">
                 {items.map((it) => (
                     <div key={it.id} className="w-full flex justify-center">
@@ -55,6 +55,6 @@ export default function DrinksGridSection({
                     </div>
                 ))}
             </div>
-        </MenuSectionShell>
+        </FrameSection>
     );
 }

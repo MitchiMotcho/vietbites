@@ -1,6 +1,6 @@
 import Image from "next/image";
 import type { TMenuItem } from "@/lib/schema";
-import MenuSectionShell from "@/components/menu/MenuSectionShell";
+import FrameSection from "@/components/common/FrameSection";
 import Price from "@/components/menu/MenuPrice";
 
 type ToppingsVariant = "banhmi" | "drinks";
@@ -44,7 +44,7 @@ export default function ToppingsSection({
             : "line-clamp-3";
 
     return (
-        <MenuSectionShell title={title} frameClass={frameClass}>
+        <FrameSection title={title} frameClass={frameClass}>
             {intro ?? defaultIntro}
 
             {/* Mobile: single column with generous vertical gap between tiles.
@@ -100,6 +100,6 @@ export default function ToppingsSection({
                     </div>
                 ))}
             </div>
-        </MenuSectionShell>
+        </FrameSection>
     );
 }

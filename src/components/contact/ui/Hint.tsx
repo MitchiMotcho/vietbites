@@ -47,8 +47,8 @@ export default function Hint({ children }: { children: ReactNode }) {
                     <LuX className="h-3 w-3" aria-hidden />
                 </div>
 
-                <div className="font-medium text-gray-900 mb-1">Hint</div>
-                <div className="text-gray-600">{children}</div>
+                <div className="font-semibold text-gray-900 mb-1">Hint</div>
+                <div className="text-gray-700 font-medium">{children}</div>
             </div>
         </div>
     );

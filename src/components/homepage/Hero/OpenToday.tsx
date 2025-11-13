@@ -1,7 +1,15 @@
 import { getHours } from "@/lib/notion/hours";
 import Link from "next/link";
 
-export default function OpenToday({ hours }: { hours: Awaited<ReturnType<typeof getHours>> }) {
+export default function OpenToday({
+    hours,
+    showLink = true,
+    className = "",
+}: {
+    hours: Awaited<ReturnType<typeof getHours>>;
+    showLink?: boolean;
+    className?: string;
+}) {
     if (!hours?.length) return null;
 
     // Expect "Sort" 1..7 for Mon..Sun
@@ -37,7 +45,7 @@ export default function OpenToday({ hours }: { hours: Awaited<ReturnType<typeof 
     }
 
     return (
-        <p>
+        <p className={`${className}`}>
             Today&apos;s Hours:{" "}
             {isClosed ? (
                 <span className="font-semibold">Closed</span>
@@ -46,12 +54,14 @@ export default function OpenToday({ hours }: { hours: Awaited<ReturnType<typeof 
                     {to12Hour(today.open)} - {to12Hour(today.close)}
                 </span>
             )}{" "}
-            <Link
-                href="/location"
-                className="underline hover:text-orange transition-colors"
-            >
-                (see full hours)
-            </Link>
+            {showLink && (
+                <Link
+                    href="/location"
+                    className="underline hover:text-orange transition-colors"
+                >
+                    (see full hours)
+                </Link>
+            )}
         </p>
     );
 }

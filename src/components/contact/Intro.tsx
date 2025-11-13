@@ -22,7 +22,7 @@ export default function Intro({ className = "" }: { className?: string }) {
                     Tell us what&apos;s going on and we&apos;ll get back to you
                     within{" "}
                     <span className="font-medium text-gray-900">
-                        3–5 business days
+                        3-5 business days
                     </span>
                     .
                 </p>

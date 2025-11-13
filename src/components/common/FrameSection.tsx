@@ -1,20 +1,23 @@
 import { PropsWithChildren } from "react";
 import clsx from "clsx";
 
-type MenuSectionShellProps = PropsWithChildren<{
+type FrameSectionProps = PropsWithChildren<{
     title: string;
     className?: string;
     frameClass?: "center-frame" | "left-frame" | "right-frame";
+    id?: string;
 }>;
 
-export default function MenuSectionShell({
+export default function FrameSection({
     title,
     className,
     frameClass,
+    id,
     children,
-}: MenuSectionShellProps) {
+}: FrameSectionProps) {
     return (
         <section
+            id={id}
             className={clsx(
                 "bg-cream frame-sharp",
                 frameClass,
@@ -24,7 +27,7 @@ export default function MenuSectionShell({
             )}
         >
             <h2
-                className={`menu-heading mb-3 ${
+                className={`frame-heading mb-3 ${
                     frameClass === "center-frame"
                         ? "text-center mx-auto text-2xl lg:text-3xl"
                         : "text-xl"

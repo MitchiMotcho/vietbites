@@ -13,7 +13,7 @@ export default function Tips({
                     <span className="flex-none mt-0.5 inline-flex items-center justify-center h-8 w-8 rounded-md bg-orange/10 text-orange">
                         {item.icon}
                     </span>
-                    <p className="leading-tight">{item.text}</p>
+                    <p className="leading-tight font-medium text-gray-700">{item.text}</p>
                 </div>
             ))}
         </div>

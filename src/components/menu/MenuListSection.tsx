@@ -1,6 +1,6 @@
 import MenuItem from "./MenuItem";
 import type { TMenuItem } from "@/lib/schema";
-import MenuSectionShell from "./MenuSectionShell";
+import FrameSection from "@/components/common/FrameSection";
 
 type Props = {
     title: string;
@@ -73,7 +73,7 @@ export default function MenuListSection({
     );
 
     return (
-        <MenuSectionShell
+        <FrameSection
             title={title}
             frameClass={frameClass}
             className="w-full"
@@ -215,6 +215,6 @@ export default function MenuListSection({
                     </div>
                 </>
             )}
-        </MenuSectionShell>
+        </FrameSection>
     );
 }
