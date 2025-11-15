@@ -8,6 +8,8 @@ import LocationIntro from "@/components/location/LocationIntro";
 import { FaPhone } from "react-icons/fa6";
 import { FaLocationDot } from "react-icons/fa6";
 
+import Image from "next/image";
+
 const ADDRESS = "246 Gerrard St E, Toronto, ON M5A 2G2";
 const PHONE = "(437) 607-8296";
 
@@ -40,9 +42,11 @@ export default async function LocationPage() {
                         <div className="rounded-lg my-4 p-4 md:p-5 bg-clean ring-1 ring-charcoal/6 shadow-sm flex flex-col xl:flex-row items-center xl:items-start gap-4 text-center xl:text-left">
                             {/* Logo */}
                             <div className="shrink-0">
-                                <img
+                                <Image
                                     src="/images/logos/LogoCircle.png"
                                     alt="VietBites logo"
+                                    width={100}
+                                    height={100}
                                     className="h-12 w-12 rounded-md object-cover"
                                 />
                             </div>

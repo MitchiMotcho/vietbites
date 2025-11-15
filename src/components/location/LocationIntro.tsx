@@ -1,8 +1,9 @@
 "use client";
 
 import OpenToday from "@/components/homepage/Hero/OpenToday";
+import type { OpeningHour } from "@/lib/notion/hours";
 
-type Hours = any;
+type Hours = OpeningHour[];
 
 function toMinutes(t: string) {
     const [hh, mm = "0"] = t.split(":").map((s) => s.trim());
@@ -25,74 +26,84 @@ function getToday(hours: Hours) {
     if (Array.isArray(hours)) {
         return (
             hours.find(
-                (h: any) => (h.day || "").toString().toLowerCase() === todayName
+                (h: OpeningHour) =>
+                    (h.day || "").toString().toLowerCase() === todayName
             ) || hours[now.getDay()]
         );
     }
     if (hours && typeof hours === "object") {
-        return hours[todayName] ?? hours[now.getDay()] ?? hours.today;
+        return hours[todayName] ?? hours[now.getDay()];
     }
     return null;
 }
+function normalizeIntervals(
+    today: OpeningHour | OpeningHour[] | null
+): { start: string; end: string } | null {
+    if (!today) return null;
 
-function normalizeIntervals(today: any) {
-    if (!today) return [];
-    let intervals: any[] = [];
+    if (Array.isArray(today)) {
+        console.error(
+            "normalizeIntervals: expected a single OpeningHour object but received an array. Using the first element.",
+            today
+        );
+        today = today[0];
+        if (!today) return null;
+    }
 
-    if (Array.isArray(today)) intervals = today;
-    else if (Array.isArray(today?.intervals)) intervals = today.intervals;
-    else if (today.open && today.close)
-        intervals = [{ start: today.open, end: today.close }];
+    let interval: { start?: string; end?: string } = {};
 
-    return intervals
-        .map((it) => {
-            if (typeof it === "string") {
-                const [start, end] = it.split("-").map((s) => s.trim());
-                return { start, end };
-            }
-            return {
-                start: it.start ?? it.open ?? it.from,
-                end: it.end ?? it.close ?? it.to,
-            };
-        })
-        .filter((it) => it.start && it.end);
+    if (today.open && today.close)
+        interval = { start: today.open, end: today.close };
+    else return null;
+
+    if (!interval.start || !interval.end) return null;
+
+    return {
+        start: interval.start,
+        end: interval.end,
+    };
 }
 
 function statusMessage(hours: Hours) {
     const now = new Date();
     const nowM = now.getHours() * 60 + now.getMinutes();
     const today = getToday(hours);
-    const intervals = normalizeIntervals(today);
+    const interval = today ? normalizeIntervals(today as OpeningHour) : null;
 
-    if (!intervals.length) {
+    if (!interval) {
         return "We're closed :( Check our hours below and visit another day.";
     }
 
-    const openInterval = intervals.find((it) => {
+    const openNow = (() => {
         try {
-            return nowM >= toMinutes(it.start) && nowM < toMinutes(it.end);
+            return (
+                nowM >= toMinutes(interval!.start) &&
+                nowM < toMinutes(interval!.end)
+            );
         } catch {
             return false;
         }
-    });
+    })();
 
-    if (openInterval) {
-        const minsLeft = toMinutes(openInterval.end) - nowM;
-        return minsLeft <= 30
+    if (openNow) {
+        const minsLeft = toMinutes(interval.end) - nowM;
+        return minsLeft <= 60
             ? "We're closing soon, come by quickly!"
             : "We're open right now, come visit us!";
     }
 
-    const later = intervals
-        .map((it) => ({ m: toMinutes(it.start), it }))
-        .filter((x) => x.m > nowM)
-        .sort((a, b) => a.m - b.m)[0];
-
-    if (later) {
-        const h = Math.floor(later.m / 60);
-        const m = later.m % 60;
-        const pad = (n: number) => n.toString().padStart(2, "0");
-        return `We open later today at ${h}:${pad(m)}.`;
+    if (nowM < toMinutes(interval.start)) {
+        const startM = toMinutes(interval.start);
+        const endM = toMinutes(interval.end);
+        const format12 = (mins: number) => {
+            const hh = Math.floor(mins / 60);
+            const mm = mins % 60;
+            const period = hh >= 12 ? "PM" : "AM";
+            const hour12 = ((hh + 11) % 12) + 1; // convert 0->12, 13->1, etc.
+            const pad = (n: number) => n.toString().padStart(2, "0");
+            return `${hour12}:${pad(mm)} ${period}`;
+        };
+        return `We open later today at ${format12(startM)} until ${format12(endM)}.`;
     }
 
     return "We're closed :( Check our hours below and visit another day.";

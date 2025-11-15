@@ -1,21 +1,14 @@
 import clsx from "clsx";
 import InstagramSocial from "@/components/common/InstagramSocial";
+import type { OpeningHour } from "@/lib/notion/hours";
 
-/** ---- data helpers (unchanged api) ---- */
+function capitalize(s: string) {
+    return s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
+}
+
 function normalizeHours(
-    hours: any
+    hours: OpeningHour[]
 ): Array<{ day: string; open?: string; close?: string; closed?: boolean }> {
-    if (Array.isArray(hours)) {
-        return hours.map((h: any) => ({
-            day: h.day ?? h.label ?? h.name ?? "—",
-            open: h.open ?? h.start ?? h.opens ?? h.from ?? h.openTime,
-            close: h.close ?? h.end ?? h.closes ?? h.to ?? h.closeTime,
-            closed: Boolean(
-                h.closed ?? h.isClosed ?? (h.open === "" && h.close === "")
-            ),
-        }));
-    }
-
     const order = [
         "Monday",
         "Tuesday",
@@ -25,18 +18,19 @@ function normalizeHours(
         "Saturday",
         "Sunday",
     ];
-    if (hours && typeof hours === "object") {
-        const rows = Object.entries(hours).map(([key, value]: any) => ({
-            day: capitalize(key),
-            open: value?.open ?? value?.start ?? "",
-            close: value?.close ?? value?.end ?? "",
-            closed: Boolean(value?.closed),
-        }));
-        rows.sort((a, b) => order.indexOf(a.day) - order.indexOf(b.day));
-        return rows;
+
+    if (Array.isArray(hours)) {
+        return hours
+            .map((h: OpeningHour) => ({
+                day: capitalize(h.day),
+                open: h.open,
+                close: h.close,
+                closed: Boolean(h.closed ?? (h.open === "" && h.close === "")),
+            }))
+            .sort((a, b) => order.indexOf(a.day) - order.indexOf(b.day));
     }
 
-    // default closed template
+    // If no hours provided, return all days closed
     return [
         "Monday",
         "Tuesday",
@@ -47,12 +41,8 @@ function normalizeHours(
         "Sunday",
     ].map((d) => ({ day: d, closed: true }));
 }
-function capitalize(s: string) {
-    return s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
-}
 
-/** ---- UI ---- */
-export default function HoursTable({ hours }: { hours: any }) {
+export default function HoursTable({ hours }: { hours: OpeningHour[] }) {
     const rows = normalizeHours(hours);
 
     return (
