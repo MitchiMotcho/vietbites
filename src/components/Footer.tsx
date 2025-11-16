@@ -1,8 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
-import { FaInstagram, FaMapMarkerAlt } from "react-icons/fa";
 
-export default function Footer() {
+import Platforms from "./common/Platforms";
+import type { Platform } from "@/lib/notion/platforms";
+import { getPlatforms } from "@/lib/notion/platforms";
+
+export default async function Footer() {
+    const allPlatforms: Platform[] = await getPlatforms();
+
     return (
         <footer className="mt-16 mb-2 bg-clean border-t border-charcoal/10">
             {/* Slim brand accent */}
@@ -62,20 +67,7 @@ export default function Footer() {
                     </p>
 
                     <div className="mt-3 flex gap-3 justify-center md:justify-start">
-                        <Link
-                            href="/location"
-                            className="flex items-center justify-center w-10 h-10 rounded-full bg-orange text-clean shadow transition ease-in-out duration-300 hover:bg-orange-hover active:bg-orange-active active:scale-[.95]"
-                        >
-                            <FaMapMarkerAlt size={18} />
-                        </Link>
-                        <a
-                            href="https://www.instagram.com/vietbites.to"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-center w-10 h-10 rounded-full border border-charcoal/15 text-charcoal shadow-sm button-outline"
-                        >
-                            <FaInstagram size={18} />
-                        </a>
+                        <Platforms items={allPlatforms} variant="compact" rowSize={4} tone="subtle" />
                     </div>
                 </div>
             </div>

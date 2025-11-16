@@ -2,15 +2,14 @@
 
 import OpenToday from "@/components/homepage/Hero/OpenToday";
 import type { OpeningHour } from "@/lib/notion/hours";
-
-type Hours = OpeningHour[];
+import SectionHeader from "../common/SectionHeader";
 
 function toMinutes(t: string) {
     const [hh, mm = "0"] = t.split(":").map((s) => s.trim());
     return Number(hh) * 60 + Number(mm);
 }
 
-function getToday(hours: Hours) {
+function getToday(hours: OpeningHour[]) {
     const now = new Date();
     const dayNames = [
         "sunday",
@@ -64,7 +63,7 @@ function normalizeIntervals(
     };
 }
 
-function statusMessage(hours: Hours) {
+function statusMessage(hours: OpeningHour[]) {
     const now = new Date();
     const nowM = now.getHours() * 60 + now.getMinutes();
     const today = getToday(hours);
@@ -103,25 +102,27 @@ function statusMessage(hours: Hours) {
             const pad = (n: number) => n.toString().padStart(2, "0");
             return `${hour12}:${pad(mm)} ${period}`;
         };
-        return `We open later today at ${format12(startM)} until ${format12(endM)}.`;
+        return `We open later today at ${format12(startM)} until ${format12(
+            endM
+        )}.`;
     }
 
     return "We're closed :( Check our hours below and visit another day.";
 }
 
-export default function LocationIntro({ hours }: { hours: Hours }) {
+export default function LocationIntro({ hours }: { hours: OpeningHour[] }) {
     return (
         <>
-            <header className="text-center">
-                <h1 className="contact-heading text-3xl md:text-4xl font-semibold text-orange tracking-tight">
-                    Visit Us
-                </h1>
-                <p className="mt-2 text-sm md:text-base text-charcoal/70">
-                    We&apos;re located in Downtown Toronto! Come by for bánh mì,
-                    drinks, and desserts. See today&apos;s hours and directions
-                    below.
-                </p>
-            </header>
+            <SectionHeader
+                title="Visit Us"
+                subtitle={
+                    <>
+                        We&apos;re located in Downtown Toronto! Come by for bánh
+                        mì, drinks, and desserts. See today&apos;s hours and
+                        directions below.
+                    </>
+                }
+            />
 
             {/* Today’s status — prominent card, centered (unchanged design) */}
             <div className="flex justify-center">

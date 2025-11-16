@@ -1,7 +1,8 @@
 import { getPillars } from "@/lib/notion/pillars";
+import type { Pillar } from "@/lib/notion/pillars";
 
 export default async function Pillars() {
-    const pillars = await getPillars();
+    const pillars: Pillar[] = await getPillars();
 
     if (pillars.length === 0) return null;
 

@@ -161,9 +161,6 @@ export default function ContactForm() {
                     <SelectBox.Item value="catering requests">
                         Catering / Event Request - Large orders & quotes
                     </SelectBox.Item>
-                    <SelectBox.Item value="technical issues">
-                        Technical Issue - Website bug or suggestion
-                    </SelectBox.Item>
                     <SelectBox.Item value="customer complaints">
                         Customer Complaint - Order or service
                     </SelectBox.Item>
@@ -171,7 +168,10 @@ export default function ContactForm() {
                         Suggestion - Product or menu improvement
                     </SelectBox.Item>
                     <SelectBox.Item value="hiring inquiries">
-                        Hiring Inquiry
+                        Hiring Inquiry - Job opportunities
+                    </SelectBox.Item>
+                    <SelectBox.Item value="technical issues">
+                        Technical Issue - Website bug or suggestion
                     </SelectBox.Item>
                     <SelectBox.Item value="other">Other</SelectBox.Item>
                 </SelectBox>
@@ -215,6 +215,7 @@ export default function ContactForm() {
                     placeholder="Tell us more…"
                     onValidityChange={setOverDescriptionLimit}
                     max={5000}
+                    id="description"
                 />
             </FormField>
 

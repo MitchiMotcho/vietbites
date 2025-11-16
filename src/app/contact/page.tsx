@@ -1,25 +1,38 @@
+import "server-only";
+
 import Intro from "@/components/contact/Intro";
 import ContactForm from "@/components/contact/ContactForm";
-import InstagramSocial from "@/components/common/InstagramSocial";
+import SectionHeader from "@/components/common/SectionHeader";
+import Platforms from "@/components/common/Platforms";
 
-export default function ContactPage() {
+import { getPlatforms } from "@/lib/notion/platforms";
+import type { Platform } from "@/lib/notion/platforms";
+
+export default async function ContactPage() {
+    const allPlatforms: Platform[] = await getPlatforms();
+    const platforms = allPlatforms.filter(
+        (p) =>
+            p.name === "Instagram" ||
+            p.name === "Facebook" ||
+            p.name === "TikTok" ||
+            p.name === "Location" ||
+            p.name === "DoorDash" ||
+            p.name === "UberEats"
+    );
+
     return (
         <main className="max-w-7xl bg-cream">
-            <section className="mx-auto px-4 md:px-6 lg:px-8 py-10 rounded-lg section-cream">
-                <header className="mb-8">
-                    <h1 className="contact-heading text-center text-3xl md:text-4xl font-semibold text-orange tracking-tight">
-                        CONTACT US
-                    </h1>
-                    <p className="mt-2 text-center text-sm md:text-base text-charcoal/70 lg:max-w-1/2 mx-auto">
-                        The Viet Bites team is here to help you with any
-                        questions or concerns!
-                    </p>
-                    <InstagramSocial align="center" />
-                </header>
+            <section className="mx-auto px-4 md:px-6 lg:px-8 pb-10 pt-4 rounded-lg section-cream">
+                <SectionHeader
+                    title="CONTACT US"
+                    subtitle="The Viet Bites team is here to help you with any questions or concerns!"
+                >
+                    <Platforms items={platforms} variant="full" align="center"/>
+                </SectionHeader>
 
                 <div className="mt-8 grid grid-cols-1 gap-6">
                     <Intro />
-                    <div>
+                    <div className="max-w-5xl mx-auto w-full">
                         <ContactForm />
                     </div>
                 </div>

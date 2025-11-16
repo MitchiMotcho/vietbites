@@ -34,6 +34,26 @@ export function getRichText(
     return undefined;
 }
 
+export function getUrl(props: any, key: string): string | undefined {
+    const prop = props?.[key];
+    if (!prop) return undefined;
+
+    // Native Notion URL property
+    if (prop.type === "url") return prop.url || undefined;
+
+    // Graceful fallback: if someone stored it as rich_text/title, try to read it
+    if (prop.type === "rich_text") {
+        const txt = (prop.rich_text || []).map((t: any) => t.plain_text).join("").trim();
+        return txt || undefined;
+    }
+    if (prop.type === "title") {
+        const txt = (prop.title || []).map((t: any) => t.plain_text).join("").trim();
+        return txt || undefined;
+    }
+
+    return undefined;
+}
+
 export function getNumber(
     props: PageObjectResponse["properties"],
     key: string
@@ -90,8 +110,8 @@ export function firstFileUrl(
     return f.type === "file"
         ? f.file.url
         : f.type === "external"
-        ? f.external.url
-        : undefined;
+            ? f.external.url
+            : undefined;
 }
 
 /* -------------------- Paginated results shape -------------------- */

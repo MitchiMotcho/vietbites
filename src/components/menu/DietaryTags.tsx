@@ -1,6 +1,6 @@
-import type { TMenuItem } from "@/lib/schema";
+import type { MenuItem } from "@/lib/notion/menu";
 
-export default function DietaryTags({ item }: { item: TMenuItem }) {
+export default function DietaryTags({ item }: { item: MenuItem }) {
     if (
         (!item.description || item.description.trim() === "") &&
         !item.tags?.length

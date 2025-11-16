@@ -104,11 +104,23 @@ export const PillarSchema = z.object({
     id: z.string(),
     title: z.string().min(1, "Title is required"),
     description: z.string().optional(),
+    label: z.string().optional(),
     priority: z.number().optional(),
 });
 export type TPillar = z.infer<typeof PillarSchema>;
 
 export const PillarListSchema = z.array(PillarSchema);
+
+/* -------------------------------- Platforms -------------------------------- */
+export const PlatformSchema = z.object({
+    id: z.string(),
+    name: z.string().min(1, "Name is required"),
+    url: z.url("Must be a valid URL").optional(),
+    priority: z.number().optional(),
+});
+export type TPlatform = z.infer<typeof PlatformSchema>;
+
+export const PlatformListSchema = z.array(PlatformSchema);
 
 /* ----------------------------- Batch validators ----------------------------- */
 
@@ -148,6 +160,15 @@ export function assertPillars(items: unknown): TPillar[] {
     if (!parsed.success) {
         console.error("Pillars validation errors:", parsed.error.flatten());
         throw new Error("Pillars data failed validation");
+    }
+    return parsed.data;
+}
+
+export function assertPlatforms(items: unknown): TPlatform[] {
+    const parsed = PlatformListSchema.safeParse(items);
+    if (!parsed.success) {
+        console.error("Platforms validation errors:", parsed.error.flatten());
+        throw new Error("Platforms data failed validation");
     }
     return parsed.data;
 }

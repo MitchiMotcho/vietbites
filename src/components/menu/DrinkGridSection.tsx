@@ -1,6 +1,6 @@
 // components/menu/DrinkGridSection.tsx
 import Image from "next/image";
-import type { TMenuItem } from "@/lib/schema";
+import type { MenuItem } from "@/lib/notion/menu";
 import Price from "@/components/menu/MenuPrice";
 import NoteBadge from "@/components/menu/NoteBadge";
 import FrameSection from "@/components/common/FrameSection";
@@ -11,7 +11,7 @@ export default function DrinksGridSection({
     frameClass = "center-frame",
 }: {
     title?: string;
-    items: TMenuItem[];
+    items: MenuItem[];
     frameClass?: "center-frame" | "left-frame" | "right-frame";
 }) {
     if (!items?.length) return null;

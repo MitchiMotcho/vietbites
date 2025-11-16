@@ -30,6 +30,7 @@ export const tags = {
     hours: () => ["hours"],
     announcements: () => ["announcements"],
     pillars: () => ["pillars"],
+    platforms: () => ["platforms"],
 };
 
 export const ttl = {

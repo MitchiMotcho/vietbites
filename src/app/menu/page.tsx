@@ -10,6 +10,11 @@ import { getMenu } from "@/lib/notion/menu";
 import { groupByCategory, splitToppings } from "@/lib/menu/helpers";
 
 import { BiMessageError } from "react-icons/bi";
+import SectionHeader from "@/components/common/SectionHeader";
+
+import { getPlatforms } from "@/lib/notion/platforms";
+import type { Platform } from "@/lib/notion/platforms";
+import Platforms from "@/components/common/Platforms";
 
 export default async function MenuPage() {
     const items = await getMenu();
@@ -22,6 +27,14 @@ export default async function MenuPage() {
     const { banhMiToppings, drinksToppings } = splitToppings(toppings);
     const houseSpecial = groups["House Special"] ?? [];
     const combo = groups["Combo"] ?? [];
+
+    const allPlatforms: Platform[] = await getPlatforms();
+    const platforms = allPlatforms.filter(
+        (p) =>
+            p.name === "DoorDash" ||
+            p.name === "UberEats"
+    );
+    console.log("Platforms:", platforms);
 
     if (
         !banhMi.length ||
@@ -45,17 +58,11 @@ export default async function MenuPage() {
     return (
         <main className="max-w-7xl bg-cream">
             <section className="mx-auto px-4 md:px-6 lg:px-8 pb-10 pt-3 rounded-lg section-cream space-y-8">
-                <div className="mb-8 max-w-full md:max-w-4/5 lg:max-w-1/2 mx-auto">
-                    <h1 className="contact-heading text-center text-3xl md:text-4xl font-semibold text-orange tracking-tight">
-                        OUR MENU
-                    </h1>
-                    <p className="mt-2 text-center text-sm md:text-base text-charcoal/70">
-                        From traditional Vietnamese Bánh Mì to delightful Sweet
-                        Soups and refreshing Drinks, explore our diverse menu
-                        crafted to satisfy your cravings.
-                    </p>
-                </div>
-
+                <SectionHeader
+                    title="OUR MENU"
+                    subtitle="From traditional Vietnamese Bánh Mì to delightful Sweet Soups and refreshing Drinks, explore our diverse menu crafted to satisfy your cravings."
+                />
+                <Platforms items={platforms} variant="full" align="center"/>
                 <section className="grid gap-6 xl:grid-cols-2 h-full items-start">
                     <div className="h-full flex flex-col">
                         <MenuListSection

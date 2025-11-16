@@ -1,13 +1,13 @@
 import Image from "next/image";
 import Price from "@/components/menu/MenuPrice";
 import DietaryTags from "@/components/menu/DietaryTags";
-import type { TMenuItem } from "@/lib/schema";
+import type { MenuItem } from "@/lib/notion/menu";
 
 export default function MenuItem({
     group,
     showOptions = true,
 }: {
-    group: TMenuItem[];
+    group: MenuItem[];
     showOptions?: boolean;
 }) {
     const item = group[0];

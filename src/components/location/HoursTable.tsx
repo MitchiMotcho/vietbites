@@ -1,6 +1,10 @@
+import "server-only";
 import clsx from "clsx";
-import InstagramSocial from "@/components/common/InstagramSocial";
 import type { OpeningHour } from "@/lib/notion/hours";
+
+import { getPlatforms } from "@/lib/notion/platforms";
+import type { Platform } from "@/lib/notion/platforms";
+import Platforms from "@/components/common/Platforms";
 
 function capitalize(s: string) {
     return s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
@@ -42,8 +46,19 @@ function normalizeHours(
     ].map((d) => ({ day: d, closed: true }));
 }
 
-export default function HoursTable({ hours }: { hours: OpeningHour[] }) {
+export default async function HoursTable({ hours }: { hours: OpeningHour[] }) {
     const rows = normalizeHours(hours);
+
+    const allPlatforms: Platform[] = await getPlatforms();
+    const platforms = allPlatforms.filter(
+        (p) =>
+            p.name === "Instagram" ||
+            p.name === "Facebook" ||
+            p.name === "TikTok" ||
+            p.name === "Email" ||
+            p.name === "DoorDash" ||
+            p.name === "UberEats"
+    );
 
     return (
         <section
@@ -95,8 +110,14 @@ export default function HoursTable({ hours }: { hours: OpeningHour[] }) {
                 })}
             </ul>
 
-            {/* Socials - Just Instagram for now */}
-            <InstagramSocial align="center" />
+            <hr className="my-6 w-full" />
+            <div className="py-4 my-4">
+                <Platforms
+                    items={platforms}
+                    variant="compact"
+                    align="between"
+                />
+            </div>
         </section>
     );
 }

@@ -1,5 +1,5 @@
 import MenuItem from "./MenuItem";
-import type { TMenuItem } from "@/lib/schema";
+import type { MenuItem as TMenuItem } from "@/lib/notion/menu";
 import FrameSection from "@/components/common/FrameSection";
 
 type Props = {

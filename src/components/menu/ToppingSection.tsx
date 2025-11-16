@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { TMenuItem } from "@/lib/schema";
+import type { MenuItem } from "@/lib/notion/menu";
 import FrameSection from "@/components/common/FrameSection";
 import Price from "@/components/menu/MenuPrice";
 
@@ -7,7 +7,7 @@ type ToppingsVariant = "banhmi" | "drinks";
 
 type Props = {
     title: string;
-    items: TMenuItem[];
+    items: MenuItem[];
     variant?: ToppingsVariant;
     intro?: React.ReactNode;
     frameClass?: "center-frame" | "left-frame" | "right-frame";
