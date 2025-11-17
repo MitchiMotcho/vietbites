@@ -22,7 +22,7 @@ export default function LocationSection() {
                     </div>
 
                     <h2 className="text-2xl md:text-3xl font-bold font-heading">
-                        Come Visit VietBites on Gerrard St E
+                        Come Visit Us on Gerrard St East
                     </h2>
 
                     <p className="text-charcoal/80 text-sm md:text-base leading-relaxed max-w-prose">
@@ -41,17 +41,17 @@ export default function LocationSection() {
                     <hr className="my-2" />
 
                     {/* CTA group */}
-                    <div className="flex flex-col gap-6 pt-2 md:flex-row md:items-center">
-                        <div className="flex flex-col md:flex-row items-center justify-center md:justify-start gap-4">
+                    <div className="flex flex-col 2xl:flex-row gap-6 pt-2 md:items-center">
+                        <div className="flex flex-col 2xl:flex-row items-center justify-center md:justify-start gap-4">
                             <Link
                                 href="/location"
-                                className="inline-flex items-center justify-center rounded-lg bg-orange text-clean px-5 py-3 font-semibold shadow transition duration-200 hover:bg-orange-hover active:bg-orange-active active:scale-[.98]"
+                                className="flex w-full 2xl:w-auto items-center justify-center rounded-lg bg-orange text-clean px-5 py-3 font-semibold shadow transition duration-200 hover:bg-orange-hover active:bg-orange-active active:scale-[.98]"
                             >
                                 Hours & Directions
                             </Link>
                             <Link
                                 href="/contact"
-                                className="button-outline py-3 px-5 font-heading font-medium rounded-lg text-center"
+                                className="button-outline w-full 2xl:w-auto py-3 px-5 font-heading font-medium rounded-lg text-center"
                             >
                                 Get in Touch
                             </Link>

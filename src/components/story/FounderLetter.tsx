@@ -45,7 +45,7 @@ export default function FounderLetter() {
                             </span>
                             To introduce nostalgic, authentic flavors to locals
                             and passersby, and to give people a little taste of
-                            Vietnam — just the way I remember it.
+                            Vietnam, just the way I remember it.
                         </p>
                         <div className="absolute bottom-0 right-0 w-16 h-[3px] bg-orange/40 rounded-full translate-y-2 translate-x-2" />
                     </div>
