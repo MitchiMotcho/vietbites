@@ -1,4 +1,3 @@
-// components/menu/DrinkGridSection.tsx
 import Image from "next/image";
 import type { MenuItem } from "@/lib/notion/menu";
 import Price from "@/components/menu/MenuPrice";

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Price from "@/components/menu/MenuPrice";
+import NoteBadge from "@/components/menu/NoteBadge";
 import DietaryTags from "@/components/menu/DietaryTags";
 import type { MenuItem } from "@/lib/notion/menu";
 
@@ -17,6 +18,8 @@ export default function MenuItem({
         <div className="grid grid-cols-1 sm:grid-cols-[30%_1fr] gap-3 items-center">
             {/* Image */}
             <div className="relative">
+                <NoteBadge note={item.notes} />
+
                 <div className="relative w-full aspect-4/3 rounded-md overflow-hidden">
                     {item.photo ? (
                         <Image

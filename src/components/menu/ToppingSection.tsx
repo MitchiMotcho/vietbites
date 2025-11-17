@@ -47,16 +47,10 @@ export default function ToppingsSection({
         <FrameSection title={title} frameClass={frameClass}>
             {intro ?? defaultIntro}
 
-            {/* Mobile: single column with generous vertical gap between tiles.
-          ≥sm: two columns with balanced x/y gaps. */}
             <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-6 py-4">
                 {items.map((it) => (
                     <div key={it.id} className="h-full">
-                        {/* Tile content:
-                - mobile: image centered, then text+price centered below
-                - ≥sm: image left, text+price right (one row) */}
                         <div className="flex flex-col items-center sm:flex-row sm:items-center sm:gap-3">
-                            {/* Image: bigger on mobile so it doesn’t feel tiny */}
                             <div className="shrink-0">
                                 {it.photo ? (
                                     <Image
@@ -64,7 +58,7 @@ export default function ToppingsSection({
                                         alt={it.name}
                                         width={112}
                                         height={112}
-                                        className="h-24 w-24 rounded-full object-cover ring-1 ring-charcoal/10"
+                                        className="h-24 w-24 rounded-full object-cover"
                                     />
                                 ) : (
                                     <div className="h-24 w-24 rounded-full bg-clean ring-1 ring-charcoal/10 flex items-center justify-center">
@@ -75,9 +69,6 @@ export default function ToppingsSection({
                                 )}
                             </div>
 
-                            {/* Text block:
-                                - mobile: stacked (name then price), centered
-                                - ≥sm: two columns [name | price], aligned with image */}
                             <div className="mt-2 sm:mt-0 w-full grid grid-cols-1 sm:grid-cols-[1fr_auto] items-center gap-y-1 sm:gap-y-0 text-center sm:text-left mb-2">
                                 <span
                                     className={`text-sm md:text-base font-medium font-heading text-orange leading-tight ${clampClass}`}

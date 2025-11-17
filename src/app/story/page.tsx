@@ -1,9 +1,11 @@
+import "server-only";
+
 import type { Metadata } from "next";
 import { StoryHero } from "@/components/story/StoryHero";
 import FounderLetter from "@/components/story/FounderLetter";
 import { PhotoStrip } from "@/components/story/PhotoStrip";
 import Quote from "@/components/story/Quote";
-import CTA from "@/components/story/CTA";
+import LocationSection from "@/components/common/LocationSection";
 import Pillars from "@/components/story/Pillars";
 
 export const metadata: Metadata = {
@@ -43,7 +45,7 @@ export default function StoryPage() {
             <hr />
 
             {/* CTA */}
-            <CTA />
+            <LocationSection />
         </main>
     );
 }

@@ -21,6 +21,7 @@ export default async function Footer() {
                         alt="VietBites"
                         width={500}
                         height={200}
+                        priority
                         className="rounded-md h-16 w-auto"
                     />
                     <div className="mt-3 flex flex-col gap-3 w-1/2 sm:w-1/3 md:flex-row md:w-full md:gap-4">
@@ -51,9 +52,7 @@ export default async function Footer() {
                         className="underline text-charcoal/90 hover:text-orange transition-colors ease-in-out duration-300"
                     >
                         <address className="not-italic text-center md:text-left">
-                            246 Gerrard St E
-                            <br />
-                            Toronto, ON, M5A 2G2
+                            {process.env.NEXT_PUBLIC_VIETBITES_LOCATION}
                         </address>
                     </a>
                     <p className="mt-2 text-charcoal/80 text-center md:text-left">

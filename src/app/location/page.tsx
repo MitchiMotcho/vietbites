@@ -10,9 +10,6 @@ import { FaLocationDot } from "react-icons/fa6";
 
 import Image from "next/image";
 
-const ADDRESS = "246 Gerrard St E, Toronto, ON M5A 2G2";
-const PHONE = "(437) 607-8296";
-
 function googleMapsEmbedSrc() {
     return "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2887.074289893019!2d-79.37107992344025!3d43.66202617109976!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89d4cbc0f751d687%3A0x881dfbd1330e66d6!2sVietBites!5e0!3m2!1sen!2sca!4v1731557500000!5m2!1sen!2sca";
 }
@@ -61,15 +58,15 @@ export default async function LocationPage() {
                                         <p className="text-charcoal/80 font-medium mt-1">
                                             <span className="inline-flex items-center gap-2 text-xs md:text-sm lg:text-base">
                                                 <FaLocationDot className="h-4 w-4 text-orange" aria-hidden="true" />
-                                                {ADDRESS}
+                                                {process.env.NEXT_PUBLIC_VIETBITES_LOCATION}
                                             </span>
                                         </p>
 
-                                        {PHONE ? (
+                                        {process.env.NEXT_PUBLIC_VIETBITES_PHONE ? (
                                             <p className="text-charcoal/80 font-medium mt-1">
                                             <span className="inline-flex items-center gap-2 text-sm lg:text-base">
                                                 <FaPhone className="h-4 w-4 text-orange" aria-hidden="true" />
-                                                {PHONE}
+                                                {process.env.NEXT_PUBLIC_VIETBITES_PHONE}
                                             </span>
                                         </p>
 
@@ -111,7 +108,7 @@ export default async function LocationPage() {
                         {/* Buttons — centered ≤lg, left on xl+ */}
                         <div className="mt-2 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center xl:justify-start">
                             <a
-                                href={directionsUrl(ADDRESS)}
+                                href={directionsUrl(process.env.NEXT_PUBLIC_VIETBITES_LOCATION || "")}
                                 className="text-center rounded-lg bg-orange text-clean px-5 py-3 font-semibold shadow transition duration-200 hover:bg-orange-hover active:bg-orange-active active:scale-[.98]"
                                 target="_blank"
                                 rel="noreferrer noopener"
@@ -120,7 +117,7 @@ export default async function LocationPage() {
                             </a>
                             <a
                                 href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                                    ADDRESS
+                                    process.env.NEXT_PUBLIC_VIETBITES_LOCATION || ""
                                 )}`}
                                 className="text-center button-outline px-5 py-3 text-sm md:text-base font-heading font-medium rounded-lg"
                                 target="_blank"

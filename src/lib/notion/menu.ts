@@ -11,7 +11,7 @@ import {
     getRichText,
     getNumber,
     getSelectName,
-    firstFileUrl,
+    notionFileSrc,
     getCheckbox,
     getMultiSelectNames,
 } from "./parse";
@@ -61,7 +61,7 @@ const rawToItem = (p: NotionPage): MenuItem => {
         getNumber(props, "Price") ?? (Number(getTitle(props, "Price")) || 0); // safety fallback if schema is temporarily off
 
     const category = getSelectName(props, "Category") ?? "Uncategorized";
-    const photo = firstFileUrl(props, "Photo");
+    const photo = notionFileSrc({ pageId: p.id, prop: "Photo" }) || undefined;
     const notes = getSelectName(props, "Notes") ?? undefined;
     const sortOrder = getNumber(props, "Sort Order");
     const available = getCheckbox(props, "Available") ?? true;

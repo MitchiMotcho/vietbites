@@ -7,7 +7,7 @@ import { getHours } from "@/lib/notion/hours";
 import Hero from "@/components/homepage/Hero/Hero";
 import Announcements from "@/components/homepage/Announcements";
 import FeaturedMenu from "@/components/homepage/FeaturedMenu/FeaturedMenu";
-import Location from "@/components/homepage/Location";
+import LocationSection from "@/components/common/LocationSection";
 
 export default async function HomePage() {
     // fetch in parallel
@@ -37,7 +37,7 @@ export default async function HomePage() {
 
             <hr />
 
-            <Location />
+            <LocationSection />
         </>
     );
 }

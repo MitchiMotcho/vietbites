@@ -39,10 +39,22 @@ const asNumber = z.preprocess(
 
 // Accept http(s) URL strings; allow undefined/empty
 const asUrl = z
-    .string()
     .url()
     .or(z.literal("").transform(() => undefined))
     .optional();
+
+// Accept http(s) URLs OR app-relative paths like "/api/..."
+const asHref = z
+  .string()
+  .transform((v) => (v === "" ? undefined : v))
+  .refine(
+    (v) =>
+      v === undefined ||
+      /^https?:\/\//i.test(v) || // absolute
+      v.startsWith("/"),         // app-relative
+    { message: "Must be http(s) URL or app-relative path" }
+  )
+  .optional();
 
 // Simple 24h "HH:MM" guard (keep loose to allow “11:00”, “9:30” if you want)
 export const TimeString = z
@@ -60,7 +72,7 @@ export const MenuItemSchema = z.object({
     price: asNumber,
     // Allow strict known categories OR gracefully accept unknown future ones
     category: CategoryEnum.or(z.string()),
-    photo: asUrl,
+    photo: asHref,
     notes: NoteEnum.or(z.string()).optional(),
     sortOrder: z.number().optional(),
     available: z.boolean().default(true),
@@ -91,7 +103,7 @@ export const AnnouncementSchema = z.object({
     id: z.string(),
     title: z.string().min(1),
     details: z.string().optional(),
-    media: asUrl, // image/video URL if provided
+    media: asHref, // image/video URL if provided
     sort: z.number().optional(),
     active: z.boolean().default(true),
 });
@@ -115,7 +127,7 @@ export const PillarListSchema = z.array(PillarSchema);
 export const PlatformSchema = z.object({
     id: z.string(),
     name: z.string().min(1, "Name is required"),
-    url: z.url("Must be a valid URL").optional(),
+    url: asUrl,
     priority: z.number().optional(),
 });
 export type TPlatform = z.infer<typeof PlatformSchema>;

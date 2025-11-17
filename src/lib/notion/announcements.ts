@@ -10,7 +10,7 @@ import {
     getTitle,
     getRichText,
     getNumber,
-    firstFileUrl,
+    notionFileSrc,
     getCheckbox,
 } from "./parse";
 
@@ -30,7 +30,7 @@ const rawToAnn = (p: NotionPage): Announcement => {
         id: p.id,
         title: getTitle(props, "Title") || "Untitled",
         details: getRichText(props, "Details") || undefined,
-        media: firstFileUrl(props, "Media"),
+        media: notionFileSrc({ pageId: p.id, prop: "Media" }) || undefined,
         sort: getNumber(props, "Sort"),
         active: getCheckbox(props, "Active") ?? true,
     };

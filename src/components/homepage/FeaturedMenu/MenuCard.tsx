@@ -23,23 +23,26 @@ export default function MenuCard({
     tags,
 }: MenuCardProps) {
     return (
-        <article className="group overflow-hidden rounded-xl border border-charcoal/10 bg-cream shadow-sm transition-all hover:shadow-lg flex flex-col h-96">
+        <a
+            href="/menu"
+            className="group overflow-hidden rounded-xl border border-charcoal/10 bg-cream shadow-sm transition-all hover:shadow-lg flex flex-col h-96"
+        >
             <div className="relative">
                 {/* Image with subtle gradient for text legibility */}
                 {photo ? (
-                    <div className="relative h-44 w-full">
+                    <div className="w-full grid place-items-center bg-cream border-b border-charcoal/10">
                         <Image
                             src={photo}
                             alt={name}
                             width={640}
                             height={360}
-                            className="h-full w-full object-cover"
+                            className="max-h-44 max-w-full object-contain"
                             sizes="(max-width: 768px) 100vw, 33vw"
                         />
-                        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/15 via-black/0 to-transparent" />
+                        <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/15 via-transparent to-transparent" />
                     </div>
                 ) : (
-                    <div className="h-44 w-full grid place-items-center bg-clean text-sm text-charcoal/60 border-b border-charcoal/10">
+                    <div className="w-full grid place-items-center bg-clean text-sm text-charcoal/60 border-b border-charcoal/10 py-6">
                         Photo coming soon...
                     </div>
                 )}
@@ -94,6 +97,6 @@ export default function MenuCard({
 
             {/* Bottom accent hover */}
             <div className="h-1 bg-orange/60 origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100" />
-        </article>
+        </a>
     );
 }

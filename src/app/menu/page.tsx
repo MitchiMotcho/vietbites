@@ -34,7 +34,6 @@ export default async function MenuPage() {
             p.name === "DoorDash" ||
             p.name === "UberEats"
     );
-    console.log("Platforms:", platforms);
 
     if (
         !banhMi.length ||
