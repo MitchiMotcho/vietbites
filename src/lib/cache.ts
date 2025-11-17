@@ -20,8 +20,10 @@ export function cached<TArgs extends unknown[], TReturn>(
 }
 
 /** Trigger a revalidation for anything cached with a matching tag. */
-export async function revalidateByTag(tag: string) {
-    revalidateTag(tag);
+export async function revalidateByTag(tag: string, profile: string | Record<string, unknown> = "default") {
+    // Ensure we pass a string to revalidateTag; if profile is an object, stringify it.
+    const profileId = typeof profile === "string" ? profile : JSON.stringify(profile);
+    revalidateTag(profileId, tag);
 }
 
 export const tags = {
