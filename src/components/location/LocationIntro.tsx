@@ -170,7 +170,7 @@ export default function LocationIntro({ hours }: { hours: OpeningHour[] }) {
                 </div>
 
                 <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-[1fr_auto] sm:items-center">
-                    <p className="text-sm text-charcoal/80 max-w-3/4 mb-2 sm:mb-0">
+                    <p className="text-sm text-charcoal/80 sm:max-w-3/4 mb-2 sm:mb-0 text-center sm:text-left">
                         Follow us on Instagram for new specials and
                         behind-the-scenes.
                     </p>

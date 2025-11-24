@@ -11,10 +11,8 @@ type MenuSectionLink = {
 
 export default function MenuMobileNav({
     sections,
-    id
 }: {
     sections: MenuSectionLink[];
-    id: string;
 }) {
     const [open, setOpen] = useState(false);
     const [activeId, setActiveId] = useState<string | null>(
@@ -79,7 +77,7 @@ export default function MenuMobileNav({
 
     return (
         <div
-            id={id}
+            id={"menu"}
             ref={containerRef}
             className={[
                 "sm:hidden fixed inset-x-0 bottom-0 z-30 bg-cream/95 backdrop-blur border-t border-charcoal/10 transition-shadow",

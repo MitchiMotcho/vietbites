@@ -51,6 +51,7 @@ export default function OpenToday({
                 <span className="font-semibold">Closed</span>
             ) : (
                 <span className="font-semibold">
+                    <br className="sm:hidden" />
                     {to12Hour(today.open)} - {to12Hour(today.close)}
                 </span>
             )}{" "}

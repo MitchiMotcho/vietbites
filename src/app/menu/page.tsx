@@ -1,4 +1,6 @@
 import "server-only";
+import type { Metadata } from "next";
+import Script from "next/script";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -16,6 +18,22 @@ import SectionHeader from "@/components/common/SectionHeader";
 import { getPlatforms } from "@/lib/notion/platforms";
 import type { Platform } from "@/lib/notion/platforms";
 import Platforms from "@/components/common/Platforms";
+
+export const metadata: Metadata = {
+    title: "Menu",
+    description:
+        "Browse the VietBites menu with Vietnamese bánh mì, house specials, chè sweet soup, specialty drinks, and toppings in Downtown Toronto.",
+    openGraph: {
+        title: "VietBites Menu In Downtown Toronto",
+        description:
+            "See the full VietBites menu including Vietnamese bánh mì, house specials, chè sweet soup, drinks, and toppings available in Downtown Toronto.",
+    },
+    twitter: {
+        title: "VietBites Menu In Downtown Toronto",
+        description:
+            "Explore the VietBites menu with Vietnamese bánh mì, chè sweet soup, drinks, and toppings served in Downtown Toronto.",
+    },
+};
 
 export default async function MenuPage() {
     const items = await getMenu();
@@ -55,9 +73,66 @@ export default async function MenuPage() {
 
     return (
         <main className="bg-cream">
+            {/* Menu JSON-LD schema */}
+            <Script id="ld-json-menu" type="application/ld+json">
+                {JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "Menu",
+                    name: "VietBites Menu",
+                    hasMenuSection: [
+                        {
+                            "@type": "MenuSection",
+                            name: "Bánh Mì",
+                            hasMenuItem: banhMi.slice(0, 5).map((item) => ({
+                                "@type": "MenuItem",
+                                name: item.name,
+                                description: item.description,
+                            })),
+                        },
+                        {
+                            "@type": "MenuSection",
+                            name: "Chè / Sweet Soup",
+                            hasMenuItem: sweetSoup.slice(0, 5).map((item) => ({
+                                "@type": "MenuItem",
+                                name: item.name,
+                                description: item.description,
+                            })),
+                        },
+                        {
+                            "@type": "MenuSection",
+                            name: "Drinks",
+                            hasMenuItem: drinks.slice(0, 5).map((item) => ({
+                                "@type": "MenuItem",
+                                name: item.name,
+                                description: item.description,
+                            })),
+                        },
+                        {
+                            "@type": "MenuSection",
+                            name: "House Specials",
+                            hasMenuItem: houseSpecial
+                                .slice(0, 5)
+                                .map((item) => ({
+                                    "@type": "MenuItem",
+                                    name: item.name,
+                                    description: item.description,
+                                })),
+                        },
+                        {
+                            "@type": "MenuSection",
+                            name: "Combo Meals",
+                            hasMenuItem: combo.slice(0, 5).map((item) => ({
+                                "@type": "MenuItem",
+                                name: item.name,
+                                description: item.description,
+                            })),
+                        },
+                    ],
+                })}
+            </Script>
+
             {/* Mobile section navigator */}
             <MenuMobileNav
-                id="menu"
                 sections={[
                     { id: "menu-banhmi", label: "Bánh Mì" },
                     { id: "menu-house", label: "House Specials" },
@@ -66,7 +141,6 @@ export default async function MenuPage() {
                     { id: "menu-combo", label: "Combo Meals" },
                 ]}
             />
-
             <section className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8 pb-10 pt-3 rounded-lg section-cream space-y-8">
                 <SectionHeader
                     title="OUR MENU"
