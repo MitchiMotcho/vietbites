@@ -5,6 +5,7 @@ import Link from "next/link";
 import ToppingsSection from "@/components/menu/ToppingSection";
 import MenuListSection from "@/components/menu/MenuListSection";
 import DrinksGridSection from "@/components/menu/DrinkGridSection";
+import MenuMobileNav from "@/components/menu/MenuMobileNav";
 
 import { getMenu } from "@/lib/notion/menu";
 import { groupByCategory, splitToppings } from "@/lib/menu/helpers";
@@ -30,9 +31,7 @@ export default async function MenuPage() {
 
     const allPlatforms: Platform[] = await getPlatforms();
     const platforms = allPlatforms.filter(
-        (p) =>
-            p.name === "DoorDash" ||
-            p.name === "UberEats"
+        (p) => p.name === "DoorDash" || p.name === "UberEats"
     );
 
     if (
@@ -55,15 +54,33 @@ export default async function MenuPage() {
     }
 
     return (
-        <main className="max-w-7xl bg-cream">
-            <section className="mx-auto px-4 md:px-6 lg:px-8 pb-10 pt-3 rounded-lg section-cream space-y-8">
+        <main className="bg-cream">
+            {/* Mobile section navigator */}
+            <MenuMobileNav
+                id="menu"
+                sections={[
+                    { id: "menu-banhmi", label: "Bánh Mì" },
+                    { id: "menu-house", label: "House Specials" },
+                    { id: "menu-sweetsoup", label: "Chè / Sweet Soup" },
+                    { id: "menu-drinks", label: "Drinks" },
+                    { id: "menu-combo", label: "Combo Meals" },
+                ]}
+            />
+
+            <section className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8 pb-10 pt-3 rounded-lg section-cream space-y-8">
                 <SectionHeader
                     title="OUR MENU"
                     subtitle="From traditional Vietnamese Bánh Mì to delightful Sweet Soups and refreshing Drinks, explore our diverse menu crafted to satisfy your cravings."
                 />
-                <Platforms items={platforms} variant="full" align="center"/>
-                <section className="grid gap-6 xl:grid-cols-2 h-full items-start">
-                    <div className="h-full flex flex-col">
+
+                <Platforms items={platforms} variant="full" align="center" />
+
+                {/* Bánh mì + house specials */}
+                <section className="grid gap-6 xl:grid-cols-2 h-full items-start pt-4">
+                    <section
+                        id="menu-banhmi"
+                        className="h-full flex flex-col scroll-mt-24"
+                    >
                         <MenuListSection
                             title="BÁNH MÌ"
                             items={banhMi}
@@ -77,8 +94,12 @@ export default async function MenuPage() {
                             variant="banhmi"
                             frameClass="left-frame"
                         />
-                    </div>
-                    <div className="h-full flex">
+                    </section>
+
+                    <section
+                        id="menu-house"
+                        className="h-full flex scroll-mt-24"
+                    >
                         <MenuListSection
                             title="HOUSE SPECIALS"
                             items={houseSpecial}
@@ -115,11 +136,15 @@ export default async function MenuPage() {
                                 </>
                             }
                         />
-                    </div>
+                    </section>
                 </section>
 
-                <section className="w-full">
-                    <div className="h-full flex">
+                {/* Sweet soup */}
+                <section className="w-full pt-4">
+                    <section
+                        id="menu-sweetsoup"
+                        className="h-full flex scroll-mt-24"
+                    >
                         <MenuListSection
                             title="CHÈ / SWEET SOUP"
                             items={sweetSoup}
@@ -129,23 +154,25 @@ export default async function MenuPage() {
                             splitThreshold={6}
                             extraTopPlacement="span"
                             extraTop={
-                                <>
-                                    <p className="py-4">
-                                        A traditional Vietnamese sweet dessert
-                                        soup made with ingredients like beans,
-                                        coconut milk, tapioca, jellies and
-                                        seasonal fruits. Served chilled or warm,
-                                        it&apos;s a refreshing and colorful
-                                        treat enjoyed year-round.
-                                    </p>
-                                </>
+                                <p className="py-4">
+                                    A traditional Vietnamese sweet dessert soup
+                                    made with ingredients like beans, coconut
+                                    milk, tapioca, jellies and seasonal fruits.
+                                    Served chilled or warm, it&apos;s a
+                                    refreshing and colorful treat enjoyed
+                                    year-round.
+                                </p>
                             }
                         />
-                    </div>
+                    </section>
                 </section>
 
-                <section className="grid gap-6 xl:grid-cols-2 h-full items-start">
-                    <div className="h-full flex flex-col">
+                {/* Drinks + combos */}
+                <section className="grid gap-6 xl:grid-cols-2 h-full items-start pt-4">
+                    <section
+                        id="menu-drinks"
+                        className="h-full flex flex-col scroll-mt-24"
+                    >
                         <DrinksGridSection
                             items={drinks}
                             frameClass="center-frame"
@@ -156,8 +183,12 @@ export default async function MenuPage() {
                             variant="drinks"
                             frameClass="left-frame"
                         />
-                    </div>
-                    <div className="h-full flex">
+                    </section>
+
+                    <section
+                        id="menu-combo"
+                        className="h-full flex scroll-mt-24"
+                    >
                         <MenuListSection
                             title="COMBO MEALS"
                             items={combo}
@@ -173,7 +204,7 @@ export default async function MenuPage() {
                                 </p>
                             }
                         />
-                    </div>
+                    </section>
                 </section>
             </section>
         </main>

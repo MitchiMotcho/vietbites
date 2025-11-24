@@ -61,7 +61,7 @@ export default function MenuItem({
                             {item.vietName}
                         </p>
                     ) : null}
-                    <DietaryTags item={item} />
+                    <DietaryTags item={item} description={item.description?.split("/")[1]?.trim()} />
                     {/* description intentionally not rendered to match your style */}
                 </div>
 

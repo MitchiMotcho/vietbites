@@ -1,6 +1,6 @@
 import type { MenuItem } from "@/lib/notion/menu";
 
-export default function DietaryTags({ item }: { item: MenuItem }) {
+export default function DietaryTags({ item, description }: { item: MenuItem; description?: string }) {
     if (
         (!item.description || item.description.trim() === "") &&
         !item.tags?.length
@@ -9,7 +9,7 @@ export default function DietaryTags({ item }: { item: MenuItem }) {
     if (item.notes?.toLowerCase().includes("coming soon")) return null;
     return (
         <div className="mt-1 text-xs text-charcoal/70">
-            {item.description && <p>{item.description}</p>}
+            {description ? <p>{description}</p> : item.description ? <p>{item.description}</p> : null}
             {!!item.tags?.length && (
                 <p className="mt-1">
                     {item.tags.map((t) => (
