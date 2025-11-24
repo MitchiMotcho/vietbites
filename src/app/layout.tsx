@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -24,8 +25,25 @@ const defaultUrl = process.env.NEXT_PUBLIC_BASE_URL
 
 export const metadata: Metadata = {
     metadataBase: new URL(defaultUrl),
-    title: "Viet Bites - Canada",
-    description: "Authentic Vietnamese cuisine in Canada",
+    title: {
+        default: "VietBites Toronto Vietnamese Desserts And Banh Mi",
+        template: "%s | VietBites Toronto",
+    },
+    description:
+        "VietBites is a Vietnamese bakery and cafe in Downtown Toronto serving bánh mì, chè sweet soups, drinks, and desserts inspired by Hải Phòng.",
+    openGraph: {
+        siteName: "VietBites",
+        type: "website",
+        images: ["/opengraph-image.png"],
+    },
+    twitter: {
+        card: "summary_large_image",
+        images: ["/twitter-image.png"],
+    },
+    robots: {
+        index: true,
+        follow: true,
+    },
 };
 
 export default function RootLayout({
@@ -34,13 +52,38 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en">
+        <html data-scroll-behavior="smooth" lang="en">
             <body
                 className={`${beVietnam.variable} ${sourceSans.variable} antialiased`}
             >
                 <Navbar />
                 <main>{children}</main>
                 <Footer />
+
+                <Script id="ld-json-localbusiness" type="application/ld+json">
+                    {JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "Restaurant",
+                        name: "VietBites",
+                        image: `${defaultUrl}/opengraph-image.png`,
+                        url: defaultUrl,
+                        telephone:
+                            process.env.NEXT_PUBLIC_VIETBITES_PHONE ||
+                            undefined,
+                        address: {
+                            "@type": "PostalAddress",
+                            streetAddress:
+                                process.env.NEXT_PUBLIC_VIETBITES_LOCATION ||
+                                "",
+                            addressLocality: "Toronto",
+                            addressRegion: "ON",
+                            postalCode: "M5A",
+                            addressCountry: "CA",
+                        },
+                        servesCuisine: ["Vietnamese"],
+                        priceRange: "$",
+                    })}
+                </Script>
             </body>
         </html>
     );

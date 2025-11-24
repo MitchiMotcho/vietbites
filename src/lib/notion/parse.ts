@@ -34,6 +34,26 @@ export function getRichText(
     return undefined;
 }
 
+export function getUrl(props: any, key: string): string | undefined {
+    const prop = props?.[key];
+    if (!prop) return undefined;
+
+    // Native Notion URL property
+    if (prop.type === "url") return prop.url || undefined;
+
+    // Graceful fallback: if someone stored it as rich_text/title, try to read it
+    if (prop.type === "rich_text") {
+        const txt = (prop.rich_text || []).map((t: any) => t.plain_text).join("").trim();
+        return txt || undefined;
+    }
+    if (prop.type === "title") {
+        const txt = (prop.title || []).map((t: any) => t.plain_text).join("").trim();
+        return txt || undefined;
+    }
+
+    return undefined;
+}
+
 export function getNumber(
     props: PageObjectResponse["properties"],
     key: string
@@ -71,28 +91,22 @@ export function getMultiSelectNames(
     return undefined;
 }
 
-/* -------------------- Files → first URL -------------------- */
+/* -------------------- Files → API Route -------------------- */
 // Minimal structural type for Notion files (works across SDK versions)
 type NotionFile =
     | { type: "file"; file: { url: string } }
     | { type: "external"; external: { url: string } };
 
-export function firstFileUrl(
-    props: PageObjectResponse["properties"],
-    key: string
-): string | undefined {
-    const prop = props[key];
-    if (prop?.type !== "files") return undefined;
-
-    const f = prop.files?.[0] as NotionFile | undefined;
-    if (!f) return undefined;
-
-    return f.type === "file"
-        ? f.file.url
-        : f.type === "external"
-        ? f.external.url
-        : undefined;
+// Call this API route to get a cached/rotating URL for Notion-hosted files
+// Prevents 403 errors from expired signed URLs in the client
+export function notionFileSrc(params: { pageId: string; prop?: string; i?: number; ttlMins?: number }) {
+    const { pageId, prop = "Image", i = 0, ttlMins = 1 } = params;
+    // cache-buster that changes every ttlMins minutes so the optimizer drops stale 403s
+    const v = Math.floor(Date.now() / (ttlMins * 60_000));
+    const qs = new URLSearchParams({ pageId, prop, i: String(i), v: String(v) });
+    return `/api/notion-file?${qs.toString()}`;
 }
+
 
 /* -------------------- Paginated results shape -------------------- */
 export type NotionList<T = NotionPage> = {

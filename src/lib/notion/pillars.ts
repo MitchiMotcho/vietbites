@@ -12,7 +12,12 @@ import {
     getNumber,
 } from "./parse";
 
-export type Pillar = TPillar;
+export type Pillar = {
+    id: string,
+    title: string,
+    description?: string,
+    priority?: number,
+};
 
 const rawToPillar = (p: NotionPage): Pillar => {
     if (!isFullPage(p)) {

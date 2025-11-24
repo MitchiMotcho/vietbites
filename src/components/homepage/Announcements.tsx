@@ -24,7 +24,7 @@ export default async function Announcements({
                 <div className="max-w-4xl mx-auto">
                     {/* Featured */}
                     <article className="mt-4 overflow-hidden rounded-2xl bg-clean ring-1 ring-charcoal/10">
-                        <div className="relative aspect-[16/9] w-full">
+                        <div className="relative aspect-video w-full">
                             {featured.media && (
                                 <Image
                                     src={featured.media}

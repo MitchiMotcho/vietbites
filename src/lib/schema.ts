@@ -39,10 +39,22 @@ const asNumber = z.preprocess(
 
 // Accept http(s) URL strings; allow undefined/empty
 const asUrl = z
-    .string()
     .url()
     .or(z.literal("").transform(() => undefined))
     .optional();
+
+// Accept http(s) URLs OR app-relative paths like "/api/..."
+const asHref = z
+  .string()
+  .transform((v) => (v === "" ? undefined : v))
+  .refine(
+    (v) =>
+      v === undefined ||
+      /^https?:\/\//i.test(v) || // absolute
+      v.startsWith("/"),         // app-relative
+    { message: "Must be http(s) URL or app-relative path" }
+  )
+  .optional();
 
 // Simple 24h "HH:MM" guard (keep loose to allow “11:00”, “9:30” if you want)
 export const TimeString = z
@@ -60,7 +72,7 @@ export const MenuItemSchema = z.object({
     price: asNumber,
     // Allow strict known categories OR gracefully accept unknown future ones
     category: CategoryEnum.or(z.string()),
-    photo: asUrl,
+    photo: asHref,
     notes: NoteEnum.or(z.string()).optional(),
     sortOrder: z.number().optional(),
     available: z.boolean().default(true),
@@ -91,7 +103,7 @@ export const AnnouncementSchema = z.object({
     id: z.string(),
     title: z.string().min(1),
     details: z.string().optional(),
-    media: asUrl, // image/video URL if provided
+    media: asHref, // image/video URL if provided
     sort: z.number().optional(),
     active: z.boolean().default(true),
 });
@@ -104,11 +116,23 @@ export const PillarSchema = z.object({
     id: z.string(),
     title: z.string().min(1, "Title is required"),
     description: z.string().optional(),
+    label: z.string().optional(),
     priority: z.number().optional(),
 });
 export type TPillar = z.infer<typeof PillarSchema>;
 
 export const PillarListSchema = z.array(PillarSchema);
+
+/* -------------------------------- Platforms -------------------------------- */
+export const PlatformSchema = z.object({
+    id: z.string(),
+    name: z.string().min(1, "Name is required"),
+    url: asUrl,
+    priority: z.number().optional(),
+});
+export type TPlatform = z.infer<typeof PlatformSchema>;
+
+export const PlatformListSchema = z.array(PlatformSchema);
 
 /* ----------------------------- Batch validators ----------------------------- */
 
@@ -148,6 +172,15 @@ export function assertPillars(items: unknown): TPillar[] {
     if (!parsed.success) {
         console.error("Pillars validation errors:", parsed.error.flatten());
         throw new Error("Pillars data failed validation");
+    }
+    return parsed.data;
+}
+
+export function assertPlatforms(items: unknown): TPlatform[] {
+    const parsed = PlatformListSchema.safeParse(items);
+    if (!parsed.success) {
+        console.error("Platforms validation errors:", parsed.error.flatten());
+        throw new Error("Platforms data failed validation");
     }
     return parsed.data;
 }

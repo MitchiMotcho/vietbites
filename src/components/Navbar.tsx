@@ -10,7 +10,7 @@ const navLinks = [
     { href: "/", label: "Home" },
     { href: "/story", label: "Our Story" },
     { href: "/menu", label: "Menu" },
-    { href: "/location", label: "Location" },
+    { href: "/location", label: "Location/Hours" },
 ];
 
 export default function Navbar() {
@@ -18,7 +18,7 @@ export default function Navbar() {
     const pathname = usePathname();
 
     return (
-        <header className="sticky top-0 z-50 bg-clean/95 backdrop-blur supports-[backdrop-filter]:bg-clean/80 border-b border-charcoal/10 shadow-sm">
+        <header className="sticky top-0 z-50 bg-clean/95 backdrop-blur supports-backdrop-filter:bg-clean/80 border-b border-charcoal/10 shadow-sm">
             <div className="h-1 bg-orange/80"></div>
 
             <nav className="mx-auto max-w-[1440px] px-4 py-3 flex items-center justify-between">
@@ -50,7 +50,7 @@ export default function Navbar() {
                                         active
                                             ? "text-orange font-bold"
                                             : "text-charcoal/90 hover:text-orange"
-                                    } before:absolute before:-bottom-1 before:left-0 before:h-[2px] before:w-0 before:bg-orange before:transition-all before:duration-300 hover:before:w-full`}
+                                    } before:absolute before:-bottom-1 before:left-0 before:h-0.5 before:w-0 before:bg-orange before:transition-all before:duration-300 hover:before:w-full`}
                                 >
                                     {l.label}
                                 </Link>
@@ -60,7 +60,7 @@ export default function Navbar() {
                     <li>
                         <Link
                             href="/contact"
-                            className="inline-flex items-center rounded-full bg-orange text-clean px-4 py-2 text-sm font-semibold shadow transition duration-200 hover:bg-[var(--orange-hover)] active:bg-[var(--orange-active)] active:scale-[.98]"
+                            className="inline-flex items-center rounded-full bg-orange text-clean px-4 py-2 text-sm font-semibold shadow transition duration-200 hover:bg-orange-hover active:bg-orange-active active:scale-[.98]"
                         >
                             Get in touch
                         </Link>

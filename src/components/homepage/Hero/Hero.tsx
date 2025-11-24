@@ -81,7 +81,7 @@ export default async function Hero({
                     <div className="mt-8 w-3/4 mx-auto sm:w-full flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
                         <Link
                             href="/menu"
-                            className="text-center rounded-lg bg-orange text-clean px-5 py-3 font-semibold shadow transition duration-200 hover:bg-[var(--orange-hover)] active:bg-[var(--orange-active)] active:scale-[.98]"
+                            className="text-center rounded-lg bg-orange text-clean px-5 py-3 font-semibold shadow transition duration-200 hover:bg-orange-hover active:bg-orange-active active:scale-[.98]"
                         >
                             View Menu
                         </Link>
@@ -105,49 +105,22 @@ export default async function Hero({
                     </div>
                 </div>
 
-                <div className="relative mx-auto w-full max-w-sm">
-                    <div className="rounded-xl bg-clean p-6 shadow-sm ring-1 ring-charcoal/10">
-                        <div className="flex items-center gap-3">
-                            <Image
-                                src="/images/logos/LogoCircle.png"
-                                alt="VietBites mark"
-                                width={40}
-                                height={40}
-                                className="h-10 w-10 rounded-full"
-                            />
-                            <div>
-                                <p className="font-heading font-bold text-lg tracking-wide text-orange">
-                                    VIETBITES
-                                </p>
-                                <p className="text-xs text-charcoal/70">
-                                    Desserts &amp; Bánh mì
-                                </p>
-                            </div>
-                        </div>
-
-                        <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-[1fr_auto] sm:items-center">
-                            <p className="text-sm text-charcoal/80">
-                                Follow us on Instagram for new specials and
-                                behind-the-scenes.
-                            </p>
-                            <a
-                                href="https://www.instagram.com/vietbites.to"
-                                className="inline-flex items-center justify-center rounded-md bg-orange px-4 py-2 text-sm font-semibold text-clean shadow hover:bg-[var(--orange-hover)] active:bg-[var(--orange-active)]"
-                                target="_blank"
-                                rel="noreferrer noopener"
-                            >
-                                @vietbites.to
-                            </a>
-                        </div>
-
-                        {/* Instagram QR code */}
-                        <QRCode />
+                <div className="relative mx-auto w-full max-w-md ">
+                    <div className="mt-6 group rounded-lg overflow-hidden bg-cream ring-2 ring-charcoal/10">
+                        <Image
+                            src="/images/banners/VerticalArt.jpg"
+                            alt="VietBites poster with 'Bite to Bright, Spoon to Smile'"
+                            width={600}
+                            height={800}
+                            className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                            priority
+                        />
                     </div>
                 </div>
             </div>
 
             {/* Layout safety layer to prevent overlaps on small screens */}
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 top-0 z-0 md:hidden bg-gradient-to-b from-transparent via-transparent to-cream/10" />
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 top-0 z-0 md:hidden bg-linear-to-b from-transparent via-transparent to-cream/10" />
         </section>
     );
 }

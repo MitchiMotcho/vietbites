@@ -7,6 +7,7 @@ export const DB = {
     OPENING: process.env.NOTION_DB_OPENING!,
     ANNOUNCEMENTS: process.env.NOTION_DB_ANNOUNCEMENTS!,
     PILLARS: process.env.NOTION_DB_PILLARS!,
+    PLATFORMS: process.env.NOTION_DB_PLATFORMS!,
 };
 
 for (const [k, v] of Object.entries(DB)) {

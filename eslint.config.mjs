@@ -1,25 +1,46 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
+import nextCoreWebVitals from "eslint-config-next/core-web-vitals";
+// import tseslint from "typescript-eslint";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const config = [
+    // Ignore build artifacts
+    {
+        ignores: [
+            "node_modules/**",
+            ".next/**",
+            "out/**",
+            "build/**",
+            "next-env.d.ts",
+        ],
+    },
 
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
+    // Next.js rules (core web vitals)
+    ...nextCoreWebVitals,
 
-const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
-  {
-    ignores: [
-      "node_modules/**",
-      ".next/**",
-      "out/**",
-      "build/**",
-      "next-env.d.ts",
-    ],
-  },
+    // Optional: TypeScript rules with type-checking
+    // ...tseslint.configs.recommendedTypeChecked.map((cfg) => ({
+    //     ...cfg,
+    //     languageOptions: {
+    //         ...cfg.languageOptions,
+    //         parser: tseslint.parser,
+    //         parserOptions: {
+    //             ...cfg.languageOptions?.parserOptions,
+    //             // Either enable the project service (auto-detect tsconfigs)...
+    //             projectService: true,
+    //             // ...or explicitly set your project(s):
+    //             // project: ['./tsconfig.json'],
+    //             tsconfigRootDir: import.meta.dirname,
+    //         },
+    //     },
+    // })),
+
+    // Your project overrides
+    {
+        rules: {
+            "@next/next/no-img-element": "off",
+            "react/jsx-key": "warn",
+        },
+    },
 ];
 
-export default eslintConfig;
+
+export default config;

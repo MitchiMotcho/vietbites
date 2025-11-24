@@ -1,8 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
-import { FaInstagram, FaMapMarkerAlt } from "react-icons/fa";
 
-export default function Footer() {
+import Platforms from "./common/Platforms";
+import type { Platform } from "@/lib/notion/platforms";
+import { getPlatforms } from "@/lib/notion/platforms";
+
+export default async function Footer() {
+    const allPlatforms: Platform[] = await getPlatforms();
+
     return (
         <footer className="mt-16 mb-2 bg-clean border-t border-charcoal/10">
             {/* Slim brand accent */}
@@ -16,6 +21,7 @@ export default function Footer() {
                         alt="VietBites"
                         width={500}
                         height={200}
+                        priority
                         className="rounded-md h-16 w-auto"
                     />
                     <div className="mt-3 flex flex-col gap-3 w-1/2 sm:w-1/3 md:flex-row md:w-full md:gap-4">
@@ -39,11 +45,16 @@ export default function Footer() {
                     <p className="mb-2 font-semibold text-charcoal font-heading">
                         Visit us
                     </p>
-                    <address className="not-italic text-charcoal/90 text-center md:text-left">
-                        246 Gerrard St E
-                        <br />
-                        Toronto, ON, M5A 2G2
-                    </address>
+                    <a
+                        href="https://maps.app.goo.gl/Fq7RaTVgy5xjsM9C6"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline text-charcoal/90 hover:text-orange transition-colors ease-in-out duration-300"
+                    >
+                        <address className="not-italic text-center md:text-left">
+                            {process.env.NEXT_PUBLIC_VIETBITES_LOCATION}
+                        </address>
+                    </a>
                     <p className="mt-2 text-charcoal/80 text-center md:text-left">
                         Open Sat to Thurs •{" "}
                         <Link
@@ -55,20 +66,7 @@ export default function Footer() {
                     </p>
 
                     <div className="mt-3 flex gap-3 justify-center md:justify-start">
-                        <Link
-                            href="/location"
-                            className="flex items-center justify-center w-10 h-10 rounded-full bg-orange text-clean shadow transition ease-in-out duration-300 hover:bg-orange-hover active:bg-orange-active active:scale-[.95]"
-                        >
-                            <FaMapMarkerAlt size={18} />
-                        </Link>
-                        <a
-                            href="https://www.instagram.com/vietbites.to"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-center w-10 h-10 rounded-full border border-charcoal/15 text-charcoal shadow-sm button-outline"
-                        >
-                            <FaInstagram size={18} />
-                        </a>
+                        <Platforms items={allPlatforms} variant="compact" rowSize={4} tone="subtle" />
                     </div>
                 </div>
             </div>

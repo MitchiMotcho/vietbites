@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
     return {
-        name: "Viet Bites - Canada",
+        name: "VietBites - Canada",
         short_name: "VietBites",
         description: "Authentic Vietnamese cuisine in Canada",
         start_url: "/",
