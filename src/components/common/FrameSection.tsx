@@ -6,6 +6,7 @@ type FrameSectionProps = PropsWithChildren<{
     className?: string;
     frameClass?: "center-frame" | "left-frame" | "right-frame";
     id?: string;
+    reveal?: "initial" | true;
 }>;
 
 export default function FrameSection({
@@ -13,11 +14,13 @@ export default function FrameSection({
     className,
     frameClass,
     id,
+    reveal = true,
     children,
 }: FrameSectionProps) {
     return (
         <section
             id={id}
+            data-reveal={reveal === "initial" ? "initial" : ""}
             className={clsx(
                 "bg-cream frame-sharp",
                 frameClass,
