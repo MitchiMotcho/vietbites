@@ -1,65 +1,3 @@
-/* ----- Curved layout positions for the 3 floating images ----- */
-
-/* Left: bottom-left corner, slightly rotated */
-.floatLeft {
-    left: 10%;
-    bottom: clamp(0.5rem, 2.5vw, 1rem);
-}
-
-/* Center: centered horizontally, a touch higher to form the arc */
-.floatCenter {
-    left: 43%;
-    transform: translateX(-50%) rotate(-3deg);
-    bottom: clamp(2rem, 5vw, 1rem);
-}
-
-/* Right: bottom-right corner mirroring the left */
-.floatRight {
-    right: 10%;
-    bottom: clamp(0.5rem, 2.5vw, 1rem);
-    transform: rotate(-4deg);
-}
-
-/* Slight inward offset on very wide screens so they don't hug the edges */
-@media (min-width: 1536px) {
-    .floatLeft {
-        left: 8%;
-    }
-    .floatRight {
-        right: 8%;
-    }
-}
-
-/* Responsive: bring images closer and scale down on large/medium */
-@media (max-width: 1280px) {
-    .floatLeft {
-        left: 6%;
-        bottom: clamp(0.5rem, 2vw, 1rem);
-    }
-    .floatCenter {
-        left: 40%;
-        bottom: clamp(1.75rem, 4.5vw, 1rem);
-    }
-    .floatRight {
-        left: 70%;
-        bottom: clamp(0.5rem, 2vw, 1rem);
-    }
-}
-@media (max-width: 1024px) {
-    .floatLeft {
-        left: 6%;
-        bottom: clamp(0.5rem, 3vw, 0.75rem);
-    }
-    .floatCenter {
-        left: 40%;
-        bottom: clamp(1.5rem, 4vw, 0.75rem);
-    }
-    .floatRight {
-        left: 70%;
-        bottom: clamp(0.5rem, 3vw, 0.75rem);
-    }
-}
-
 /* ----- Gentle float animations (very subtle for a professional feel) ----- */
 @keyframes float1 {
     0% {
@@ -120,17 +58,5 @@
     .floatAnim2,
     .floatAnim3 {
         animation: none !important;
-    }
-}
-
-/* ----- Safety: never overlap main content on small screens ----- */
-/* We already hide some images with `hidden md/lg:block` in TSX.
-   This adds a bit of guard on tablet sizes by nudging them inward. */
-@media (max-width: 900px) {
-    .floatLeft {
-        left: 5%;
-    }
-    .floatRight {
-        right: 5%;
     }
 }

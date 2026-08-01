@@ -12,49 +12,10 @@ export default async function Hero({
     return (
         <section
             id="hero"
+            data-reveal="hero"
             className="frame-clipped overflow-hidden rounded-2xl bg-cream px-8 py-16 
-             md:px-16 md:py-24 lg:pt-14 lg:pb-32 min-h-150 md:min-h-175 lg:min-h-200"
+             min-h-150 md:min-h-175 md:px-16 md:py-24 lg:min-h-0 lg:py-14"
         >
-            {/* Floating product images */}
-            <div
-                aria-hidden
-                className="pointer-events-none absolute inset-0 z-0"
-            >
-                <div className="hidden md:block absolute floatLeft opacity-95 floatAnim1">
-                    <Image
-                        src="/images/food/icon1.png"
-                        alt="Food Icons - Rice Paper Salad"
-                        width={220}
-                        height={150}
-                        style={{ height: "auto", width: "200px" }}
-                        className="h-auto aspect-auto w-50 lg:w-55 object-cover -rotate-20"
-                        priority
-                    />
-                </div>
-                <div className="hidden lg:block absolute floatCenter opacity-95 floatAnim2">
-                    <Image
-                        src="/images/food/icon3.png"
-                        alt="Food Icons - Banh Mi"
-                        width={200}
-                        height={260}
-                        style={{ height: "auto", width: "180px" }}
-                        className="h-auto w-45 xl:w-50 object-cover"
-                        priority
-                    />
-                </div>
-                <div className="hidden md:block absolute floatRight opacity-95 floatAnim3">
-                    <Image
-                        src="/images/food/icon2.png"
-                        alt="Food Icons - Snack"
-                        width={210}
-                        height={210}
-                        style={{ height: "auto" }}
-                        className="h-auto w-45 xl:w-50 object-cover"
-                        priority
-                    />
-                </div>
-            </div>
-
             <div className="relative z-10 grid items-center gap-10 md:gap-14 lg:grid-cols-[1.2fr_.8fr]">
                 <div>
                     <p className="mb-2 inline-block rounded-full bg-orange/10 px-3 py-1 text-xs font-semibold text-orange">
@@ -82,33 +43,70 @@ export default async function Hero({
                         <OpenToday hours={hours} />
                     </div>
 
-                    <div className="mt-4 w-3/4 mx-auto sm:w-full flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
-                        <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
-                            <Link
-                                href="/menu"
-                                className="text-center rounded-lg bg-orange text-clean px-5 py-3 font-semibold shadow transition duration-200 hover:bg-orange-hover active:bg-orange-active active:scale-[.98]"
-                            >
-                                View Menu
-                            </Link>
-                            <a
-                                href="https://vietbites.pikapoint.io/"
-                                target="_blank"
-                                className="text-center rounded-lg bg-charcoal text-clean px-5 py-3 font-semibold shadow transition duration-200 hover:bg-charcoal/95 active:bg-charcoal-active active:scale-[.98]"
-                            >
-                                Order Now
-                            </a>
+                    <div className="mt-4 mx-auto flex w-3/4 flex-col gap-3 sm:mx-0 sm:w-full sm:flex-row sm:gap-4">
+                        <Link
+                            href="/menu"
+                            className="text-center rounded-lg bg-orange text-clean px-5 py-3 font-semibold shadow transition duration-200 hover:bg-orange-hover active:bg-orange-active active:scale-[.98]"
+                        >
+                            View Menu
+                        </Link>
+                        <a
+                            href="https://vietbites.pikapoint.io/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-center rounded-lg bg-charcoal text-clean px-5 py-3 font-semibold shadow transition duration-200 hover:bg-charcoal/95 active:bg-charcoal-active active:scale-[.98]"
+                        >
+                            Order Now
+                        </a>
+                    </div>
+
+                    {/* Desktop-only decoration stays in the text column so it
+                        cannot overlap the poster in the adjacent grid column. */}
+                    <div
+                        aria-hidden="true"
+                        className="pointer-events-none mt-10 hidden max-w-xl items-center justify-between gap-6 lg:flex"
+                    >
+                        <div className="opacity-95 floatAnim1">
+                            <Image
+                                src="/images/food/icon1.png"
+                                alt=""
+                                width={220}
+                                height={150}
+                                sizes="(min-width: 1280px) 144px, 112px"
+                                className="h-auto w-28 object-contain xl:w-36"
+                            />
+                        </div>
+                        <div className="opacity-95 floatAnim2">
+                            <Image
+                                src="/images/food/icon3.png"
+                                alt=""
+                                width={200}
+                                height={260}
+                                sizes="(min-width: 1280px) 144px, 112px"
+                                className="h-auto w-28 object-contain xl:w-36"
+                            />
+                        </div>
+                        <div className="opacity-95 floatAnim3">
+                            <Image
+                                src="/images/food/icon2.png"
+                                alt=""
+                                width={210}
+                                height={210}
+                                sizes="(min-width: 1280px) 144px, 112px"
+                                className="h-auto w-28 object-contain xl:w-36"
+                            />
                         </div>
                     </div>
                 </div>
 
                 <div className="relative mx-auto w-full max-w-md ">
-                    <div className="mt-6 group rounded-lg overflow-hidden bg-cream ring-2 ring-charcoal/10">
+                    <div className="mt-6 overflow-hidden rounded-lg bg-cream ring-2 ring-charcoal/10">
                         <Image
                             src="/images/banners/VerticalArt.jpg"
                             alt="VietBites poster with 'Bite to Bright, Spoon to Smile'"
                             width={600}
                             height={800}
-                            className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                            className="h-auto w-full object-cover"
                             priority
                         />
                     </div>

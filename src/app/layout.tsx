@@ -3,6 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SectionReveal from "@/components/common/SectionReveal";
 
 import { Be_Vietnam_Pro, Source_Sans_3 } from "next/font/google";
 
@@ -64,6 +65,7 @@ export default function RootLayout({
             className={`${beVietnam.variable} ${sourceSans.variable} antialiased`}
         >
             <Navbar />
+            <SectionReveal />
             <main>{children}</main>
             <Footer />
 

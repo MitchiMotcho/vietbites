@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "server-only";
 
 import { getHours } from "@/lib/notion/hours";
-import LocationIntro from "@/components/visit/location/LocationIntro";
 import HoursTable from "@/components/visit/location/HoursTable";
 import ContactForm from "@/components/visit/contact/contactForm/ContactForm";
 import FrameSection from "@/components/common/FrameSection";
@@ -51,8 +50,6 @@ export default async function VisitPage({ searchParams }: { searchParams?: Recor
             id="visit"
             className="max-w-7xl mx-auto bg-cream px-4 md:px-6 lg:px-8 pb-12 pt-6 space-y-8"
         >
-            <LocationIntro hours={hours} />
-
             <section className="grid gap-6 lg:grid-cols-2 items-start">
                 <FrameSection
                     id="hours"

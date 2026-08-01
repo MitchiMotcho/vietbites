@@ -142,12 +142,14 @@ export default async function MenuPage() {
                 ]}
             />
             <section className="mx-auto px-4 md:px-6 lg:px-8 pb-10 pt-3 space-y-8">
-                <SectionHeader
-                    title="OUR MENU"
-                    subtitle="From traditional Vietnamese Bánh Mì to delightful Sweet Soups and refreshing Drinks, explore our diverse menu crafted to satisfy your cravings."
-                />
+                <div data-reveal="initial" className="space-y-8">
+                    <SectionHeader
+                        title="OUR MENU"
+                        subtitle="From traditional Vietnamese Bánh Mì to delightful Sweet Soups and refreshing Drinks, explore our diverse menu crafted to satisfy your cravings."
+                    />
 
-                <Platforms items={platforms} variant="full" align="center" />
+                    <Platforms items={platforms} variant="full" align="center" />
+                </div>
 
                 {/* Bánh mì + house specials */}
                 <section className="grid gap-6 xl:grid-cols-2 h-full items-start pt-4">
