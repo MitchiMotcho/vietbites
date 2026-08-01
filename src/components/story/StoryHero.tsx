@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export function StoryHero() {
     return (
-        <section className="relative overflow-hidden rounded-2xl section-cream sm:mx-6 px-6 py-16 md:px-10 md:py-20 lg:py-24">
+        <section data-reveal="hero" className="relative overflow-hidden rounded-2xl section-cream sm:mx-6 px-6 py-16 md:px-10 md:py-20 lg:py-24">
             {/* subtle brand blobs */}
             <div
                 aria-hidden

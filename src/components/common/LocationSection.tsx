@@ -41,31 +41,36 @@ export default function LocationSection() {
                     <hr className="my-2" />
 
                     {/* CTA group */}
-                    <div className="flex flex-col 2xl:flex-row gap-6 pt-2 md:items-center">
-                        <div className="flex flex-col 2xl:flex-row items-center justify-center md:justify-start gap-4">
+                    <div className="flex flex-col items-start gap-4 pt-2">
+                        <div className="grid w-full grid-cols-2 gap-3 sm:flex sm:w-auto sm:gap-4">
                             <Link
                                 href="/visit"
-                                className="flex w-full 2xl:w-auto items-center justify-center rounded-lg bg-orange text-clean px-5 py-3 font-semibold shadow transition duration-200 hover:bg-orange-hover active:bg-orange-active active:scale-[.98]"
+                                className="inline-flex min-h-12 items-center justify-center rounded-lg bg-orange px-5 py-3 font-semibold text-clean shadow transition duration-200 hover:bg-orange-hover active:scale-[.98] active:bg-orange-active"
                             >
                                 Visit Us
                             </Link>
                             <Link
                                 href="/menu"
-                                className="button-outline w-full 2xl:w-auto py-3 px-5 font-heading font-medium rounded-lg text-center"
+                                className="button-outline inline-flex min-h-12 items-center justify-center rounded-lg px-5 py-3 text-center font-heading font-medium"
                             >
-                                Menu
+                                View Menu
                             </Link>
                         </div>
 
-                        <div className="text-center md:text-left relative">
-                            <Link
-                                href="/story"
-                                className="inline-block text-orange font-semibold underline-offset-4 hover:scale-105 transition-all ease-in-out duration-300 text-sm md:text-base relative group"
+                        <Link
+                            href="/story"
+                            className="group inline-flex items-center gap-2 rounded-sm py-1 text-sm font-semibold text-orange focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-orange md:text-base"
+                        >
+                            <span className="underline decoration-orange/35 underline-offset-4 transition-colors group-hover:decoration-orange">
+                                Learn more about our story
+                            </span>
+                            <span
+                                aria-hidden="true"
+                                className="transition-transform duration-200 group-hover:translate-x-1"
                             >
-                                Learn more about our story →
-                                <span className="absolute bottom-0 left-0 w-0 h-px bg-orange transition-[width] duration-300 ease-in-out group-hover:w-full" />
-                            </Link>
-                        </div>
+                                →
+                            </span>
+                        </Link>
                     </div>
                 </div>
 

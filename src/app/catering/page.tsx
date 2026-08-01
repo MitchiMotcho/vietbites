@@ -26,7 +26,7 @@ function contactUrl(reason: string) {
 export default function CateringPage() {
     return (
         <main className="max-w-7xl mx-auto rounded-lg section-cream shadow-sm px-4 md:px-6 lg:px-8 pb-12 pt-6 space-y-10">
-            <section className="pt-3 mx-4">
+            <section data-reveal="initial" className="pt-3 mx-4">
                 <SectionHeader
                     title="CATERING"
                     subtitle="Wholesale (B2B), catering, and collaborations. Built for cafés, events, and brands looking for something special."
